@@ -3,7 +3,7 @@ package controllers
 import (
 	"strconv"
 
-	gf "../../vendor/git.target.com/gospot/framework"
+	gf "../../vendor/git.target.com/gophersaurus/framework"
 	weather "../services/openweathermap/data/v25"
 
 	"../validators/forms"

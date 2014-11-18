@@ -1,6 +1,6 @@
 package models
 
-import "../../vendor/git.target.com/gospot/framework"
+import "../../vendor/git.target.com/gophersaurus/framework"
 
 type Creds struct {
 	Username string `json:"username" validate:"email"`

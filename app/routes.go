@@ -1,7 +1,7 @@
 package app
 
 import (
-	gf "../vendor/git.target.com/gospot/framework"
+	gf "../vendor/git.target.com/gophersaurus/framework"
 	c "./controllers"
 )
 

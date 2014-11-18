@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	gf "../vendor/git.target.com/gospot/framework"
+	gf "../vendor/git.target.com/gophersaurus/framework"
 )
 
 func Start(keys gf.KeyMap, db *gf.DbConfig, port int, indentJson bool) {

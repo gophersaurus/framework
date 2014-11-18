@@ -1,7 +1,7 @@
 package repos
 
 import (
-	gf "../../vendor/git.target.com/gospot/framework"
+	gf "../../vendor/git.target.com/gophersaurus/framework"
 	"../../vendor/gopkg.in/mgo.v2/bson"
 	"../models"
 )

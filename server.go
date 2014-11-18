@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"./bootstrap"
-	"./vendor/git.target.com/gospot/framework"
+	"./vendor/git.target.com/gophersaurus/framework"
 	"./vendor/github.com/codegangsta/cli"
 )
 

@@ -1,7 +1,7 @@
 package forms
 
 import (
-	f "../../../vendor/git.target.com/gospot/framework"
+	f "../../../vendor/git.target.com/gophersaurus/framework"
 	"../../models"
 )
 
