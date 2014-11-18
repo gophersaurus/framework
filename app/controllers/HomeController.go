@@ -36,13 +36,13 @@ func (h *HomeController) Index(resp *gf.Response, req *gf.Request) {
 
 	// Add json body data.
 	resp.RespondWithJSON(map[string]string{
-		"hello Minneapolis":             "Here is what's happening outside!",
-		"location":                      w.Name,
-		"average temp (°C)":             strconv.FormatFloat(w.Main.Temp, 'f', 1, 64),
-		"high temp (°C)":                strconv.FormatFloat(w.Main.TempMax, 'f', 1, 64),
-		"low temp (°C)":                 strconv.FormatFloat(w.Main.TempMin, 'f', 1, 64),
-		"next sunrise (unix timestamp)": strconv.Itoa(w.Sys.Sunrise),
-		"next sunset (unix timestamp)":  strconv.Itoa(w.Sys.Sunset),
+		"Minneapolis": "Here is what's happening outside!",
+		"location":    w.Name,
+		"averageTemp": strconv.FormatFloat(w.Main.Temp, 'f', 1, 64),
+		"highTemp":    strconv.FormatFloat(w.Main.TempMax, 'f', 1, 64),
+		"lowTemp":     strconv.FormatFloat(w.Main.TempMin, 'f', 1, 64),
+		"sunrise":     strconv.Itoa(w.Sys.Sunrise),
+		"sunset":      strconv.Itoa(w.Sys.Sunset),
 	})
 
 }
