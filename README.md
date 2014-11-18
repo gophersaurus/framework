@@ -1,7 +1,7 @@
 Gophersaurus Golang Framework
 =============================
 
-![gophersaurus](https://git.target.com/gophersaurus/art/blob/master/gophersaurus.png)
+![gophersaurus](https://git.target.com/gophersaurus/art/raw/master/gophersaurus.png)
 
 ###Description:
 
