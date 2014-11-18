@@ -1,6 +1,8 @@
 Gophersaurus Golang Framework
 =============================
 
+![gophersaurus](https://git.target.com/gophersaurus/art/blob/master/gophersaurus.png)
+
 ###Description:
 
 Gophersaurus is a golang framework for building web services. It combines many open source golang libraries into a more structured approach when building go service binaries.
