@@ -5,8 +5,6 @@ import (
 
 	gf "../../vendor/git.target.com/gophersaurus/framework"
 	weather "../services/openweathermap/data/v25"
-
-	"../validators/forms"
 )
 
 // HomeController contains controller logic for home.
@@ -36,7 +34,7 @@ func (h *HomeController) Index(resp *gf.Response, req *gf.Request) {
 
 	// Add json body data.
 	resp.RespondWithJSON(map[string]string{
-		"Minneapolis": "Here is what's happening outside!",
+		"Hello":       "Hi there, here is what's happening outside!",
 		"location":    w.Name,
 		"averageTemp": strconv.FormatFloat(w.Main.Temp, 'f', 1, 64),
 		"highTemp":    strconv.FormatFloat(w.Main.TempMax, 'f', 1, 64),
@@ -45,13 +43,4 @@ func (h *HomeController) Index(resp *gf.Response, req *gf.Request) {
 		"sunset":      strconv.Itoa(w.Sys.Sunset),
 	})
 
-}
-
-func (s *HomeController) Store(resp *gf.Response, req *gf.Request) {
-	err := forms.Login(req)
-	if err != nil {
-		resp.RespondWithErr(err)
-		return
-	}
-	resp.Respond()
 }

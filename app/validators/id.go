@@ -6,6 +6,6 @@ import (
 )
 
 // gets the 'id' url path parameter as a Mongo Id
-func objectId(r *gf.Request) (bson.ObjectId, error) {
-	return gf.ToBsonId(r.Vars["id"])
+func ObjectId(r *gf.Request) (bson.ObjectId, error) {
+	return gf.StringToBsonId(r.Vars["id"])
 }

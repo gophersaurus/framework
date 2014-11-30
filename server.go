@@ -4,7 +4,6 @@ import (
 	"os"
 
 	"./bootstrap"
-	"./vendor/git.target.com/gophersaurus/framework"
 	"./vendor/github.com/codegangsta/cli"
 )
 
@@ -35,5 +34,7 @@ func main() {
 	}
 
 	err := app.Run(os.Args)
-	framework.Check(err)
+	if err != nil {
+		panic(err)
+	}
 }
