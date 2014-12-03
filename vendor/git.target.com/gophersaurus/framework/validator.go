@@ -3,6 +3,7 @@ package gophersauras
 import (
 	"errors"
 	"reflect"
+	"regexp"
 
 	valLib "../../../github.com/asaskevich/govalidator"
 	valSys "../../../gopkg.in/validator.v2"
@@ -34,4 +35,25 @@ func email(v interface{}, param string) error {
 	return nil
 }
 
-// passwordPattern := "[a-zA-Z][a-zA-Z0-9]{7,19}$"
+// Pattern Validator gives the user the ability to create a validation function for a
+// specific regular expression. This will allow developers to pair specific regular
+// expressions to specific purposes.
+func NewPatternValidator(pattern string) (*patternValidator, error) {
+	regex, err := regexp.Compile(pattern)
+	return &patternValidator{regex}, err
+}
+
+type patternValidator struct {
+	pattern *regexp.Regexp
+}
+
+func (p *patternValidator) Validate(v interface{}, param string) error {
+	s := reflect.ValueOf(v)
+	if s.Kind() != reflect.String {
+		return errors.New("value not string")
+	}
+	if !p.pattern.MatchString(s.String()) {
+		return errors.New("pattern not matched")
+	}
+	return nil
+}
