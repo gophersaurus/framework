@@ -7,10 +7,9 @@ type Creds struct {
 	Password string `json:"password" val:"password"`
 }
 
+var ValidatePassword func(v interface{}, param string) error
+
 func init() {
-	val, err := gf.NewPatternValidator("[a-zA-Z][a-zA-Z0-9]{7,19}$")
-	if err != nil {
-		panic(err)
-	}
-	gf.Validator.SetValidationFunc("password", val.Validate)
+	ValidatePassword = gf.NewPatternValidator("[a-zA-Z][a-zA-Z0-9]{7,19}$").Validate
+	gf.Validator.SetValidationFunc("password", ValidatePassword)
 }

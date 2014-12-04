@@ -38,9 +38,8 @@ func email(v interface{}, param string) error {
 // Pattern Validator gives the user the ability to create a validation function for a
 // specific regular expression. This will allow developers to pair specific regular
 // expressions to specific purposes.
-func NewPatternValidator(pattern string) (*patternValidator, error) {
-	regex, err := regexp.Compile(pattern)
-	return &patternValidator{regex}, err
+func NewPatternValidator(pattern string) *patternValidator {
+	return &patternValidator{regexp.MustCompile(pattern)}
 }
 
 type patternValidator struct {
