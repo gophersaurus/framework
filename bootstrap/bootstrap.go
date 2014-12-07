@@ -1,8 +1,8 @@
 package bootstrap
 
 import (
-	"../app"
-	"../app/config"
+	"git.target.com/gophersaurus/gophersaurus/app"
+	"git.target.com/gophersaurus/gophersaurus/app/config"
 )
 
 // Run the app.

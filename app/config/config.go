@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	gf "../../vendor/git.target.com/gophersaurus/framework"
+	gf "git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/framework"
 )
 
 var Env ExpandedEnvConfig

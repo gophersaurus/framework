@@ -32,7 +32,7 @@ import (
 	"sync"
 	"time"
 
-	"./bson"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
 type replyFunc func(err error, reply *replyOp, docNum int, docData []byte)

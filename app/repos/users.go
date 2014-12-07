@@ -1,9 +1,9 @@
 package repos
 
 import (
-	gf "../../vendor/git.target.com/gophersaurus/framework"
 	"../../vendor/gopkg.in/mgo.v2/bson"
 	"../models"
+	gf "git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/framework"
 )
 
 // FindAllUsers gets all users from the database

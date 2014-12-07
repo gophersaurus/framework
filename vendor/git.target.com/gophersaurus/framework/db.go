@@ -1,6 +1,6 @@
 package gophersauras
 
-import mgo "../../../gopkg.in/mgo.v2"
+import mgo "git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2"
 
 var (
 	conn *mgo.Session

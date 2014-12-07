@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"../../../github.com/codegangsta/negroni"
-	"../../../github.com/gorilla/mux"
-	render "../../../gopkg.in/unrolled/render.v1"
+	"git.target.com/gophersaurus/gophersaurus/vendor/github.com/codegangsta/negroni"
+	"git.target.com/gophersaurus/gophersaurus/vendor/github.com/gorilla/mux"
+	render "git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/unrolled/render.v1"
 )
 
 var renderer *render.Render

@@ -5,8 +5,8 @@ import (
 	"errors"
 	"net/http"
 
-	"../../../github.com/gorilla/mux"
-	"../../../gopkg.in/mgo.v2/bson"
+	"git.target.com/gophersaurus/gophersaurus/vendor/github.com/gorilla/mux"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
 type Query map[string][]string
