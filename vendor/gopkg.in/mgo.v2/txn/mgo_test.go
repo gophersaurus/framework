@@ -5,7 +5,7 @@ import (
 	"os/exec"
 	"time"
 
-	".."
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2"
 )
 
 // ----------------------------------------------------------------------------

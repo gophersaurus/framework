@@ -19,8 +19,8 @@ package validator_test
 import (
 	"testing"
 
-	. "../../gopkg.in/check.v1"
-	"../../gopkg.in/validator.v2"
+	. "git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/check.v1"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/validator.v2"
 )
 
 func Test(t *testing.T) {

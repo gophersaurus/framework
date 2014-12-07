@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"sort"
 
-	"../../gopkg.in/validator.v2"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/validator.v2"
 )
 
 // This example demonstrates a custom function to process template text.

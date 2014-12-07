@@ -14,7 +14,7 @@ import (
 	"strings"
 	"sync"
 
-	".."
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2"
 	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
