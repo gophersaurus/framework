@@ -18,14 +18,14 @@ func NewUser() *User {
 }
 
 func (u *User) Find(key string, value interface{}) error {
-	return gf.Mgo.C("users").Find(bson.M{key: value}).One(u)
+	return gf.Mgo.C("testUsers").Find(bson.M{key: value}).One(u)
 }
 
 func (u *User) Save() error {
-	_, err := gf.Mgo.C("users").UpsertId(u.Id, u)
+	_, err := gf.Mgo.C("testUsers").UpsertId(u.Id, u)
 	return err
 }
 
 func (u *User) Delete() error {
-	return gf.Mgo.C("users").RemoveId(u.Id)
+	return gf.Mgo.C("testUsers").RemoveId(u.Id)
 }
