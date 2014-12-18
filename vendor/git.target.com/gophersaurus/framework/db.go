@@ -1,8 +1,7 @@
 package gophersauras
 
 import (
-	mgo "../../../gopkg.in/mgo.v2"
-	bson "../../../gopkg.in/mgo.v2/bson"
+	mgo "git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2"
 )
 
 var (

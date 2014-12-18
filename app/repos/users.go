@@ -1,15 +1,15 @@
 package repos
 
 import (
-	gf "../../vendor/git.target.com/gophersaurus/framework"
-	"../../vendor/gopkg.in/mgo.v2/bson"
-	"../models"
+	"git.target.com/gophersaurus/gophersaurus/app/models"
+	gf "git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/framework"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
 // FindAllUsers gets all users from the database
 func FindAllUsers() ([]models.User, error) {
 	var users []models.User
-	err := gf.Mgo.C("users").Find(bson.M{}).All(&users)
+	err := gf.Mgo.C("testUsers").Find(bson.M{}).All(&users)
 	return users, err
 }
 
@@ -21,6 +21,6 @@ func FindUsersById(ids ...string) ([]models.User, error) {
 		},
 	}
 	var users []models.User
-	err := gf.Mgo.C("users").Find(query).All(&users)
+	err := gf.Mgo.C("testUsers").Find(query).All(&users)
 	return users, err
 }

@@ -1,6 +1,6 @@
 package models
 
-import gf "../../vendor/git.target.com/gophersaurus/framework"
+import gf "git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/framework"
 
 type Creds struct {
 	Username string `json:"username" val:"email"`

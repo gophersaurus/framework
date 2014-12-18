@@ -7,6 +7,8 @@
 
 package sasl
 
+import "C"
+
 import (
 	"fmt"
 	"strings"

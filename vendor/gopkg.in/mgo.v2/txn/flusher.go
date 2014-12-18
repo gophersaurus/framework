@@ -3,8 +3,8 @@ package txn
 import (
 	"fmt"
 
-	".."
-	"../bson"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
+	"gopkg.in/mgo.v2"
 )
 
 func flush(r *Runner, t *transaction) error {

@@ -32,7 +32,7 @@ import (
 	"time"
 
 	"."
-	"./bson"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
 func (s *S) TestGridFSCreate(c *C) {

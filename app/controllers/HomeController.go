@@ -3,8 +3,8 @@ package controllers
 import (
 	"strconv"
 
-	gf "../../vendor/git.target.com/gophersaurus/framework"
-	weather "../services/openweathermap/data/v25"
+	weather "git.target.com/gophersaurus/gophersaurus/app/services/openweathermap/data/v25"
+	gf "git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/framework"
 )
 
 // HomeController contains controller logic for home.

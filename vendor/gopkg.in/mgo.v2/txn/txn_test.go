@@ -5,9 +5,10 @@ import (
 	"testing"
 	"time"
 
-	".."
-	"../bson"
 	"."
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
+	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/txn"
 )
 
 func TestAll(t *testing.T) {

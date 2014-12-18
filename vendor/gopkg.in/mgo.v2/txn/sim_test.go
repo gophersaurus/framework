@@ -5,9 +5,9 @@ import (
 	"math/rand"
 	"time"
 
-	".."
-	"../bson"
-	"."
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/txn"
 )
 
 var (

@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"regexp"
 
-	valLib "../../../github.com/asaskevich/govalidator"
-	valSys "../../../gopkg.in/validator.v2"
+	valLib "git.target.com/gophersaurus/gophersaurus/vendor/github.com/asaskevich/govalidator"
+	valSys "git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/validator.v2"
 )
 
 func init() {

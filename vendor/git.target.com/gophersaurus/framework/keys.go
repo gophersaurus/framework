@@ -11,7 +11,7 @@ type keyHandler struct {
 
 func (k *keyHandler) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	if !k.isKeyValid(r.RemoteAddr, r.URL.Query().Get("key"), r.Header.Get("API-Key")) {
-		NewResponse(rw).RespondWithErr(errors.New(InvalidPermissions))
+		buildResponse(rw).RespondWithErr(errors.New(InvalidPermissions))
 		return
 	}
 	next(rw, r)

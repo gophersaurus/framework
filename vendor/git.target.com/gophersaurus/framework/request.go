@@ -1,12 +1,14 @@
 package gophersauras
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
+	"io/ioutil"
 	"net/http"
 
-	"../../../github.com/gorilla/mux"
-	"../../../gopkg.in/mgo.v2/bson"
+	"git.target.com/gophersaurus/gophersaurus/vendor/github.com/gorilla/mux"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
 type Query map[string][]string
@@ -20,7 +22,11 @@ type Request struct {
 }
 
 func NewRequest(method, url string, body []byte) (*Request, error) {
-	return &Request{Req: http.NewRequest(method, url, bytes.NewReader(body)), Body: string(body)}
+	req, err := http.NewRequest(method, url, bytes.NewReader(body))
+	if err != nil {
+		return nil, err
+	}
+	return &Request{Req: req, Body: string(body)}, nil
 }
 
 func (r *Request) AddHeader(name, value string) {

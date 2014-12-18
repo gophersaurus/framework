@@ -5,7 +5,7 @@ import (
 	"log"
 	"strconv"
 
-	"../../../gopkg.in/mgo.v2/bson"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
 func Check(err error) {

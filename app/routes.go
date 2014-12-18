@@ -1,8 +1,8 @@
 package app
 
 import (
-	gf "../vendor/git.target.com/gophersaurus/framework"
-	c "./controllers"
+	c "git.target.com/gophersaurus/gophersaurus/app/controllers"
+	gf "git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/framework"
 )
 
 // register takes a Router and registers route paths to controller methods.

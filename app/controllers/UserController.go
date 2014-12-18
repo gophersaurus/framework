@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"../models"
-	"../repos"
-	"../validators"
+	"git.target.com/gophersaurus/gophersaurus/app/models"
+	"git.target.com/gophersaurus/gophersaurus/app/repos"
+	"git.target.com/gophersaurus/gophersaurus/app/validators"
 
-	gf "../../vendor/git.target.com/gophersaurus/framework"
+	gf "git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/framework"
 )
 
 var User = &userController{}

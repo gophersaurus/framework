@@ -14,8 +14,8 @@ import (
 	"strings"
 	"sync"
 
-	".."
-	"../bson"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
 type state int

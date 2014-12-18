@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"testing"
 
-	"../context"
+	"git.target.com/gophersaurus/gophersaurus/vendor/github.com/gorilla/mux/context"
 )
 
 type routeTest struct {

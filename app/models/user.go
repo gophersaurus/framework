@@ -1,8 +1,8 @@
 package models
 
 import (
-	gf "../../vendor/git.target.com/gophersaurus/framework"
-	"../../vendor/gopkg.in/mgo.v2/bson"
+	gf "git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/framework"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
 type User struct {

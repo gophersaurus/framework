@@ -38,7 +38,7 @@ import (
 	"time"
 
 	"."
-	"./bson"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
 var fast = flag.Bool("fast", false, "Skip slow tests")

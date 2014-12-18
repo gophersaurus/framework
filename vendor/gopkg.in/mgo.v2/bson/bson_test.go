@@ -36,7 +36,7 @@ import (
 	"testing"
 	"time"
 
-	"./bson"
+	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
 func TestAll(t *testing.T) {
