@@ -17,17 +17,15 @@ func NewUser() *User {
 	}
 }
 
-func (u *User) Find(key string, value interface{}) bool {
-	err := gf.Mgo.C("users").Find(bson.M{key: value}).One(u)
-	return err == nil // TODO: errors should really be checked for not found vs an actual error
+func (u *User) Find(key string, value interface{}) error {
+	return gf.Mgo.C("users").Find(bson.M{key: value}).One(u)
 }
 
-func (u *User) Save() bool {
+func (u *User) Save() error {
 	_, err := gf.Mgo.C("users").UpsertId(u.Id, u)
-	return err == nil // TODO: errors should really be checked for not found vs an actual error
+	return err
 }
 
-func (u *User) Delete() bool {
-	err := gf.Mgo.C("users").RemoveId(u.Id)
-	return err == nil // TODO: errors should really be checked for not found vs an actual error
+func (u *User) Delete() error {
+	return gf.Mgo.C("users").RemoveId(u.Id)
 }

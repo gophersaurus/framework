@@ -11,7 +11,7 @@ type Response struct {
 	body   []interface{}
 }
 
-func NewResponse(w http.ResponseWriter) *Response {
+func buildResponse(w http.ResponseWriter) *Response {
 	return &Response{
 		W:      w,
 		status: http.StatusOK,

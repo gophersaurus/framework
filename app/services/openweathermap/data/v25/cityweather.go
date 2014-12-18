@@ -2,32 +2,26 @@ package cityweather
 
 import (
 	"encoding/json"
-	"io/ioutil"
-	"net/http"
+
+	gf "../../../../../vendor/git.target.com/gophersaurus/framework"
 )
 
-func Find(city, country string) (Result, error) {
-
-	var result Result
+func Find(city, country string) (*Result, error) {
 
 	url := "http://api.openweathermap.org/data/2.5/weather?q=" + city + "," + country
-	resp, err := http.Get(url)
+
+	req, err := gf.NewRequest("GET", url, nil)
 	if err != nil {
-		return result, err
+		return nil, err
 	}
 
-	defer resp.Body.Close()
-
-	bytes, err := ioutil.ReadAll(resp.Body)
+	bytes, err := req.Send()
 	if err != nil {
-		return result, err
+		return nil, err
 	}
 
-	err = json.Unmarshal(bytes, &result)
-	if err != nil {
-		return result, err
-	}
-
+	result := &Result{}
+	err = json.Unmarshal(bytes, result)
 	return result, err
 
 }

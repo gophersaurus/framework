@@ -25,15 +25,15 @@ const (
 )
 
 var errorMap = map[string]int{
-	AccountLocked:      http.StatusInternalServerError,
+	AccountLocked:      http.StatusForbidden,
 	ExpiredSession:     http.StatusInternalServerError,
-	InvalidCreds:       http.StatusInternalServerError,
-	InvalidEmail:       http.StatusInternalServerError,
-	InvalidId:          http.StatusInternalServerError,
-	InvalidJson:        http.StatusInternalServerError,
-	InvalidParameter:   http.StatusInternalServerError,
-	InvalidPassword:    http.StatusInternalServerError,
-	InvalidPermissions: http.StatusInternalServerError,
+	InvalidCreds:       http.StatusBadRequest,
+	InvalidEmail:       http.StatusBadRequest,
+	InvalidId:          http.StatusBadRequest,
+	InvalidJson:        http.StatusBadRequest,
+	InvalidParameter:   http.StatusBadRequest,
+	InvalidPassword:    http.StatusBadRequest,
+	InvalidPermissions: http.StatusForbidden,
 	InvalidSession:     http.StatusInternalServerError,
 	MissingSession:     http.StatusInternalServerError,
 	MissingUser:        http.StatusInternalServerError,

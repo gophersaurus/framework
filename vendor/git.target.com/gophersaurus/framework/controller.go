@@ -17,7 +17,7 @@ func Handle(action Action) http.HandlerFunc {
 }
 
 func (a Action) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	resp := NewResponse(w)
-	req := NewRequest(r)
+	resp := buildResponse(w)
+	req := buildRequest(r)
 	a(resp, req)
 }

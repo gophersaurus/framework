@@ -15,7 +15,7 @@ func init() {
 	Validator.SetValidationFunc("email", email)
 }
 
-var Validator *valSys.Validator
+var Validator = valSys.NewValidator()
 
 func Validate(v interface{}) error {
 	return Validator.Validate(v)

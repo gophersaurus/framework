@@ -19,7 +19,32 @@ type Request struct {
 	Body      string
 }
 
-func NewRequest(req *http.Request) *Request {
+func NewRequest(method, url string, body []byte) (*Request, error) {
+	return &Request{Req: http.NewRequest(method, url, bytes.NewReader(body)), Body: string(body)}
+}
+
+func (r *Request) AddHeader(name, value string) {
+	r.Req.Header.Add(name, value)
+}
+
+func (r *Request) SetHeader(name, value string) {
+	r.Req.Header.Set(name, value)
+}
+
+func (r *Request) Send() ([]byte, error) {
+	client := &http.Client{}
+	resp, err := client.Do(r.Req)
+	if err != nil {
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+	bytes, err := ioutil.ReadAll(resp.Body)
+	return bytes, err
+
+}
+
+func buildRequest(req *http.Request) *Request {
 	// Make a slice of bytes large enough for the JSON ruest body.
 	jsonBody := make([]byte, req.ContentLength)
 

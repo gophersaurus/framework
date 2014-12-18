@@ -1,31 +1,35 @@
 {
-  "prod": {
-    "App": {
-      "Port": 3000,
-      "Keys": {},
-      "IndentJson": true
-    },
-    "DB": {},
-    "Services": {}
-  },
-
-  "stage": {
-    "App": {
-      "Port": 3000,
-      "Keys": {},
-      "IndentJson": true
-    },
-    "DB": {},
-    "Services": {}
-  },
-
-  "dev": {
-    "App": {
-      "Port": 3000,
-      "Keys": {},
-      "IndentJson": true
-    },
-    "DB": {},
-    "Services": {}
-  }
+   "prod": {
+      "App": {
+         "Port": 3000,
+         "Keys": {},
+         "IndentJson": true
+      },
+      "DB": {},
+      "Services": {}
+   },
+   "stage": {
+      "App": {
+         "Port": 3000,
+         "Keys": {},
+         "IndentJson": true
+      },
+      "DB": {},
+      "Services": {}
+   },
+   "dev": {
+      "App": {
+         "Port": 3000,
+         "Keys": {},
+         "IndentJson": true
+      },
+      "DB": {
+         "Type": "mongo",
+         "Addr": "localhost:27017/dbtest",
+         "Name": "",
+         "Username": "user",
+         "Password": "password"
+      },
+      "Services": {}
+   }
 }

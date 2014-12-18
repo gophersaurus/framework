@@ -20,7 +20,7 @@ func FindUsersById(ids ...string) ([]models.User, error) {
 			"$in": ids,
 		},
 	}
-	var users []models.Users
+	var users []models.User
 	err := gf.Mgo.C("users").Find(query).All(&users)
 	return users, err
 }
