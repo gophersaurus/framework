@@ -17,7 +17,7 @@ func NewUser() *User {
 	}
 }
 
-func (u *User) Apply(patch Patch) error {
+func (u *User) Apply(patch gf.Patch) error {
 	// TODO -- best way to apply subset of properties to object
 	return nil
 }

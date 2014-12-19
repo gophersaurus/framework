@@ -102,7 +102,7 @@ func (u *userController) Apply(resp *gf.Response, req *gf.Request) {
 		resp.RespondWithErr(err)
 		return
 	}
-	patch := Patch{}
+	patch := gf.Patch{}
 	err = req.ReadBody(patch)
 	if err != nil {
 		resp.RespondWithErr(err)

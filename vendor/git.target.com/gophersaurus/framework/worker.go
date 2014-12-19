@@ -12,8 +12,8 @@ type Result interface {
 
 func WorkerPool(size int, jobs ...Job) error {
 	jobCount := len(jobs)
-	jobChan := make(chan *Job, jobCount)
-	resultChan := make(chan *Result, jobCount)
+	jobChan := make(chan Job, jobCount)
+	resultChan := make(chan Result, jobCount)
 
 	var err error
 
@@ -43,7 +43,7 @@ func WorkerPool(size int, jobs ...Job) error {
 	return nil
 }
 
-func worker(jobs <-chan *Job, results chan<- *Result, wg *sync.WaitGroup, err *error) {
+func worker(jobs <-chan Job, results chan<- Result, wg *sync.WaitGroup, err *error) {
 	for j := range jobs {
 		if err != nil {
 			wg.Done()
@@ -55,7 +55,7 @@ func worker(jobs <-chan *Job, results chan<- *Result, wg *sync.WaitGroup, err *e
 			wg.Done()
 			return
 		}
-		results <- j.Do()
+		results <- result
 	}
 	wg.Done()
 }
