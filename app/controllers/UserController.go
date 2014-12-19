@@ -31,6 +31,11 @@ func (u *userController) Store(resp *gf.Response, req *gf.Request) {
 		resp.RespondWithErr(err)
 		return
 	}
+	err = gf.Validate(user)
+	if err != nil {
+		resp.RespondWithErr(err)
+		return
+	}
 	err = user.Save()
 	if err != nil {
 		// TODO -- how should we handle this error
@@ -70,6 +75,49 @@ func (u *userController) Update(resp *gf.Response, req *gf.Request) {
 		return
 	}
 	user.Id = id
+	err = gf.Validate(user)
+	if err != nil {
+		resp.RespondWithErr(err)
+		return
+	}
+	err = user.Save()
+	if err != nil {
+		// TODO -- how should we handle this error
+		resp.RespondWithErr(err)
+		return
+	}
+	resp.Respond()
+}
+
+func (u *userController) Apply(resp *gf.Response, req *gf.Request) {
+	id, err := validators.ObjectId(req)
+	if err != nil {
+		resp.RespondWithErr(err)
+		return
+	}
+	user := models.NewUser()
+	err = user.Find("_id", id)
+	if err != nil {
+		// TODO -- how should we handle this error
+		resp.RespondWithErr(err)
+		return
+	}
+	patch := Patch{}
+	err = req.ReadBody(patch)
+	if err != nil {
+		resp.RespondWithErr(err)
+		return
+	}
+	err = user.Apply(patch)
+	if err != nil {
+		resp.RespondWithErr(err)
+		return
+	}
+	err = gf.Validate(user)
+	if err != nil {
+		resp.RespondWithErr(err)
+		return
+	}
 	err = user.Save()
 	if err != nil {
 		// TODO -- how should we handle this error

@@ -7,7 +7,7 @@ import (
 
 type User struct {
 	Id    bson.ObjectId `json:"_id" bson:"_id"`
-	Email string        `json:"email" bson:"email"`
+	Email string        `json:"email" bson:"email" val:"email"`
 }
 
 // NewUser creates an anonymous user.
@@ -15,6 +15,11 @@ func NewUser() *User {
 	return &User{
 		Id: bson.NewObjectId(),
 	}
+}
+
+func (u *User) Apply(patch Patch) error {
+	// TODO -- best way to apply subset of properties to object
+	return nil
 }
 
 func (u *User) Find(key string, value interface{}) error {

@@ -68,6 +68,13 @@ func (r *Router) Put(path string, action Action) {
 	route.Handler(negroni.New(&keyHandler{r.keys}, negroni.Wrap(action)))
 }
 
+func (r *Router) Patch(path string, action Action) {
+	route := r.mux.Path(path)
+	route.Methods("PATCH")
+	route.Headers("Content-Type", "application/json")
+	route.Handler(negroni.New(&keyHandler{r.keys}, negroni.Wrap(action)))
+}
+
 func (r *Router) Delete(path string, action Action) {
 	route := r.mux.Path(path)
 	route.Methods("DELETE")
@@ -81,6 +88,15 @@ func (r *Router) Resource(path string, c Controller) {
 	r.Get(path, c.Index)
 	r.Post(path, c.Store)
 	r.Get(defaultPathId, c.Show)
-	r.Put(defaultPathId, c.Update)
 	r.Delete(defaultPathId, c.Destroy)
+
+	u, ok := c.(Updateable)
+	if ok {
+		r.Put(defaultPathId, u.Update)
+	}
+
+	p, ok := c.(Patchable)
+	if ok {
+		r.Patch(defaultPathId, p.Apply)
+	}
 }

@@ -6,9 +6,20 @@ type Controller interface {
 	Index(resp *Response, req *Request)
 	Store(resp *Response, req *Request)
 	Show(resp *Response, req *Request)
-	Update(resp *Response, req *Request)
 	Destroy(resp *Response, req *Request)
 }
+
+type Updateable interface {
+	Controller
+	Update(resp *Response, req *Request)
+}
+
+type Patchable interface {
+	Controller
+	Apply(resp *Response, req *Request)
+}
+
+type Patch map[string]interface{}
 
 type Action func(resp *Response, req *Request)
 
