@@ -10,11 +10,7 @@ import (
 // HomeController contains controller logic for home.
 type HomeController struct{}
 
-var Home *HomeController
-
-func init() {
-	Home = &HomeController{}
-}
+var Home = &HomeController{}
 
 // Index handles a "/home" GET request for the HomeController.
 func (h *HomeController) Index(resp *gf.Response, req *gf.Request) {
