@@ -31,7 +31,7 @@ func (w *workerPool) runJobs(err *error) {
 		go newWorker().work(jobChan, resultChan, &workErr)
 	}
 
-	for i, j := range w.Jobs {
+	for _, j := range w.Jobs {
 		if workErr != nil {
 			*err = workErr
 			return
