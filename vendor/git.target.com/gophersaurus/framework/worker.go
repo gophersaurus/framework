@@ -1,61 +1,83 @@
 package gophersauras
 
-import "sync"
-
 type Job interface {
-	Do() (Result, error)
+	DoWork()
+	ProcessResult()
 }
 
-type Result interface {
-	Process() error
+type workerPool struct {
+	Size int
+	Jobs []Job
 }
 
-func WorkerPool(size int, jobs ...Job) error {
-	jobCount := len(jobs)
+func NewWorkerPool(size int, jobs ...Job) *workerPool {
+	return &workerPool{size, jobs}
+}
+
+func (w *workerPool) RunJobs() error {
+	var jobErr error
+	w.runJobs(&jobErr)
+	return jobErr
+}
+
+func (w *workerPool) runJobs(err *error) {
+	defer Relieve(err)
+	jobCount := len(w.Jobs)
 	jobChan := make(chan Job, jobCount)
-	resultChan := make(chan Result, jobCount)
+	resultChan := make(chan Job, jobCount)
 
-	var err error
-
-	wg := &sync.WaitGroup{}
-
-	for w := 0; w < size; w++ {
-		go worker(jobChan, resultChan, wg, &err)
+	var workErr error
+	for i := 0; i < w.Size; i++ {
+		go newWorker().work(jobChan, resultChan, &workErr)
 	}
 
-	for _, job := range jobs {
-		jobChan <- job
-	}
-
-	wg.Wait()
-	if err != nil {
-		return err
+	for i, j := range w.Jobs {
+		if workErr != nil {
+			*err = workErr
+			return
+		}
+		jobChan <- j
 	}
 	close(jobChan)
+	if workErr != nil {
+		*err = workErr
+		return
+	}
 
 	for r := 0; r < jobCount; r++ {
-		result := <-resultChan
-		err := result.Process()
-		if err != nil {
-			return err
+		result, isOpen := <-resultChan
+		if !isOpen {
+			if workErr != nil {
+				*err = workErr
+			}
+			return
 		}
+		result.ProcessResult()
 	}
-	return nil
 }
 
-func worker(jobs <-chan Job, results chan<- Result, wg *sync.WaitGroup, err *error) {
+type worker struct {
+}
+
+func newWorker() *worker {
+	return &worker{}
+}
+
+func (w *worker) work(jobs <-chan Job, results chan<- Job, workErr *error) {
 	for j := range jobs {
-		if err != nil {
-			wg.Done()
+		if *workErr != nil {
 			return
 		}
-		result, er := j.Do()
-		if er != nil {
-			*err = er
-			wg.Done()
+		w.workSafe(j, workErr)
+		if *workErr != nil {
+			close(results)
 			return
 		}
-		results <- result
+		results <- j
 	}
-	wg.Done()
+}
+
+func (w *worker) workSafe(job Job, err *error) {
+	defer Relieve(err)
+	job.DoWork()
 }

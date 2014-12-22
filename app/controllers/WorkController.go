@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"fmt"
+
 	gf "git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/framework"
 )
 
@@ -17,7 +19,7 @@ func (w *workController) Index(resp *gf.Response, req *gf.Request) {
 		jobs = append(jobs, &SampleJob{i, &sum})
 	}
 
-	err := gf.WorkerPool(5, jobs...)
+	err := gf.NewWorkerPool(5, jobs...).RunJobs()
 	if err != nil {
 		resp.RespondWithErr(err)
 		return
@@ -27,21 +29,24 @@ func (w *workController) Index(resp *gf.Response, req *gf.Request) {
 	resp.Respond()
 }
 
+func double(i int) int {
+	return i * 2
+}
+
 type SampleJob struct {
 	value int
 	sum   *int
 }
 
-func (s *SampleJob) Do() (gf.Result, error) {
-	return &SampleResult{s.value * 2, s.sum}, nil
+func (s *SampleJob) DoWork() {
+	if s.value == 7 {
+		panic("no sevens")
+	}
+	s.value = double(s.value)
+	fmt.Printf("value: %v\n", s.value)
 }
 
-type SampleResult struct {
-	value int
-	sum   *int
-}
-
-func (s *SampleResult) Process() error {
+func (s *SampleJob) ProcessResult() {
 	*s.sum = (*s.sum) + s.value
-	return nil
+	fmt.Printf("sum: %v\n", *s.sum)
 }
