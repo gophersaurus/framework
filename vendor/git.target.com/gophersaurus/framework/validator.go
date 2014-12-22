@@ -2,6 +2,7 @@ package gophersauras
 
 import (
 	"errors"
+	"net/http"
 	"reflect"
 	"regexp"
 
@@ -12,6 +13,11 @@ import (
 func init() {
 	Validator := valSys.NewValidator()
 	Validator.SetTag("val")
+	for name, fn := range valLib.TagMap {
+		val := newLibValidator(name, fn)
+		ApplyErrorCode(val.Err, http.StatusBadRequest)
+		Validator.SetValidationFunc(name, val.Validate)
+	}
 	Validator.SetValidationFunc("email", email)
 }
 
@@ -53,6 +59,27 @@ func (p *patternValidator) Validate(v interface{}, param string) error {
 	}
 	if !p.pattern.MatchString(s.String()) {
 		return errors.New("pattern not matched")
+	}
+	return nil
+}
+
+type libValidator struct {
+	name  string
+	Err   error
+	valFn valLib.Validator
+}
+
+func newLibValidator(name string, valFn valLib.Validator) *libValidator {
+	return &libValidator{name, errors.New("not " + name), valFn}
+}
+
+func (l *libValidator) Validate(v interface{}, param string) error {
+	s := reflect.ValueOf(v)
+	if s.Kind() != reflect.String {
+		return errors.New(l.name + " validator only validates string values")
+	}
+	if !l.valFn(s.String()) {
+		return l.Err
 	}
 	return nil
 }
