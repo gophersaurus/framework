@@ -4,7 +4,7 @@ import (
 	"strconv"
 
 	weather "git.target.com/gophersaurus/gophersaurus/app/services/openweathermap/data/v25"
-	gf "git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/framework"
+	"git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/gf.v1"
 )
 
 // HomeController contains controller logic for home.

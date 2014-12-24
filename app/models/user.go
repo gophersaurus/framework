@@ -1,7 +1,7 @@
 package models
 
 import (
-	gf "git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/framework"
+	"git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/gf.v1"
 	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
