@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"git.target.com/gophersaurus/gophersaurus/bootstrap"
-	"git.target.com/gophersaurus/gophersaurus/vendor/github.com/codegangsta/cli"
+	"github.com/codegangsta/cli"
 )
 
 // The go program starts here.

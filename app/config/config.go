@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/gf.v1"
+	"git.target.com/gophersaurus/gf.v1"
 )
 
 var Env ExpandedEnvConfig
