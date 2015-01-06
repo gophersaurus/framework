@@ -1,31 +1,39 @@
 package gf
 
-import (
-	"fmt"
-	"net/http"
-)
+import "net/http"
 
-type Response struct {
-	W      http.ResponseWriter
+type Response interface {
+	RespondWithJSON(json map[string]string)
+	Respond()
+	RespondWithErr(err error)
+	HttpStatus(code int)
+	Body(obj interface{})
+	AppendBody(objects ...interface{})
+	Header(key, value string)
+	FlushHeaders()
+}
+
+type response struct {
+	w      http.ResponseWriter
 	status int
 	body   []interface{}
 }
 
-func buildResponse(w http.ResponseWriter) *Response {
-	return &Response{
-		W:      w,
+func buildResponse(w http.ResponseWriter) Response {
+	return &response{
+		w:      w,
 		status: http.StatusOK,
 	}
 }
 
-func (r Response) RespondWithJSON(json map[string]string) {
-	renderer.JSON(r.W, r.status, json)
+func (r *response) RespondWithJSON(json map[string]string) {
+	renderer.JSON(r.w, r.status, json)
 }
 
-func (r *Response) Respond() {
+func (r *response) Respond() {
 	if len(r.body) == 0 {
 		// if no body present, respond with status code and headers only
-		r.W.WriteHeader(r.status)
+		r.w.WriteHeader(r.status)
 	} else {
 		var body interface{}
 		body = r.body
@@ -33,17 +41,17 @@ func (r *Response) Respond() {
 			// if only one element in body, send only that element not wrapped in an array
 			body = r.body[0]
 		}
-		renderer.JSON(r.W, r.status, body)
+		renderer.JSON(r.w, r.status, body)
 	}
 }
 
-func (r *Response) RespondWithErr(err error) {
+func (r *response) RespondWithErr(err error) {
 
 	// get the error message string
 	message := err.Error()
 
 	// build the message as json
-	body := fmt.Sprintf("{\"error\": \"%v\"}", message)
+	body := map[string]string{"error": message}
 
 	// look up the http code for the given error message, default to 500
 	code, ok := errorMap[message]
@@ -54,29 +62,29 @@ func (r *Response) RespondWithErr(err error) {
 			code = http.StatusInternalServerError
 		}
 	}
+	r.status = code
 
-	// send error
-	http.Error(r.W, body, code)
+	r.RespondWithJSON(body)
 }
 
-func (r *Response) HttpStatus(code int) {
+func (r *response) HttpStatus(code int) {
 	r.status = code
 }
 
-func (r *Response) Body(obj interface{}) {
+func (r *response) Body(obj interface{}) {
 	r.body = []interface{}{obj} // TODO: the '{}{obj}' seems very strange... are we doing what we think we are doing here?
 }
 
-func (r *Response) AppendBody(objects ...interface{}) {
+func (r *response) AppendBody(objects ...interface{}) {
 	r.body = append(r.body, objects...)
 }
 
-func (r *Response) Header(key, value string) {
-	r.W.Header().Set(key, value)
+func (r *response) Header(key, value string) {
+	r.w.Header().Set(key, value)
 }
 
-func (r *Response) FlushHeaders() { // TODO: we should revisit this function... is there another way to do this???
-	headers := r.W.Header()
+func (r *response) FlushHeaders() { // TODO: we should revisit this function... is there another way to do this???
+	headers := r.w.Header()
 
 	// iterate through the headers and delete each
 	for key, _ := range headers {

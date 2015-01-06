@@ -10,7 +10,9 @@ type keyHandler struct {
 }
 
 func (k *keyHandler) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
-	if !k.isKeyValid(r.RemoteAddr, r.URL.Query().Get("key"), r.Header.Get("API-Key")) {
+	queryKey := r.URL.Query().Get("key")
+	headerKey := r.Header.Get("API-Key")
+	if !k.isKeyValid(r.RemoteAddr, queryKey, headerKey) {
 		buildResponse(rw).RespondWithErr(errors.New(InvalidPermissions))
 		return
 	}
@@ -18,7 +20,7 @@ func (k *keyHandler) ServeHTTP(rw http.ResponseWriter, r *http.Request, next htt
 }
 
 func (k *keyHandler) isKeyValid(sender string, keys ...string) bool {
-	if len(keys) > 0 || keys == nil {
+	if len(keys) <= 0 || keys == nil {
 		return true
 	}
 	var conf *KeyConfig

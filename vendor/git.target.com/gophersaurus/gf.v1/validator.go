@@ -10,21 +10,30 @@ import (
 	valSys "git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/validator.v2"
 )
 
-func init() {
-	Validator := valSys.NewValidator()
-	Validator.SetTag("val")
-	for name, fn := range valLib.TagMap {
-		val := newLibValidator(name, fn)
-		ApplyErrorCode(val.Err, http.StatusBadRequest)
-		Validator.SetValidationFunc(name, val.Validate)
-	}
-	Validator.SetValidationFunc("email", email)
-}
-
 var Validator = valSys.NewValidator()
 
 func Validate(v interface{}) error {
 	return Validator.Validate(v)
+}
+
+func ShorthandValTag(name, tags string) {
+	Validator.SetValidationFunc(name, func(v interface{}, param string) error {
+		return Validator.Valid(v, tags)
+	})
+}
+
+func ApplyLibValidator(name string, valFn valLib.Validator) {
+	val := newLibValidator(name, valFn)
+	ApplyErrorCode(val.Err, http.StatusBadRequest)
+	Validator.SetValidationFunc(name, val.Validate)
+}
+
+func init() {
+	Validator.SetTag("val")
+	for name, fn := range valLib.TagMap {
+		ApplyLibValidator(name, fn)
+	}
+	Validator.SetValidationFunc("email", email)
 }
 
 func email(v interface{}, param string) error {
@@ -52,15 +61,8 @@ type patternValidator struct {
 	pattern *regexp.Regexp
 }
 
-func (p *patternValidator) Validate(v interface{}, param string) error {
-	s := reflect.ValueOf(v)
-	if s.Kind() != reflect.String {
-		return errors.New("value not string")
-	}
-	if !p.pattern.MatchString(s.String()) {
-		return errors.New("pattern not matched")
-	}
-	return nil
+func (p *patternValidator) IsValid(v string) bool {
+	return p.pattern.MatchString(v)
 }
 
 type libValidator struct {

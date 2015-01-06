@@ -1,56 +1,34 @@
 package gf
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
-	"io/ioutil"
 	"net/http"
 
 	"git.target.com/gophersaurus/gophersaurus/vendor/github.com/gorilla/mux"
 	"git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2/bson"
 )
 
-type Query map[string][]string
-
-type Request struct {
-	Req       *http.Request
-	Vars      map[string]string
-	Query     Query
-	SessionId bson.ObjectId
-	Body      string
+type Request interface {
+	Request() *http.Request
+	Var(name string) string
+	Query(name string) []string
+	SessionId() bson.ObjectId
+	Body() string
+	HasSession() bool
+	HasBody() bool
+	ReadBody(obj interface{}) error
 }
 
-func NewRequest(method, url string, body []byte) (*Request, error) {
-	req, err := http.NewRequest(method, url, bytes.NewReader(body))
-	if err != nil {
-		return nil, err
-	}
-	return &Request{Req: req, Body: string(body)}, nil
+type request struct {
+	req       *http.Request
+	vars      map[string]string
+	query     map[string][]string
+	sessionId bson.ObjectId
+	body      string
 }
 
-func (r *Request) AddHeader(name, value string) {
-	r.Req.Header.Add(name, value)
-}
-
-func (r *Request) SetHeader(name, value string) {
-	r.Req.Header.Set(name, value)
-}
-
-func (r *Request) Send() ([]byte, error) {
-	client := &http.Client{}
-	resp, err := client.Do(r.Req)
-	if err != nil {
-		return nil, err
-	}
-
-	defer resp.Body.Close()
-	bytes, err := ioutil.ReadAll(resp.Body)
-	return bytes, err
-
-}
-
-func buildRequest(req *http.Request) *Request {
+func buildRequest(req *http.Request) Request {
 	// Make a slice of bytes large enough for the JSON ruest body.
 	jsonBody := make([]byte, req.ContentLength)
 
@@ -66,30 +44,50 @@ func buildRequest(req *http.Request) *Request {
 		sessionId = ""
 	}
 
-	return &Request{
-		Req:       req,
-		Body:      string(jsonBody),
-		SessionId: sessionId,
+	return &request{
+		req:       req,
+		body:      string(jsonBody),
+		sessionId: sessionId,
 
 		// get the url path variables
-		Vars: mux.Vars(req),
+		vars: mux.Vars(req),
 
 		// get url query parameters
-		Query: (map[string][]string)(req.URL.Query()),
+		query: (map[string][]string)(req.URL.Query()),
 	}
 }
 
-func (r *Request) HasSession() bool {
-	return r.SessionId != ""
+func (r *request) Request() *http.Request {
+	return r.req
 }
 
-func (r *Request) HasBody() bool {
-	return len(r.Body) > 0
+func (r *request) Var(name string) string {
+	return r.vars[name]
 }
 
-func (r *Request) ReadBody(obj interface{}) error {
+func (r *request) Query(name string) []string {
+	return r.query[name]
+}
+
+func (r *request) SessionId() bson.ObjectId {
+	return r.sessionId
+}
+
+func (r *request) Body() string {
+	return r.body
+}
+
+func (r *request) HasSession() bool {
+	return r.sessionId != ""
+}
+
+func (r *request) HasBody() bool {
+	return len(r.body) > 0
+}
+
+func (r *request) ReadBody(obj interface{}) error {
 	// Unmarshal JSON data into the cartwheelOffer object.
-	err := json.Unmarshal([]byte(r.Body), obj)
+	err := json.Unmarshal([]byte(r.body), obj)
 
 	// Return an error if unable to unmarshal the cartwheelOffer ruest.
 	if err != nil {

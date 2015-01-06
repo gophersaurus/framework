@@ -1,12 +1,10 @@
 package gf
 
-import (
-	mgo "git.target.com/gophersaurus/gophersaurus/vendor/gopkg.in/mgo.v2"
-)
+import "git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/gf.v1/mongo"
 
 var (
-	Mgo  *mgo.Database
-	conn *mgo.Session
+	Mgo  mongo.Database
+	conn mongo.Session
 )
 
 func ConnectDB(conf *DbConfig) {
@@ -15,7 +13,7 @@ func ConnectDB(conf *DbConfig) {
 
 	// connect to mongo database
 	var err error
-	conn, err = mgo.Dial(dial)
+	conn, err = mongo.NewDialer().Dial(dial)
 	Check(err)
 	Mgo = conn.DB(conf.Name)
 }

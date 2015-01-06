@@ -14,6 +14,10 @@ func Check(err error) {
 	}
 }
 
+func ObjectId(r Request) (bson.ObjectId, error) {
+	return StringToBsonId(r.Var("id"))
+}
+
 // converts a string to a Mongo Id, returns an error if it cannot be converted
 func StringToBsonId(id string) (bson.ObjectId, error) {
 	if !bson.IsObjectIdHex(id) {

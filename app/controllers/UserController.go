@@ -3,7 +3,6 @@ package controllers
 import (
 	"git.target.com/gophersaurus/gophersaurus/app/models"
 	"git.target.com/gophersaurus/gophersaurus/app/repos"
-	"git.target.com/gophersaurus/gophersaurus/app/validators"
 
 	"git.target.com/gophersaurus/gophersaurus/vendor/git.target.com/gophersaurus/gf.v1"
 )
@@ -13,7 +12,7 @@ var User = &userController{}
 type userController struct {
 }
 
-func (u *userController) Index(resp *gf.Response, req *gf.Request) {
+func (u *userController) Index(resp gf.Response, req gf.Request) {
 	users, err := repos.FindAllUsers()
 	if err != nil {
 		// TODO -- how should we handle this error
@@ -24,7 +23,7 @@ func (u *userController) Index(resp *gf.Response, req *gf.Request) {
 	resp.Respond()
 }
 
-func (u *userController) Store(resp *gf.Response, req *gf.Request) {
+func (u *userController) Store(resp gf.Response, req gf.Request) {
 	user := models.NewUser()
 	err := req.ReadBody(user)
 	if err != nil {
@@ -45,8 +44,8 @@ func (u *userController) Store(resp *gf.Response, req *gf.Request) {
 	resp.Respond()
 }
 
-func (u *userController) Show(resp *gf.Response, req *gf.Request) {
-	id, err := validators.ObjectId(req)
+func (u *userController) Show(resp gf.Response, req gf.Request) {
+	id, err := gf.ObjectId(req)
 	if err != nil {
 		resp.RespondWithErr(err)
 		return
@@ -62,8 +61,8 @@ func (u *userController) Show(resp *gf.Response, req *gf.Request) {
 	resp.Respond()
 }
 
-func (u *userController) Update(resp *gf.Response, req *gf.Request) {
-	id, err := validators.ObjectId(req)
+func (u *userController) Update(resp gf.Response, req gf.Request) {
+	id, err := gf.ObjectId(req)
 	if err != nil {
 		resp.RespondWithErr(err)
 		return
@@ -89,8 +88,8 @@ func (u *userController) Update(resp *gf.Response, req *gf.Request) {
 	resp.Respond()
 }
 
-func (u *userController) Apply(resp *gf.Response, req *gf.Request) {
-	id, err := validators.ObjectId(req)
+func (u *userController) Apply(resp gf.Response, req gf.Request) {
+	id, err := gf.ObjectId(req)
 	if err != nil {
 		resp.RespondWithErr(err)
 		return
@@ -127,8 +126,8 @@ func (u *userController) Apply(resp *gf.Response, req *gf.Request) {
 	resp.Respond()
 }
 
-func (u *userController) Destroy(resp *gf.Response, req *gf.Request) {
-	id, err := validators.ObjectId(req)
+func (u *userController) Destroy(resp gf.Response, req gf.Request) {
+	id, err := gf.ObjectId(req)
 	if err != nil {
 		resp.RespondWithErr(err)
 		return
