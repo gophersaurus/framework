@@ -31,12 +31,6 @@ For now simply clone our repository and change the `server.go` file to whatever 
 
 Currently we are working on tooling to automate vendoring dependencies, very much like `godep` does, but with local relative imports rather than full file paths.
 
-###Contribution guidelines
-
-####Golang Style Guide
-
-> This golang project not only utilizes the gofmt format standards, but it also follows the internal Google Code Review standards at https://code.google.com/p/go-wiki/wiki/CodeReviewComments
-
 ###License
 
 The Gophersaurus framework is open-sourced software licensed under the [MIT License](http://opensource.org/licenses/MIT)
