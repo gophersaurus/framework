@@ -3,7 +3,7 @@ package controllers
 import (
 	"strconv"
 
-	"git.target.com/gophersaurus/framework"
+	"git.target.com/gophersaurus/gf.v1"
 
 	weather "git.target.com/gophersaurus/gophersaurus/app/services/openweathermap/data/v25"
 )

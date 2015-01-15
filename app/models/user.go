@@ -1,14 +1,13 @@
 package models
 
 import (
-	"encoding/json"
 	"errors"
 
-	"git.target.com/gophersaurus/framework"
+	"git.target.com/gophersaurus/gf.v1"
 	"gopkg.in/mgo.v2/bson"
 )
 
-type User struct {
+type User struct { // embedded object for marshalling and unmarshalling
 	Id        bson.ObjectId `json:"_id" bson:"_id"`
 	Email     string        `json:"email,omitempty" bson:"email,omitempty" val:"email"`
 	FirstName string        `json:"firstname,omitempty" bson:"firstname,omitempty"`
@@ -22,7 +21,7 @@ func NewUser() gf.Model {
 	}
 }
 
-func (u *User) IdLabel() string {
+func (u *User) IdTag() string {
 	return "_id"
 }
 
@@ -38,6 +37,7 @@ func (u *User) SetId(id interface{}) error {
 	u.Id = objId
 	return nil
 }
+
 func (u *User) Find(key string, value interface{}) error {
 	return gf.Mgo.C("testUsers").Find(bson.M{key: value}).One(u)
 }
@@ -51,10 +51,6 @@ func (u *User) Delete() error {
 	return gf.Mgo.C("testUsers").RemoveId(u.Id)
 }
 
-func (u *User) MarshalJSON() ([]byte, error) {
-	return json.Marshal(u)
-}
-
-func (u *User) UnmarshalJSON(data []byte) error {
-	return json.Unmarshal(data, u)
+func (u *User) ReadFrom(req gf.Request) error {
+	return req.ReadBody(u)
 }

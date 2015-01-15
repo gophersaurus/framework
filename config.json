@@ -20,7 +20,12 @@
    "dev": {
       "App": {
          "Port": 3000,
-         "Keys": {},
+         "Keys": {
+            "6925F78BD894AD3D59CD6E5C": {
+               "Status": true,
+               "Urls": []
+            }
+         },
          "IndentJson": true
       },
       "DB": {
