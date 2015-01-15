@@ -30,8 +30,8 @@ func (u *User) SetId(id interface{}) error {
 	return nil
 }
 
-func (u *User) Find(key string, value interface{}) error {
-	return gf.Mgo.C("testUsers").Find(bson.M{key: value}).One(u)
+func (u *User) FindById(id interface{}) error {
+	return gf.Mgo.C("testUsers").FindId(id).One(u)
 }
 
 func (u *User) Save() error {

@@ -1,8 +1,8 @@
 package app
 
 import (
-	c "git.target.com/gophersaurus/gophersaurus/app/controllers"
 	"git.target.com/gophersaurus/gf.v1"
+	c "git.target.com/gophersaurus/gophersaurus/app/controllers"
 )
 
 // register takes a Router and registers route paths to controller methods.
@@ -15,7 +15,7 @@ func register(r *gf.Router) {
 	r.Get("/work", c.Work.Index)
 
 	// Register the pattern "/user" with all methods in the User Controller
-	r.Resource("/user", c.User)
+	r.Resource("/user", "user_id", c.User)
 
 	// Serve static files.
 	r.Static("/", "public/")

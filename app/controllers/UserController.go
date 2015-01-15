@@ -7,6 +7,6 @@ import (
 	"git.target.com/gophersaurus/gf.v1"
 )
 
-var User = gf.NewResource("_id", func(req gf.Request) (interface{}, error) {
-	return gf.ObjectId(req)
+var User = gf.NewResource(func(req gf.Request) (interface{}, error) {
+	return gf.StringToBsonId(req.Var("user_id"))
 }, models.NewUser, repos.FindAllUsers)
