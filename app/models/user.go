@@ -21,14 +21,6 @@ func NewUser() gf.Model {
 	}
 }
 
-func (u *User) IdTag() string {
-	return "_id"
-}
-
-func (u *User) GetIdFrom(req gf.Request) (interface{}, error) {
-	return gf.ObjectId(req)
-}
-
 func (u *User) SetId(id interface{}) error {
 	objId, ok := id.(bson.ObjectId)
 	if !ok {
