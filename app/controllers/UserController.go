@@ -7,4 +7,4 @@ import (
 	"git.target.com/gophersaurus/gf.v1"
 )
 
-var User = gf.NewResource("user_id", models.NewUser, repos.FindAllUsers)
+var Users = gf.NewResource("user_id", models.NewUser, repos.FindAllUsers)

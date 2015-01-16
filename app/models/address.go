@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	"git.target.com/gophersaurus/gf.v1"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type Address struct {
@@ -15,21 +16,17 @@ type Address struct {
 	Zip    string `json:"zip" bson:"zip"`
 }
 
-func NewAddress() gf.ChildModel {
-	return &Address{}
+func NewAddress() gf.OwnedModel {
+	return &Address{Id: bson.NewObjectId().Hex()}
 }
 
-func (a *Address) SetId(id interface{}) error {
-	objId, ok := id.(string)
-	if !ok {
-		return errors.New(gf.InvalidId)
-	}
-	a.Id = objId
+func (a *Address) SetId(id string) error {
+	a.Id = id
 	return nil
 }
 
-func (a *Address) SetParent(parent gf.Model) error {
-	user, ok := parent.(*User)
+func (a *Address) SetOwner(owner gf.Model) error {
+	user, ok := owner.(*User)
 	if !ok {
 		return errors.New("invalid parent type")
 	}
@@ -37,29 +34,62 @@ func (a *Address) SetParent(parent gf.Model) error {
 	return nil
 }
 
-func (a *Address) FindById(id interface{}) error {
-	// TODO
+func (a *Address) FindById(id string) error {
+	index, err := a.find(id)
+	if err != nil {
+		return err
+	}
+	if index < 0 {
+		return errors.New("not found")
+	}
+	user := a.user
+	*a = a.user.Addresses[index]
+	a.user = user
 	return nil
 }
 
 func (a *Address) Save() error {
-	// TODO
+	index, err := a.find(a.Id)
+	if err != nil {
+		return err
+	}
+	if index < 0 {
+		a.user.Addresses = append(a.user.Addresses, *a)
+	} else {
+		a.user.Addresses[index] = *a
+	}
+	a.user.Save()
 	return nil
 }
 
 func (a *Address) Delete() error {
-	// TODO
+	index, err := a.find(a.Id)
+	if err != nil {
+		return err
+	}
+	if index < 0 {
+		return errors.New("not found")
+	}
+	addresses := []Address{}
+	if index > 0 {
+		addresses = append(addresses, a.user.Addresses[:index]...)
+	}
+	if index+1 < len(a.user.Addresses) {
+		addresses = append(addresses, a.user.Addresses[index+1:]...)
+	}
+	a.user.Addresses = addresses
+	a.user.Save()
 	return nil
 }
 
-func (a *Address) find(id interface{}) (int, error) {
+func (a *Address) find(id string) (int, error) {
 	if a.user == nil {
 		return 0, errors.New("parent not set")
 	}
-	/*
-		for index, address := range a.user.Addresses {
-
+	for index, address := range a.user.Addresses {
+		if address.Id == id {
+			return index, nil
 		}
-	*/
+	}
 	return -1, nil
 }

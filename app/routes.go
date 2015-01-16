@@ -15,7 +15,10 @@ func register(r *gf.Router) {
 	r.Get("/work", c.Work.Index)
 
 	// Register the pattern "/user" with all methods in the User Controller
-	r.Resource("/user", "user_id", c.User)
+	r.Resource("/user", "user_id", c.Users)
+
+	// Register the pattern "/user/{user_id}/address" with all methods in the Address Controller
+	r.Resource("/user/{user_id}/address", "address_id", c.Addresses)
 
 	// Serve static files.
 	r.Static("/", "public/")
