@@ -1,8 +1,6 @@
 package models
 
 import (
-	"errors"
-
 	"git.target.com/gophersaurus/gf.v1"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -22,17 +20,18 @@ func NewUser() gf.Model {
 	}
 }
 
-func (u *User) SetId(id interface{}) error {
-	objId, ok := id.(bson.ObjectId)
-	if !ok {
-		return errors.New(gf.InvalidId)
-	}
-	u.Id = objId
-	return nil
+func (u *User) SetId(id string) error {
+	bsonId, err := gf.StringToBsonId(id)
+	u.Id = bsonId
+	return err
 }
 
-func (u *User) FindById(id interface{}) error {
-	return gf.Mgo.C("testUsers").FindId(id).One(u)
+func (u *User) FindById(id string) error {
+	bsonId, err := gf.StringToBsonId(id)
+	if err != nil {
+		return err
+	}
+	return gf.Mgo.C("testUsers").FindId(bsonId).One(u)
 }
 
 func (u *User) Save() error {
@@ -43,9 +42,3 @@ func (u *User) Save() error {
 func (u *User) Delete() error {
 	return gf.Mgo.C("testUsers").RemoveId(u.Id)
 }
-
-/*
-func (u *User) ReadFrom(req gf.Request) error {
-	return req.ReadBody(u)
-}
-*/
