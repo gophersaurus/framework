@@ -82,6 +82,10 @@ func (a *Address) Delete() error {
 	return nil
 }
 
+func (a *Address) Validate() error {
+	return gf.Validate(a)
+}
+
 func (a *Address) find(id string) (int, error) {
 	if a.user == nil {
 		return 0, errors.New("parent not set")

@@ -42,3 +42,7 @@ func (u *User) Save() error {
 func (u *User) Delete() error {
 	return gf.Mgo.C("testUsers").RemoveId(u.Id)
 }
+
+func (u *User) Validate() error {
+	return gf.Validate(u)
+}
