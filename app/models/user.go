@@ -12,6 +12,7 @@ type User struct { // embedded object for marshalling and unmarshalling
 	Email     string        `json:"email,omitempty" bson:"email,omitempty" val:"email"`
 	FirstName string        `json:"firstname,omitempty" bson:"firstname,omitempty"`
 	LastName  string        `json:"lastname,omitempty" bson:"lastname,omitempty"`
+	Addresses []Address     `json:"addresses,omitempty" bson:"addresses,omitempty"`
 }
 
 // NewUser creates an anonymous user.
@@ -43,6 +44,8 @@ func (u *User) Delete() error {
 	return gf.Mgo.C("testUsers").RemoveId(u.Id)
 }
 
+/*
 func (u *User) ReadFrom(req gf.Request) error {
 	return req.ReadBody(u)
 }
+*/
