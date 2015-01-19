@@ -18,10 +18,10 @@ func Start(keys gf.KeyMap, db *gf.DbConfig, port int, indentJson bool) {
 	}
 
 	// Create a new router.
-	r := gf.NewRouter(keys, indentJson)
+	r := gf.NewRouter()
 
 	// register dynamic routes.
-	register(r)
+	register(keys, r)
 
 	// Start the http server on the correct port.
 	portStr := strconv.Itoa(port)

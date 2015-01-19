@@ -16,7 +16,7 @@ type Address struct {
 	Zip    string `json:"zip" bson:"zip"`
 }
 
-func NewAddress() gf.OwnedModel {
+func NewAddress() gf.Model {
 	return &Address{Id: bson.NewObjectId().Hex()}
 }
 
@@ -25,7 +25,7 @@ func (a *Address) SetId(id string) error {
 	return nil
 }
 
-func (a *Address) SetOwner(owner gf.Model) error {
+func (a *Address) BelongsTo(owner gf.Model) error {
 	user, ok := owner.(*User)
 	if !ok {
 		return errors.New("invalid parent type")
