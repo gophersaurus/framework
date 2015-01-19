@@ -35,7 +35,7 @@ Currently we are working on tooling to automate vendoring dependencies, very muc
 
 ####Golang Style Guide
 
-> This golang project not only utilizes the gofmt format standards, but it also follows the internal Google Code Review standards at https://code.google.com/p/go-wiki/wiki/CodeReviewComments
+> This golang project not only utilizes the gofmt format standards, but it also follows the internal Google Code Review standards at https://github.com/golang/go/wiki/CodeReviewComments
 
 ###License
 
