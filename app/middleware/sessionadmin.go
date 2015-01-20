@@ -8,20 +8,20 @@ import (
 	"git.target.com/gophersaurus/gophersaurus/app/models"
 )
 
-var SessionUser = NewSessionUserMiddleware("Session-Id", "user_id")
+var SessionAdmin = NewSessionAdminMiddleware("Session-Id", "admin")
 
-type SessionUserMiddleware struct {
+type SessionAdminMiddleware struct {
 	SessionIDlabel string
-	UserIDlabel    string
+	AdminRole      string
 }
 
-func NewSessionUserMiddleware(sessionIDlabel, userIDlabel) *SessionUserMiddleware {
-	return &SessionUserMiddleware{sessionIDlabel, userIDlabel}
+func NewSessionAdminMiddleware(sessionIDlabel, adminRole string) *SessionAdminMiddleware {
+	return &SessionUserMiddleware{sessionIDlabel, adminRole}
 }
 
-func (s *SessionUserMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+func (s *SessionAdminMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	err := w.Header().Get("Error")
-	if len(err) > 0 {
+	if len(err) > 0 && err != gf.InvalidPermission {
 		next(w, r)
 		return
 	}
@@ -49,11 +49,13 @@ func (s *SessionUserMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	/*
-		if the user of the session is not the user in the path, pass error
-	*/
-	userVar, _ := req.Var(s.UserIDlabel)
-	if session.UserID.Hex() != userVar {
+	user := &models.User{}
+	if user_db_err := user.FindById(session.UserID.Hex()); user_db_err != nil {
+		w.Header().Set("Error", gf.MissingUser)
+		next(w, r)
+		return
+	}
+	if user.Role != s.AdminRole {
 		w.Header().Set("Error", gf.InvalidPermission)
 		next(w, r)
 		return
