@@ -14,7 +14,7 @@ type HomeController struct{}
 var Home = &HomeController{}
 
 // Index handles a "/home" GET request for the HomeController.
-func (h *HomeController) Index(resp gf.Response, req gf.Request) {
+func (h *HomeController) Index(resp gf.Responder, req gf.Requester) {
 
 	w, err := weather.Find("Minneapolis", "us")
 

@@ -1,26 +1,34 @@
 package repos
 
 import (
-	"git.target.com/gophersaurus/gophersaurus/app/models"
 	"git.target.com/gophersaurus/gf.v1"
+	"git.target.com/gophersaurus/gophersaurus/app/models"
 	"gopkg.in/mgo.v2/bson"
 )
 
-// FindAllUsers gets all users from the database
-func FindAllUsers() ([]models.User, error) {
-	var users []models.User
-	err := gf.Mgo.C("testUsers").Find(bson.M{}).All(&users)
-	return users, err
+// FindAll gets all users from the database
+func FindAllUsers() ([]gf.Model, error) {
+	return fetchUsers(bson.M{})
 }
 
-// FindUsersById gets all users whose id is in the given list
-func FindUsersById(ids ...string) ([]models.User, error) {
-	query := bson.M{
+func FindAllUsersByIds(ids ...bson.ObjectId) ([]gf.Model, error) {
+	return fetchUsers(bson.M{
 		"id": bson.M{
 			"$in": ids,
 		},
-	}
+	})
+}
+
+func fetchUsers(query interface{}) ([]gf.Model, error) {
 	var users []models.User
 	err := gf.Mgo.C("testUsers").Find(query).All(&users)
-	return users, err
+	if err != nil {
+		return nil, err
+	}
+	out := []gf.Model{}
+	for _, user := range users {
+		temp := user // needed for pointer
+		out = append(out, &temp)
+	}
+	return out, nil
 }
