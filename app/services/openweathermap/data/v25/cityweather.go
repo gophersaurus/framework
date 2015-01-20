@@ -10,18 +10,13 @@ func Find(city, country string) (*Result, error) {
 
 	url := "http://api.openweathermap.org/data/2.5/weather?q=" + city + "," + country
 
-	req, err := gf.Client.NewRequest("GET", url, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	bytes, err := gf.Client.Send(req)
+	resp, err := gf.HTTP.Get(url)
 	if err != nil {
 		return nil, err
 	}
 
 	result := &Result{}
-	err = json.Unmarshal(bytes, result)
+	err = json.Unmarshal(resp.Body, result)
 	return result, err
 
 }

@@ -11,7 +11,7 @@ var Work = &workController{}
 type workController struct {
 }
 
-func (w *workController) Index(resp gf.Response, req gf.Request) {
+func (w *workController) Index(resp gf.Responder, req gf.Requester) {
 	sum := 0
 
 	jobs := []gf.Job{}
@@ -21,12 +21,12 @@ func (w *workController) Index(resp gf.Response, req gf.Request) {
 
 	err := gf.NewWorkerPool(5, jobs...).RunJobs()
 	if err != nil {
-		resp.RespondWithErr(err)
+		resp.RespondWithErr(err.Error())
 		return
 	}
 
-	resp.Body(sum)
-	resp.Respond()
+	resp.Read(sum)
+	resp.RespondJSON()
 }
 
 func double(i int) int {

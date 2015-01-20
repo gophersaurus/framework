@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"git.target.com/PIVOT/explore_api/app/middleware"
 	"git.target.com/gophersaurus/gf.v1"
 )
 
@@ -17,8 +18,10 @@ func Start(keys gf.KeyMap, db *gf.DbConfig, port int, indentJson bool) {
 		defer gf.CloseDB()
 	}
 
+	middleware.Keys.KeyMap = keys
+
 	// Create a new router.
-	r := gf.NewRouter(keys, indentJson)
+	r := gf.NewRouter()
 
 	// register dynamic routes.
 	register(r)
