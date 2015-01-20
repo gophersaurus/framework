@@ -21,7 +21,7 @@ func NewSessionAdminMiddleware(sessionIDlabel, adminRole string) *SessionAdminMi
 
 func (s *SessionAdminMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	err := w.Header().Get("Error")
-	if len(err) > 0 && err != gf.InvalidPermission {
+	if len(err) > 0 {
 		next(w, r)
 		return
 	}
