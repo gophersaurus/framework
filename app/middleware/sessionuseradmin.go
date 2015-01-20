@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"git.target.com/PIVOT/explore_api/app/models/v1"
 	"git.target.com/gophersaurus/gf.v1"
+	"git.target.com/gophersaurus/gophersaurus/app/models"
 )
 
 var SessionUserAdmin = NewSessionUserAdminMiddleware("Session-Id", "user_id", "admin")
@@ -16,13 +16,13 @@ type SessionUserAdminMiddleware struct {
 	AdminRole      string
 }
 
-func NewSessionUserAdminMiddleware(sessionIDlabel, userIDlabel, adminRole string) *SessionUserAdmin {
+func NewSessionUserAdminMiddleware(sessionIDlabel, userIDlabel, adminRole string) *SessionUserAdminMiddleware {
 	return &SessionUserAdminMiddleware{sessionIDlabel, userIDlabel, adminRole}
 }
 
 func (s *SessionUserAdminMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
-	err := w.Header().Get("Error")
-	if len(err) > 0 {
+	errStr := w.Header().Get("Error")
+	if len(errStr) > 0 {
 		next(w, r)
 		return
 	}

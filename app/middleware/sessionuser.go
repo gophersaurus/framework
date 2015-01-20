@@ -15,13 +15,13 @@ type SessionUserMiddleware struct {
 	UserIDlabel    string
 }
 
-func NewSessionUserMiddleware(sessionIDlabel, userIDlabel) *SessionUserMiddleware {
+func NewSessionUserMiddleware(sessionIDlabel, userIDlabel string) *SessionUserMiddleware {
 	return &SessionUserMiddleware{sessionIDlabel, userIDlabel}
 }
 
 func (s *SessionUserMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
-	err := w.Header().Get("Error")
-	if len(err) > 0 {
+	errStr := w.Header().Get("Error")
+	if len(errStr) > 0 {
 		next(w, r)
 		return
 	}

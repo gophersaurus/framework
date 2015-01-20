@@ -3,7 +3,7 @@ package app
 import (
 	"git.target.com/gophersaurus/gf.v1"
 	c "git.target.com/gophersaurus/gophersaurus/app/controllers"
-	m "git.target.com/gophersaurus/gophersaurus/app/m"
+	m "git.target.com/gophersaurus/gophersaurus/app/middleware"
 )
 
 // register takes a Router and registers route paths to controller methods.

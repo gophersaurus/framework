@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"log"
 	"net/http"
 
 	"git.target.com/gophersaurus/gf.v1"
@@ -16,20 +15,14 @@ type SessionAdminMiddleware struct {
 }
 
 func NewSessionAdminMiddleware(sessionIDlabel, adminRole string) *SessionAdminMiddleware {
-	return &SessionUserMiddleware{sessionIDlabel, adminRole}
+	return &SessionAdminMiddleware{sessionIDlabel, adminRole}
 }
 
 func (s *SessionAdminMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
-	err := w.Header().Get("Error")
-	if len(err) > 0 {
+	errStr := w.Header().Get("Error")
+	if len(errStr) > 0 {
 		next(w, r)
 		return
-	}
-
-	// Create a new Request.
-	req, err := gf.NewRequest(r)
-	if err != nil {
-		log.Fatal(err)
 	}
 
 	// check to ensure the presence of a session
