@@ -6,6 +6,7 @@ import (
 	"git.target.com/gophersaurus/gf.v1"
 )
 
+// Keys is public global middlware.
 var Keys = NewKeyHandler()
 
 // KeyHandler contains the KeyMap.
@@ -13,6 +14,7 @@ type KeyHandler struct {
 	KeyMap gf.KeyMap
 }
 
+// NewKeyHandler returns a KeyHandler.
 func NewKeyHandler() *KeyHandler {
 	return &KeyHandler{gf.KeyMap{}}
 }
