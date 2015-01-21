@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"git.target.com/PIVOT/explore_api/app/middleware"
 	"git.target.com/gophersaurus/gf.v1"
+	"git.target.com/gophersaurus/gophersaurus/app/middleware"
 )
 
 func Start(keys gf.KeyMap, db *gf.DbConfig, port int, indentJson bool) {
