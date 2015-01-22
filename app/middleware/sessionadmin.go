@@ -36,14 +36,14 @@ func (s *SessionAdminMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Reques
 	session := models.NewSession()
 
 	// Search for session by sessionId.
-	if session_db_err := session.FindById(sessionID.Hex()); session_db_err != nil {
+	if session_db_err := session.FindByID(sessionID.Hex()); session_db_err != nil {
 		w.Header().Set("Error", gf.MissingSession)
 		next(w, r)
 		return
 	}
 
 	user := &models.User{}
-	if user_db_err := user.FindById(session.UserID.Hex()); user_db_err != nil {
+	if user_db_err := user.FindByID(session.UserID.Hex()); user_db_err != nil {
 		w.Header().Set("Error", gf.MissingUser)
 		next(w, r)
 		return

@@ -44,7 +44,7 @@ func (s *SessionUserAdminMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Re
 	session := models.NewSession()
 
 	// Search for session by sessionId.
-	if session_db_err := session.FindById(sessionID.Hex()); session_db_err != nil {
+	if session_db_err := session.FindByID(sessionID.Hex()); session_db_err != nil {
 		w.Header().Set("Error", gf.MissingSession)
 		next(w, r)
 		return
@@ -56,7 +56,7 @@ func (s *SessionUserAdminMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Re
 	userVar, _ := req.Var(s.UserIDlabel)
 	if session.UserID.Hex() != userVar {
 		user := &models.User{}
-		if user_db_err := user.FindById(session.UserID.Hex()); user_db_err != nil {
+		if user_db_err := user.FindByID(session.UserID.Hex()); user_db_err != nil {
 			w.Header().Set("Error", gf.MissingUser)
 			next(w, r)
 			return

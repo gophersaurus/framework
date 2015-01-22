@@ -23,13 +23,13 @@ func NewUser() gf.Model {
 	}
 }
 
-func (u *User) SetId(id string) error {
+func (u *User) SetID(id string) error {
 	bsonId, err := gf.StringToBsonID(id)
 	u.Id = bsonId
 	return err
 }
 
-func (u *User) FindById(id string) error {
+func (u *User) FindByID(id string) error {
 	bsonId, err := gf.StringToBsonID(id)
 	if err != nil {
 		return err

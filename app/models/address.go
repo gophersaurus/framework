@@ -20,7 +20,7 @@ func NewAddress() gf.Model {
 	return &Address{Id: bson.NewObjectId().Hex()}
 }
 
-func (a *Address) SetId(id string) error {
+func (a *Address) SetID(id string) error {
 	a.Id = id
 	return nil
 }
@@ -34,7 +34,7 @@ func (a *Address) BelongsTo(owner gf.Model) error {
 	return nil
 }
 
-func (a *Address) FindById(id string) error {
+func (a *Address) FindByID(id string) error {
 	index, err := a.find(id)
 	if err != nil {
 		return err

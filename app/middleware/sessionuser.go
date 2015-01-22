@@ -43,7 +43,7 @@ func (s *SessionUserMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request
 	session := models.NewSession()
 
 	// Search for session by sessionId.
-	if session_db_err := session.FindById(sessionID.Hex()); session_db_err != nil {
+	if session_db_err := session.FindByID(sessionID.Hex()); session_db_err != nil {
 		w.Header().Set("Error", gf.MissingSession)
 		next(w, r)
 		return

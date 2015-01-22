@@ -27,13 +27,13 @@ func (s *Session) IsExpired() bool {
 	return time.Now().Unix() > s.Expires
 }
 
-func (s *Session) SetId(id string) error {
+func (s *Session) SetID(id string) error {
 	bsonId, err := gf.StringToBsonID(id)
 	s.ID = bsonId
 	return err
 }
 
-func (s *Session) FindById(id string) error {
+func (s *Session) FindByID(id string) error {
 	bsonId, err := gf.StringToBsonID(id)
 	if err != nil {
 		return err

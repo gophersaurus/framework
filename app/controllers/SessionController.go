@@ -33,7 +33,7 @@ func (s *SessionController) Store(resp gf.Responder, req gf.Requester) {
 	}
 
 	user := models.NewUser()
-	err = user.FindById(userID.Hex())
+	err = user.FindByID(userID.Hex())
 	if err != nil {
 		resp.RespondWithErr("Invalid User")
 		return
@@ -59,14 +59,14 @@ func (s *SessionController) Show(resp gf.Responder, req gf.Requester) {
 	}
 
 	session := models.NewSession()
-	err = session.FindById(sessionID.Hex())
+	err = session.FindByID(sessionID.Hex())
 	if err != nil {
 		resp.RespondWithErr(gf.MissingSession)
 		return
 	}
 
 	user := &models.User{}
-	err = user.FindById(session.UserID.Hex())
+	err = user.FindByID(session.UserID.Hex())
 	if err != nil {
 		resp.RespondWithErr("Invalid User")
 		return
