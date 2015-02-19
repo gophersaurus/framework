@@ -24,26 +24,26 @@ func NewUser() gf.Model {
 }
 
 func (u *User) SetID(id string) error {
-	bsonId, err := gf.StringToBsonID(id)
+	bsonId, err := gf.BSONID(id)
 	u.Id = bsonId
 	return err
 }
 
 func (u *User) FindByID(id string) error {
-	bsonId, err := gf.StringToBsonID(id)
+	bsonId, err := gf.BSONID(id)
 	if err != nil {
 		return err
 	}
-	return gf.Mgo.C("testUsers").FindId(bsonId).One(u)
+	return DBA["test"].MGO().C("testUsers").FindId(bsonId).One(u)
 }
 
 func (u *User) Save() error {
-	_, err := gf.Mgo.C("testUsers").UpsertId(u.Id, u)
+	_, err := DBA["test"].MGO().C("testUsers").UpsertId(u.Id, u)
 	return err
 }
 
 func (u *User) Delete() error {
-	return gf.Mgo.C("testUsers").RemoveId(u.Id)
+	return DBA["test"].MGO().C("testUsers").RemoveId(u.Id)
 }
 
 func (u *User) Validate() error {

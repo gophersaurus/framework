@@ -1,4 +1,4 @@
-package app
+package server
 
 import (
 	"git.target.com/gophersaurus/gf.v1"
@@ -10,21 +10,16 @@ import (
 func register(r *gf.Router) {
 
 	// Register the HTTP GET pattern "/home" to the HomeController Index() method.
-	r.Get("/home", c.Home.Index, m.Keys, gf.RespondErr)
+	r.Get("/home", c.Home.Index)
 
 	// Register the HTTP GET pattern "/work" to the WorkController Index() method.
-	r.Get("/work", c.Work.Index, m.Keys, gf.RespondErr)
+	r.Get("/work", c.Work.Index)
 
 	// Register the pattern "/user" with all methods in the User Controller
-	r.Resource("/user", "user_id", c.Users, m.Keys, m.SessionUserAdmin, gf.RespondErr)
-
-	// Register the pattern "/user/{user_id}/address" with all methods in the Address Controller
-	r.Resource("/user/{user_id}/address", "address_id", c.Addresses, m.Keys, m.SessionUserAdmin, gf.RespondErr)
+	r.Resource("/user", "user_id", c.Users, m.SessionUserAdmin)
 
 	// Register
-	r.Post("/session", c.Sessions.Store, m.Keys, gf.RespondErr)
-	r.Get("/session", c.Sessions.Show, m.Keys, gf.RespondErr)
+	r.Post("/session", c.Sessions.Store)
+	r.Get("/session", c.Sessions.Show)
 
-	// Serve static files.
-	r.Static("/", "public/")
 }

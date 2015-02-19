@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"log"
 	"net/http"
 
 	"git.target.com/gophersaurus/gf.v1"
@@ -27,13 +26,10 @@ func (s *SessionUserMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request
 	}
 
 	// Create a new Request.
-	req, err := gf.NewRequest(r)
-	if err != nil {
-		log.Fatal(err)
-	}
+	req := gf.NewRequest(r)
 
 	// check to ensure the presence of a session
-	sessionID, err := gf.StringToBsonID(r.Header.Get(s.SessionIDlabel))
+	sessionID, err := gf.BSONID(r.Header.Get(s.SessionIDlabel))
 	if err != nil {
 		w.Header().Set("Error", gf.MissingSession)
 		next(w, r)

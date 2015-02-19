@@ -28,27 +28,27 @@ func (s *Session) IsExpired() bool {
 }
 
 func (s *Session) SetID(id string) error {
-	bsonId, err := gf.StringToBsonID(id)
+	bsonId, err := gf.BSONID(id)
 	s.ID = bsonId
 	return err
 }
 
 func (s *Session) FindByID(id string) error {
-	bsonId, err := gf.StringToBsonID(id)
+	bsonId, err := gf.BSONID(id)
 	if err != nil {
 		return err
 	}
-	return gf.Mgo.C("testSessions").FindId(bsonId).One(s)
+	return DBA["test"].MGO().C("testSessions").FindId(bsonId).One(s)
 }
 
 func (s *Session) Save() error {
 	s.User = nil
-	_, err := gf.Mgo.C("testSessions").UpsertId(s.ID, s)
+	_, err := DBA["test"].MGO().C("testSessions").UpsertId(s.ID, s)
 	return err
 }
 
 func (s *Session) Delete() error {
-	return gf.Mgo.C("testSessions").RemoveId(s.ID)
+	return DBA["test"].MGO().C("testSessions").RemoveId(s.ID)
 }
 
 func (s *Session) Validate() error {

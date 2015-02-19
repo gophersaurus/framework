@@ -1,8 +1,7 @@
-package repos
+package models
 
 import (
 	"git.target.com/gophersaurus/gf.v1"
-	"git.target.com/gophersaurus/gophersaurus/app/models"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -20,8 +19,8 @@ func FindAllUsersByIds(ids ...bson.ObjectId) ([]gf.Model, error) {
 }
 
 func fetchUsers(query interface{}) ([]gf.Model, error) {
-	var users []models.User
-	err := gf.Mgo.C("testUsers").Find(query).All(&users)
+	var users []User
+	err := DBA["test"].MGO().C("testUsers").Find(query).All(&users)
 	if err != nil {
 		return nil, err
 	}
