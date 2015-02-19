@@ -20,7 +20,7 @@ func FindAllUsersByIds(ids ...bson.ObjectId) ([]gf.Model, error) {
 
 func fetchUsers(query interface{}) ([]gf.Model, error) {
 	var users []User
-	err := DBA["test"].MGO().C("testUsers").Find(query).All(&users)
+	err := DBA.MGO("test").C("testUsers").Find(query).All(&users)
 	if err != nil {
 		return nil, err
 	}

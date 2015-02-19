@@ -8,13 +8,13 @@ import (
 )
 
 // Databases takes a config object and returns a gf.DBA
-func Databases(c config.Config) gf.DBA {
+func Databases(c *config.Config) gf.DBA {
 
 	// Create a new DBA to work with.
 	dba := gf.NewDBA()
 
 	// Iterate through the databases provided.
-	for _, db := range c.DB {
+	for _, db := range c.Databases {
 
 		// Switch to find the dbs we support.
 		switch db.Type {
@@ -33,8 +33,11 @@ func Databases(c config.Config) gf.DBA {
 				log.Fatalln("MySQL: " + db.Name + " - " + err.Error())
 			}
 
+			// Let the user know we have connected.
+			log.Println("Successfully connected to MySQL " + db.Name)
+
 			// Assign the gorp to its name in the DBA.
-			dba[db.Name] = g
+			dba.SQL[db.Name] = g
 
 		case "mongo", "mongodb":
 
@@ -51,8 +54,11 @@ func Databases(c config.Config) gf.DBA {
 				log.Fatalln("MongoDB: " + db.Name + " - " + err.Error())
 			}
 
+			// Let the user know we have connected.
+			log.Println("Successfully connected to MongoDB " + db.Name)
+
 			// Assign the mongodb to its name in the DBA.
-			dba[db.Name] = m
+			dba.NoSQL[db.Name] = m
 
 		case "postgres", "postgresql":
 
@@ -69,8 +75,11 @@ func Databases(c config.Config) gf.DBA {
 				log.Fatalln("PostgreSQL: " + db.Name + " - " + err.Error())
 			}
 
+			// Let the user know we have connected.
+			log.Println("Successfully connected to PostgreSQL " + db.Name)
+
 			// Assign the gorp to its name in the DBA.
-			dba[db.Name] = g
+			dba.SQL[db.Name] = g
 
 		default:
 			log.Fatalln("Unsupported database: " + db.Type)

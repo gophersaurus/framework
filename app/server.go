@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -23,7 +24,7 @@ func NewServer(
 	dba gf.DBA,
 	port string,
 	static string,
-	config config.Config,
+	config *config.Config,
 	keys map[string][]string,
 ) Server {
 
@@ -43,11 +44,14 @@ func Bootstrap(settings map[string]string) Server {
 	// INITALIZE CONFIGURATION
 	c := bootstrap.Config(settings)
 
+	fmt.Print(c)
+
 	// INITALIZE DATABASES
 	dba := bootstrap.Databases(c)
 
 	// SERVER PORT
 	p := c.Port
+	fmt.Println(c.Port)
 
 	// STATIC FILE PATH
 	s := settings["static"]
@@ -62,8 +66,13 @@ func Bootstrap(settings map[string]string) Server {
 // Serve starts the application server.
 func (s Server) Serve() {
 
-	// Defer the command to close db connections after HTTP execution completes.
-	for _, db := range models.DBA {
+	// Defer the command to close Mongo db connections.
+	for _, db := range models.DBA.NoSQL {
+		defer db.Close()
+	}
+
+	// Defer the command to close SQL db connections.
+	for _, db := range models.DBA.SQL {
 		defer db.Close()
 	}
 

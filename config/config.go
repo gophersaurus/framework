@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"log"
 
 	"git.target.com/gophersaurus/gf.v1"
@@ -18,25 +19,32 @@ import (
 //
 // You might disagree with us, but this is for your own good.
 // Your security friends will thank us.
-//
 type Config struct {
-	Env string
-	gf.Config
+	*gf.Config
+}
+
+// NewConfig comments
+func NewConfig() *Config {
+	return &Config{gf.NewConfig()}
 }
 
 // ReadFile takes a filename and returns a Config object.
-func ReadFile(filename string) Config {
+func ReadFile(filename string) *Config {
 
-	// Create a new Config object to work with.
-	config := Config{}
+	c := NewConfig()
 
 	// Read the file values into the Config object.
-	if err := gf.ReadConfig(filename, config); err != nil {
+	if err := gf.ReadConfig(filename, c); err != nil {
 
 		// If we have an error, we should log the error and exit.
 		// Invalid configuration is a show stopper.
 		log.Fatal(err)
 	}
 
-	return config
+	fmt.Println(" -- before print -- ")
+	fmt.Print(c)
+	fmt.Println("\n -- after print -- ")
+
+	return c
+
 }
