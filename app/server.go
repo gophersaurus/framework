@@ -84,15 +84,15 @@ func (s Server) Serve() {
 		r.Middleware(gf.NewKeyMiddleware(s.keys))
 	}
 
+	// register dynamic routes.
+	register(r)
+
 	// If a static directory path is provided, register it.
 	if len(s.static) > 0 {
 		r.Static("/", s.static)
 	} else {
 		r.Static("/", "/public")
 	}
-
-	// register dynamic routes.
-	register(r)
 
 	// let the humans know we are listening...
 	log.Println("listening on port " + s.port)
