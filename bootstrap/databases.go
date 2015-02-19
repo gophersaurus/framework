@@ -1,6 +1,7 @@
 package bootstrap
 
 import (
+	"fmt"
 	"log"
 
 	"git.target.com/gophersaurus/gf.v1"
@@ -12,6 +13,8 @@ func Databases(c *config.Config) gf.DBA {
 
 	// Create a new DBA to work with.
 	dba := gf.NewDBA()
+
+	fmt.Println("# CONNECTING TO DATABSES")
 
 	// Iterate through the databases provided.
 	for _, db := range c.Databases {
@@ -29,12 +32,13 @@ func Databases(c *config.Config) gf.DBA {
 			}
 
 			// Connect
+			fmt.Print("	Attempting to connect to MySQL " + db.Name + "... ")
 			if err := g.Connect("mysql", db.Name); err != nil {
-				log.Fatalln("MySQL: " + db.Name + " - " + err.Error())
+				log.Fatalln("Failed: " + err.Error())
 			}
 
 			// Let the user know we have connected.
-			log.Println("Successfully connected to MySQL " + db.Name)
+			fmt.Println("Success!")
 
 			// Assign the gorp to its name in the DBA.
 			dba.SQL[db.Name] = g
@@ -50,12 +54,13 @@ func Databases(c *config.Config) gf.DBA {
 			}
 
 			// Connect
+			fmt.Print("	Attempting to connect to MongoDB " + db.Name + "... ")
 			if err := m.Connect(db.Name); err != nil {
-				log.Fatalln("MongoDB: " + db.Name + " - " + err.Error())
+				log.Fatalln("Failed: " + err.Error())
 			}
 
 			// Let the user know we have connected.
-			log.Println("Successfully connected to MongoDB " + db.Name)
+			fmt.Println("Success!")
 
 			// Assign the mongodb to its name in the DBA.
 			dba.NoSQL[db.Name] = m
@@ -71,12 +76,13 @@ func Databases(c *config.Config) gf.DBA {
 			}
 
 			// Connect
+			fmt.Print("	Attempting to connect to PostgreSQL " + db.Name + "... ")
 			if err := g.Connect("postgres", db.Name); err != nil {
-				log.Fatalln("PostgreSQL: " + db.Name + " - " + err.Error())
+				log.Fatalln("Failed: " + err.Error())
 			}
 
 			// Let the user know we have connected.
-			log.Println("Successfully connected to PostgreSQL " + db.Name)
+			fmt.Println("Success!")
 
 			// Assign the gorp to its name in the DBA.
 			dba.SQL[db.Name] = g
@@ -85,6 +91,8 @@ func Databases(c *config.Config) gf.DBA {
 			log.Fatalln("Unsupported database: " + db.Type)
 		}
 	}
+
+	fmt.Print("\n")
 
 	return dba
 }

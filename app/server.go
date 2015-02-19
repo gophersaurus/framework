@@ -44,14 +44,11 @@ func Bootstrap(settings map[string]string) Server {
 	// INITALIZE CONFIGURATION
 	c := bootstrap.Config(settings)
 
-	fmt.Print(c)
-
 	// INITALIZE DATABASES
 	dba := bootstrap.Databases(c)
 
 	// SERVER PORT
 	p := c.Port
-	fmt.Println(c.Port)
 
 	// STATIC FILE PATH
 	s := settings["static"]
@@ -66,6 +63,9 @@ func Bootstrap(settings map[string]string) Server {
 // Serve starts the application server.
 func (s Server) Serve() {
 
+	fmt.Println("# STARTING SERVER")
+	fmt.Println("	Defering closing databases connections...")
+
 	// Defer the command to close Mongo db connections.
 	for _, db := range models.DBA.NoSQL {
 		defer db.Close()
@@ -76,25 +76,33 @@ func (s Server) Serve() {
 		defer db.Close()
 	}
 
+	fmt.Println("	Creating a new router...")
 	// Create a new router.
 	r := gf.NewRouter()
 
 	// If valid keys are provided, register them as gf.NewKeyMiddleware.
 	if len(s.keys) > 0 {
+		fmt.Println("	Attaching API keys middleware to router...")
 		r.Middleware(gf.NewKeyMiddleware(s.keys))
 	}
 
 	// register dynamic routes.
+	fmt.Println("	Registering routes...")
 	register(r)
 
 	// If a static directory path is provided, register it.
+	fmt.Println("	Setting static assets directory...")
 	if len(s.static) > 0 {
 		r.Static("/", s.static)
 	} else {
 		r.Static("/", "/public")
 	}
 
+	fmt.Print("\n")
+
 	// let the humans know we are listening...
-	log.Println("listening on port " + s.port)
+	fmt.Println("# SERVING")
+	fmt.Println("	Server is listening on port " + s.port)
+	fmt.Print("\n")
 	log.Fatal(http.ListenAndServe(":"+s.port, r))
 }

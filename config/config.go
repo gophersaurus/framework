@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"log"
 
 	"git.target.com/gophersaurus/gf.v1"
@@ -41,10 +40,5 @@ func ReadFile(filename string) *Config {
 		log.Fatal(err)
 	}
 
-	fmt.Println(" -- before print -- ")
-	fmt.Print(c)
-	fmt.Println("\n -- after print -- ")
-
 	return c
-
 }
