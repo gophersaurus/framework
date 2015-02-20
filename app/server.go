@@ -54,7 +54,7 @@ func Bootstrap(settings map[string]string) Server {
 	models.Init(dba)
 
 	// Initalize the config object in controllers.
-	controllers.Init(config)
+	controllers.Init(c)
 
 	// SERVER
 	return NewServer(dba, p, s, c, k)
