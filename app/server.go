@@ -28,12 +28,6 @@ func NewServer(
 	keys map[string][]string,
 ) Server {
 
-	// Initalize the database admin in models.
-	models.Init(dba)
-
-	// Initalize the config object in controllers.
-	controllers.Init(config)
-
 	// Return a new Server.
 	return Server{port: port, static: static, keys: keys}
 }
@@ -55,6 +49,12 @@ func Bootstrap(settings map[string]string) Server {
 
 	// QUICK KEYS
 	k := c.Keys
+
+	// Initalize the database admin in models.
+	models.Init(dba)
+
+	// Initalize the config object in controllers.
+	controllers.Init(config)
 
 	// SERVER
 	return NewServer(dba, p, s, c, k)
