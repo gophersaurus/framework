@@ -18,7 +18,7 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 > Note: These instructions assume you already have your $GOPATH configured and you are using git with github or github-enterprise.
 
 ####Code Setup
-1. Clone this repositiory to your local machine. `git clone git@git.target.com:gophersaurus/gophersaurus.git`
+1. Clone this repositiory. `git clone git@git.target.com:gophersaurus/gophersaurus.git`
 2. Enter the root project directory. `cd gophersaurus`
 4. Run the command `go get ./...` to ensure you have all nessesary dependencies locally.  If you want download fresh updated dependency copies and see what what your downloading run `go get -u -v ./...`.
 5. Rename the `gophersaurus` to your project name. `cd ..`, `mv gophersaurus project-name`
