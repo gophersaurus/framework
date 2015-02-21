@@ -21,13 +21,29 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 │   ├── middleware
 │   ├── models
 │   └── services
-│       └── openweathermap
+│       └── api.openweathermap.org
 │           └── data
-│               └── v25
+│               └── 2.5
 ├── bootstrap
 ├── config
 └── public
 ```
+
+####The Root Directory
+The root directory of a fresh Laravel installation contains a variety of folders:
+
+* The `app` directory, as you might expect, contains the core code of your application.  It also implements the `server` `package` in your application.
+* The `bootstrap` folder contains a few files that bootstrap the framework and configure autoloading.  It also implements the `bootstrap` `package` in your application.
+* The `config` directory, as the name implies, contains all of your application's configuration settings and logic.  It also implements the `config` `package` in your application.
+* The `public` directory contains the front controller and your assets (images, JavaScript, CSS, etc.).
+
+####The App Directory
+The "meat" of your application lives in the `app` directory. The `app` directory ships with a variety of additional directories such as `controllers`, `middleware`, `models`, and `services`.
+
+* The `controllers` directory, contains all the core controller code of your application.  It also implements the `controllers` `package` in your application.
+* The `middleware` directory, contains all the core middleware code of your application.  It also implements the `middleware` `package` in your application.
+* The `models` directory, contains all the core middleware code of your application.  It also implements the `models` `package` in your application.
+* The `services` directory, contains all the service code of your application.  Multiple service `packages` are implemented in the `services` directory.  Service `package` names usually depend on the kind of service, as well as the URI endpoint for that particular service.  In the example directory structure above, we can deterime that the endpoint for the `weather` service is located at `http://api.openweathermap.org/data/2.5/weather`.  This convention is useful for quickly identifying a URI service endpoint in your application.
 
 ![directory_structure](https://git.target.com/gophersaurus/art/raw/master/directory_structure.png)
 
