@@ -1,4 +1,4 @@
-Gophersaurus Golang gf.v1
+Gophersaurus
 =============================
 
 ![gophersaurus](https://git.target.com/gophersaurus/art/raw/master/gophersaurus.png)
