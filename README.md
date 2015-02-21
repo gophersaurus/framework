@@ -25,8 +25,9 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 5. Rename `gophersaurus` to your project name.                          
    First move outside of the project root. `cd ..`                            
    Then change the project directory name. `mv gophersaurus project-name`
-6. Do a search and replace in your project root for...         
-   `git.target.com/gophersaurus/gophersaurus` to `your.git.com/your-org/your-project-name`
+6. Do a search and replace in your project root.                                                      
+   Move into your project root directory. `cd project-name`                                                 
+   Search `git.target.com/gophersaurus/gophersaurus` and replace with `your.git.com/your-org/project-name`
 
 ####Git Setup
 7. In the project directory run `git remote set-url origin git@your.git.com:your-org/your-project-name.git`
