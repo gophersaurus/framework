@@ -3,13 +3,15 @@ Gophersaurus Golang gf.v1
 
 ![gophersaurus](https://git.target.com/gophersaurus/art/raw/master/gophersaurus.png)
 
-###Description:
+Gophersaurus is a framework for building monolithic web services quickly. It provides a more structured approach to building go services and abstracts much of the common logic away for building an API.  These traits make Gophersaurus a great choice for projects that need to be rapidly developed, yet maintain consistency.  
 
-Gophersaurus is a golang gf.v1 for building large web services. It provides a more structured approach to building go services.
+Gophersaurus has been tested in production, it can scale, and basically gets the job done, but it is not the framework for trying to eek out every bit of performance possible.  As the framework matures, it will become more performant, but honestly... if you want the best golang performance possible, don't use a framework.  The go standard library will do.  
 
-Gophersaurus encourages the use of resource routes, Models, Controllers, JSON, and vendoring of dependencies.
+Gophersaurus provides structure for large teams of gophers, and wraps many open source golang packages to abstract away common logic.  It is for these reasons Gophersaurus got its name.  Its a big package.
 
-Gophersaurus is heavily inspired by other gf.v1s, but especially by the Larvel PHP gf.v1.
+Gophersaurus is heavily inspired by other backend frameworks, but especially the Laravel PHP Framework.  Just like Laravel, Gophersaurus encourages the use of Models, Controllers, Resources, and JSON views/responses.
+
+> NOTE: Gophersaurus is still in development and currently the API is not stable.  We will lockdown the API soon, and then gf.v1 will cease to have breaking changes.  All breaking changes then will be diverted gf.v2.
 
 ###The Problem:
 
