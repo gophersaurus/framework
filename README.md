@@ -27,7 +27,7 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
    Then change the project directory name. `mv gophersaurus project-name`
 6. Do a search and replace in your project root.                                                      
    Move into your project root directory. `cd project-name`                                                 
-   Search `git.target.com/gophersaurus/gophersaurus` and replace with `your.git.com/your-org/project-name`
+   Search `git.target.com/gophersaurus/gophersaurus` replace with `your.git.com/your-org/project-name`
 
 ####Git Setup
 7. In the project directory run `git remote set-url origin git@your.git.com:your-org/your-project-name.git`
@@ -99,7 +99,8 @@ config:
   address: localhost:27017/mongoDatabaseName
 ```
 
-> Note: Referer `localhost` values currently translate as `::1`.  Most `/etc/hosts` files have `::1` listed last after `127.0.0.1`.  Also do not attempt to compensate for proxies or loadbalancers unless you know what your doing.  Gophersaurus will search the HTTP `Header` for a `X-FORWARDED-FOR` value by default.
+> Note: Referer `localhost` values currently translate as `::1`.  Most `/etc/hosts` files have `::1` listed last after `127.0.0.1`.  Also do not attempt to compensate for proxies or loadbalancers unless you know what your doing. 
+Gophersaurus will search `Header` for a `X-FORWARDED-FOR` value by default.
 
 ###Style Guide
 
