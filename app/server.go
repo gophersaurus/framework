@@ -81,7 +81,7 @@ func (s Server) Serve() {
 	r := gf.NewRouter()
 
 	// If valid keys are provided, register them as gf.NewKeyMiddleware.
-	if len(s.keys) > 0 {
+	if len(s.keys) > 0 && s.keys != nil {
 		fmt.Println("	Attaching API keys middleware to router...")
 		r.Middleware(gf.NewKeyMiddleware(s.keys))
 	}
