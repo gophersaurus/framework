@@ -64,10 +64,12 @@ An example YAML configuration file is provided below:
 config:
   port: 8080
   keys:
-    acceptOnlyTheseRefererKey:
-    - google.com:80
-    - cnn.com:8080
-    acceptAnythingDevKey:
+    x78348djas-acceptOnlyTheseRefererKey:
+    - 10.87.87.64
+    - 34.87.65.10
+    x78348djas-acceptOnlyLocalhostKey:
+    - localhost
+    x78348djas-acceptAnythingKey:
   databases:
   - type: mongo
   name: mongoDatabaseName
