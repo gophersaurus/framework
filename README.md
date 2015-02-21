@@ -34,8 +34,8 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 7. In the project directory run `git remote set-url origin git@your.git.com:your-org/your-project-name.git`
 
 ####Extra Points
-8. run `go install github.com/mattn/go-sqlite3`.  You don't want to build this C++ package every time.  
-   Save yourself now.
+8. run `go install github.com/mattn/go-sqlite3`.  You don't want to build this C package every time.  
+   Save yourself now from slow C compile times.
 
 Now you should be able to run `go build` from your project root and run all manner of `git` commands.
 
