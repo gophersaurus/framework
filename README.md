@@ -58,7 +58,7 @@ The "meat" of your application lives in the `app` directory. The `app` directory
 
 By default Gophersaurus will look in your projects root folder for a `.config.yml` file to read all application settings.  You can specify a different file by passing in the `-c=path/to/your/file.yml`.  Gophersaurus can also read `.json` files instead of `.yml` if you prefer.  
 
-An example YAML configuration file is provided below:
+An example `.config.yml` configuration file is provided below:
 
 ```YAML
 config:
@@ -77,6 +77,8 @@ config:
   pass: mongoUserPassword
   address: localhost:27017/mongoDatabaseName
 ```
+
+> Note: Referer `localhost` values currently translate as `::1`.  Most `/etc/hosts` files have `::1` listed last after `127.0.0.1`.  Also do not attempt to compensate for proxies or loadbalancers unless you know what your doing.  Gophersaurus will search the HTTP `Header` for a `X-FORWARDED-FOR` value by default.
 
 ###The Problem:
 
