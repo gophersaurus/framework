@@ -15,6 +15,20 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 
 ###Directory Structure
 
+```
+├── app
+│   ├── controllers
+│   ├── middleware
+│   ├── models
+│   └── services
+│       └── openweathermap
+│           └── data
+│               └── v25
+├── bootstrap
+├── config
+└── public
+```
+
 ![directory_structure](https://git.target.com/gophersaurus/art/raw/master/directory_structure.png)
 
 ###The Problem:
