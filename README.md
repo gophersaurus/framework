@@ -20,7 +20,10 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 ####Code Setup
 1. Clone this repositiory. `git clone git@git.target.com:gophersaurus/gophersaurus.git`
 2. Enter the root project directory. `cd gophersaurus`
-4. Run the command `go get ./...` to ensure you have all nessesary dependencies locally.  If you want download fresh updated dependency copies and see what what your downloading run `go get -u -v ./...`.
+4. Run the command `go get ./...` to ensure you have all nessesary dependencies locally.  
+
+> Note: If you want the latest dependencies and verbose mode on run `go get -u -v ./...`.
+
 5. Rename the `gophersaurus` to your project name. `cd ..`, `mv gophersaurus project-name`
 6. Do a search and replace in your project root for `git.target.com/gophersaurus/gophersaurus` to `your.git.com/your-org/your-project-name`
 
