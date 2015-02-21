@@ -80,15 +80,19 @@ config:
 
 > Note: Referer `localhost` values currently translate as `::1`.  Most `/etc/hosts` files have `::1` listed last after `127.0.0.1`.  Also do not attempt to compensate for proxies or loadbalancers unless you know what your doing.  Gophersaurus will search the HTTP `Header` for a `X-FORWARDED-FOR` value by default.
 
-###The Problem:
+###Style Guide
 
-We believe in golang there is a need for a large organizational gf.v1 to be used in enterprise environments. There are many golang gf.v1s such as Revel, Traffic, Martini, Gorilla, Goweb, and more. These gf.v1s are great at what they do, but many are contained as packages. While packages are great, we think a gf.v1 package alone does not provide enough structure for our liking.
+We believe it is important for a framework to provide a style guide, not just code.  
 
-Package flexibility is great when you need to write a small service, but when you start to grow a larger robust codebase it starts to become a nightmare. This is especially true when you have more than one backend developer.
+Instead of reinventing the wheel, we recommend `gofmt` and `goimports` to automatically format go code properly.  Beyond these awesome tools we also recommend gophers to keep as close as possible to the internal Golang Code Review standards at https://github.com/golang/go/wiki/CodeReviewComments.
 
-Our solution has been to steal all of the good directory structure other gf.v1s are famous for (like Laravel who copied Ruby on Rails), while keeping our own golang code as idiomatic as possible. We aren’t doing anything new, rather we are organizing all the good work the community has already achieved.
+###What Problem Is Gophersaurus Solving?:
 
-One last point is that in the golang community there are many different ways one could deal with dependencies. We have decided to solve the issue by vendoring all our code. This means that our repo has everything we need locally to build our binary. The same approach is now being taken by Godeps, a popular tool.
+We believe in golang there is a need for a large framework to be used in enterprise environments. There are many golang frameworks such as Revel, Traffic, Martini, Gorilla, Goweb, and more. These frameworks are great at what they do, but lack folder structure and strong opinions.
+
+Package flexibility is great when you need to write a small service, but when you start to grow a larger robust codebase it starts to become a nightmare. This is especially true when you have more than one developer.
+
+Our solution/plan has been to steal all of the good directory structure other frameworks are famous for (like Laravel who copied Ruby on Rails), while keeping our own golang code as idiomatic as possible. We aren’t doing anything new, rather we are organizing all the good work the community has already achieved.
 
 ###Installation Instructions:
 
@@ -97,10 +101,6 @@ For now simply clone our repository and change the `server.go` file to whatever 
 Currently we are working on tooling to automate vendoring dependencies, very much like `godep` does, but with local relative imports rather than full file paths.
 
 ###Contribution guidelines
-
-####Golang Style Guide
-
-> This golang project not only utilizes the gofmt format standards, but it also follows the internal Google Code Review standards at https://github.com/golang/go/wiki/CodeReviewComments
 
 ###License
 
