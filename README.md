@@ -1,15 +1,21 @@
-Gophersaurus Golang gf.v1
+Gophersaurus
 =============================
+
+Gophersaurus is a framework for building monolithic web services quickly. It provides a more structured approach to building go services and abstracts much of the common logic away for building an API.  These traits make Gophersaurus a great choice for projects that need to be rapidly developed, yet maintain consistency.  
 
 ![gophersaurus](https://git.target.com/gophersaurus/art/raw/master/gophersaurus.png)
 
-###Description:
+Gophersaurus provides structure for large teams of gophers, and wraps many open source golang packages to abstract away common logic.  It is for these reasons Gophersaurus got its name.  Its a big package.
 
-Gophersaurus is a golang gf.v1 for building large web services. It provides a more structured approach to building go services.
+Gophersaurus has been tested in production, it can scale, and basically gets the job done, but it is not the framework for trying to eek out every bit of performance possible.  As the framework matures, it will become more performant, but honestly... if you want the best golang performance possible, don't use a framework.  The go standard library will do.  
 
-Gophersaurus encourages the use of resource routes, Models, Controllers, JSON, and vendoring of dependencies.
+Gophersaurus is heavily inspired by other backend frameworks, but especially the Laravel PHP Framework.  Just like Laravel, Gophersaurus encourages the use of Models, Controllers, Resources, and JSON views/responses.
 
-Gophersaurus is heavily inspired by other gf.v1s, but especially by the Larvel PHP gf.v1.
+> NOTE: Gophersaurus is still in development and currently the API is not stable.  We will lockdown the API soon, and then gf.v1 will cease to have breaking changes.  All breaking changes then will be diverted gf.v2.
+
+###Directory Structure
+
+![directory_structure](https://git.target.com/gophersaurus/art/raw/master/directory_structure.png)
 
 ###The Problem:
 
@@ -20,10 +26,6 @@ Package flexibility is great when you need to write a small service, but when yo
 Our solution has been to steal all of the good directory structure other gf.v1s are famous for (like Laravel who copied Ruby on Rails), while keeping our own golang code as idiomatic as possible. We aren’t doing anything new, rather we are organizing all the good work the community has already achieved.
 
 One last point is that in the golang community there are many different ways one could deal with dependencies. We have decided to solve the issue by vendoring all our code. This means that our repo has everything we need locally to build our binary. The same approach is now being taken by Godeps, a popular tool.
-
-###gf.v1 Structure
-
-![directory_structure](https://git.target.com/gophersaurus/art/raw/master/directory_structure.png)
 
 ###Installation Instructions:
 
