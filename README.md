@@ -32,7 +32,7 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 ####Git Setup
 7. In the project directory run `git remote set-url origin git@your.git.com:your-org/your-project-name.git`
 
-Now you should be able to run `go build` from your project root to build and all manner of `git` commands.
+Now you should be able to run `go build` from your project root and run all manner of `git` commands.
 
 ###Directory Structure
 
