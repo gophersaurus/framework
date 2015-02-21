@@ -29,8 +29,13 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
    Move into your project root directory. `cd project-name`                                                 
    Search `git.target.com/gophersaurus/gophersaurus` replace with `your.git.com/your-org/project-name`
 
+
 ####Git Setup
 7. In the project directory run `git remote set-url origin git@your.git.com:your-org/your-project-name.git`
+
+####Extra Points
+8. run `go install github.com/mattn/go-sqlite3`.  You don't want to build this C++ package every time.  
+   Save yourself now.
 
 Now you should be able to run `go build` from your project root and run all manner of `git` commands.
 
