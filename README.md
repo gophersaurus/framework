@@ -31,6 +31,28 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 
 ![directory_structure](https://git.target.com/gophersaurus/art/raw/master/directory_structure.png)
 
+###Configuration Settings
+
+By default Gophersaurus will look in your projects root folder for a `.config.yml` file to read all application settings.  You can specify a different file by passing in the `-c=path/to/your/file.yml`.  Gophersaurus can also read `.json` files instead of `.yml` if you prefer.  
+
+An example YAML configuration file is provided below:
+
+```YAML
+config:
+  port: 8080
+  keys:
+    acceptOnlyTheseRefererKey:
+    - google.com:80
+    - cnn.com:8080
+    acceptAnythingDevKey:
+  databases:
+  - type: mongo
+  name: mongoDatabaseName
+  user: mongoUserName
+  pass: mongoUserPassword
+  address: localhost:27017/mongoDatabaseName
+```
+
 ###The Problem:
 
 We believe in golang there is a need for a large organizational gf.v1 to be used in enterprise environments. There are many golang gf.v1s such as Revel, Traffic, Martini, Gorilla, Goweb, and more. These gf.v1s are great at what they do, but many are contained as packages. While packages are great, we think a gf.v1 package alone does not provide enough structure for our liking.
