@@ -22,7 +22,9 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 2. Enter the root project directory. `cd gophersaurus`
 4. Run the command `go get ./...` to ensure you have all nessesary dependencies locally.  
    If you want the latest dependencies and verbose mode on run `go get -u -v ./...`.
-5. Rename the `gophersaurus` to your project name. `cd ..`, `mv gophersaurus project-name`
+5. Rename `gophersaurus` to your project name.                          
+   First move outside of the project root. `cd ..`                            
+   Then change the project directory name. `mv gophersaurus project-name`
 6. Do a search and replace in your project root for `git.target.com/gophersaurus/gophersaurus` to `your.git.com/your-org/your-project-name`
 
 ####Git Setup
