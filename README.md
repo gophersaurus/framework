@@ -102,7 +102,7 @@ We believe it is important for a framework to provide a style guide, not just co
 
 Instead of reinventing the wheel, we recommend `gofmt` and `goimports` to automatically format go code properly.  Beyond these awesome tools we also recommend gophers to keep close to the internal Golang Code Review standards at https://github.com/golang/go/wiki/CodeReviewComments.
 
-###What Problem Is Gophersaurus Solving?:
+###What Problem Is Gophersaurus Solving?
 
 We believe in golang there is a need for a large framework to be used in enterprise environments. There are many golang frameworks such as Revel, Traffic, Martini, Gorilla, Goweb, and more. These frameworks are great at what they do, but lack folder structure and strong opinions.
 
