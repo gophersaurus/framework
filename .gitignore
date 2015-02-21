@@ -1,4 +1,4 @@
 gophersaurus
-config.yml
-config.yaml
-config.json
+.config.yml
+.config.yaml
+.config.json
