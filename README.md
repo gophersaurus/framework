@@ -112,6 +112,11 @@ Our solution/plan has been to steal all of the good directory structure other fr
 
 ###Contribution guidelines
 
+* Submit an issue.  
+* Send us a pull request. 
+
+Thanks! :)
+
 ###License
 
 The Gophersaurus gf.v1 is open-sourced software licensed under the [MIT License](http://opensource.org/licenses/MIT)
