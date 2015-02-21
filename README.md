@@ -13,6 +13,22 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 
 > IMPORTANT NOTE: Gophersaurus is still in development and currently the API is not stable.  We will lockdown the API soon, and then gf.v1 will cease to have breaking changes.  All breaking changes will be diverted gf.v2.
 
+###Installation:
+
+> Note: These instructions assume you already have your $GOPATH configured and you are using git with github or github-enterprise.
+
+####Code Setup
+1. Clone this repositiory to your local machine. `git clone git@git.target.com:gophersaurus/gophersaurus.git`
+2. Enter the root project directory. `cd gophersaurus`
+4. Run the command `go get ./...` to ensure you have all nessesary dependencies locally.  If you want download fresh updated dependency copies and see what what your downloading run `go get -u -v ./...`.
+5. Rename the `gophersaurus` to your project name. `cd ..`, `mv gophersaurus project-name`
+6. Do a search and replace in your project root for `git.target.com/gophersaurus/gophersaurus` to `your.git.com/your-org/your-project-name`
+
+####Git Setup
+7. In the project directory run `git remote set-url origin git@your.git.com:your-org/your-project-name.git`
+
+Now you should be able to run `go build` from your project root to build and all manner of `git` commands.
+
 ###Directory Structure
 
 ```
@@ -93,12 +109,6 @@ We believe in golang there is a need for a large framework to be used in enterpr
 Package flexibility is great when you need to write a small service, but when you start to grow a larger robust codebase it starts to become a nightmare. This is especially true when you have more than one developer.
 
 Our solution/plan has been to steal all of the good directory structure other frameworks are famous for (like Laravel who copied Ruby on Rails), while keeping our own golang code as idiomatic as possible. We aren’t doing anything new, rather we are organizing all the good work the community has already achieved.
-
-###Installation Instructions:
-
-For now simply clone our repository and change the `server.go` file to whatever your backend or web service would be named. After you have finished adding controllers, models, and views, run `go build <yourname>.go` to build your binary. `go build` alone will not do the trick since all import paths are relative and therefore self-containing.
-
-Currently we are working on tooling to automate vendoring dependencies, very much like `godep` does, but with local relative imports rather than full file paths.
 
 ###Contribution guidelines
 
