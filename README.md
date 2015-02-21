@@ -84,7 +84,7 @@ config:
 
 We believe it is important for a framework to provide a style guide, not just code.  
 
-Instead of reinventing the wheel, we recommend `gofmt` and `goimports` to automatically format go code properly.  Beyond these awesome tools we also recommend gophers to keep as close as possible to the internal Golang Code Review standards at https://github.com/golang/go/wiki/CodeReviewComments.
+Instead of reinventing the wheel, we recommend `gofmt` and `goimports` to automatically format go code properly.  Beyond these awesome tools we also recommend gophers to keep close to the internal Golang Code Review standards at https://github.com/golang/go/wiki/CodeReviewComments.
 
 ###What Problem Is Gophersaurus Solving?:
 
