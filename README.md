@@ -147,6 +147,42 @@ Package flexibility is great when you need to write a small service, but when yo
 
 Our solution/plan has been to steal all of the good directory structure other frameworks are famous for (like Laravel who copied Ruby on Rails), while keeping our own golang code as idiomatic as possible. We aren’t doing anything new, rather we are organizing all the good work the community has already achieved.
 
+###Under The Hood
+
+Gophersarus runs many different open source packages under the hood.  Again, we did not reinvent the wheel, we simply cut and pasted it together ;)
+
+Please note that the `github.com/mattn/go-sqlite3` package is missing from the list below.  That is because we `go install github.com/mattn/go-sqlite3` was run ahead of time.  The `github.com/mattn/go-sqlite3` package is primarily written in C and therefore takes much longer to compile than pure go.
+
+Run `go build -v` to see all packages as they build:
+
+```
+→ go build -v                                                                                                       
+
+gopkg.in/mgo.v2/bson
+gopkg.in/mgo.v2/internal/scram
+github.com/asaskevich/govalidator
+github.com/codegangsta/negroni
+github.com/gorilla/context
+github.com/gorilla/mux
+github.com/lib/pq/oid
+gopkg.in/gorp.v1
+github.com/lib/pq
+gopkg.in/unrolled/render.v1
+gopkg.in/mgo.v2
+gopkg.in/validator.v2
+gopkg.in/yaml.v2
+github.com/codegangsta/cli
+git.target.com/gophersaurus/gf.v1/imgo
+git.target.com/gophersaurus/gf.v1
+git.target.com/gophersaurus/gophersaurus/app/models
+git.target.com/gophersaurus/gophersaurus/app/services/api.openweathermap.org/data/2.5
+git.target.com/gophersaurus/gophersaurus/config
+git.target.com/gophersaurus/gophersaurus/bootstrap
+git.target.com/gophersaurus/gophersaurus/app/controllers
+git.target.com/gophersaurus/gophersaurus/app
+git.target.com/gophersaurus/gophersaurus
+```
+
 ###Contribution guidelines
 
 * Submit an issue.  
