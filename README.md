@@ -43,6 +43,9 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 
 Now you should be able to run `go build` from your project root and run all manner of `git` commands.
 
+If everything worked as it should, then at the root path you should see the following page:
+![gophersaurus-working-public-directory](https://git.target.com/gophersaurus/art/raw/master/gophersaurus_public_directory.png)
+
 ###Directory Structure
 
 ```
