@@ -18,6 +18,7 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 > Note: These instructions assume you already have your $GOPATH configured and you are using git with github or github-enterprise.
 
 ####Code Setup
+
 1. Clone this repositiory. `git clone git@git.target.com:gophersaurus/gophersaurus.git`
 2. Enter the root project directory. `cd gophersaurus`
 4. Run the command `go get ./...` to ensure you have all nessesary dependencies locally.  
@@ -31,10 +32,12 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 
 
 ####Git Setup
-7. In the project directory run `git remote set-url origin git@your.git.com:your-org/your-project-name.git`
+
+1. In the project directory run `git remote set-url origin git@your.git.com:your-org/your-project-name.git`
 
 ####Extra Points
-8. Run `go install github.com/mattn/go-sqlite3`.  You don't want to build this C package every time.  
+
+1. Run `go install github.com/mattn/go-sqlite3`.  You don't want to build this C package every time.  
    Save yourself now from slow C compile times.
 
 Now you should be able to run `go build` from your project root and run all manner of `git` commands.
@@ -56,6 +59,7 @@ Now you should be able to run `go build` from your project root and run all mann
 ```
 
 ####The Root Directory
+
 The root directory of a fresh Laravel installation contains a variety of folders:
 
 * The `app` directory, as you might expect, contains the core code of your application.  
@@ -67,6 +71,7 @@ The root directory of a fresh Laravel installation contains a variety of folders
 * The `public` directory contains the front controller and your assets (images, JavaScript, CSS, etc.).
 
 ####The App Directory
+
 The "meat" of your application lives in the `app` directory. The `app` directory ships with a variety of additional directories such as `controllers`, `middleware`, `models`, and `services`.
 
 * The `controllers` directory, contains all the core controller code of your application.  
@@ -106,6 +111,27 @@ config:
 
 > Note: Referer `localhost` values currently translate as `::1`.  Most `/etc/hosts` files have `::1` listed last after `127.0.0.1`.  Also do not attempt to compensate for proxies or loadbalancers unless you know what your doing. 
 Gophersaurus will search `Header` for a `X-FORWARDED-FOR` value by default.
+
+###The Database Administrator
+
+Gophersaurus was never overly keen on ORMs.  We understand ORMs are a necessary convenience, but in the new world of SQL and NoSQL databases, no one golang ORM has emerged.  (If you do know of a golang ORM to rule them all, please let us know.)
+
+Thus the `DBA` or Database Administrator object was born to help with SQL vs NoSQL.  Here is what it looks like:
+
+```Go
+type DBA struct {
+	NoSQL map[string]DB
+	SQL   map[string]DB
+}
+```
+
+The `DBA` object in Gophersaurus is still something like an ORM.  Sorta/Kinda/Maybe.  Right now it impliments the `mgo` `package` for NoSQL and the `gorp` `package` for SQL.  The `DBA` keeps both seperate, but they impliment the same `DB` interface for easy access.  
+
+Currently Gophersaurus supports following databases:
+* MongoDB
+* PostgreSQL
+* MySQL
+* SQLite3
 
 ###Style Guide
 
