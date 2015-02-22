@@ -83,7 +83,7 @@ The "meat" of your application lives in the `app` directory. The `app` directory
 * The `services` directory, contains all the service code of your application.  
   Multiple service `packages` are implemented in the `services` directory.  Service `package` names usually depend on the kind of service, as well as the URI endpoint for that particular service.  
   
-> Note on `service` `package` names: In the example directory structure above, we can deterime that the endpoint for the `weather` `service` is located at `http://api.openweathermap.org/data/2.5/weather`.  This convention is useful for quickly identifying a URI `service` endpoint in your application.
+> Note on `service` `package` names: In the example directory structure above, we can determine that the endpoint for the `weather` `service` is located at `http://api.openweathermap.org/data/2.5/weather`.  This convention is useful for quickly identifying a URI `service` endpoint in your application.
 
 ###Configuration Settings
 
