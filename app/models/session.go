@@ -38,17 +38,17 @@ func (s *Session) FindByID(id string) error {
 	if err != nil {
 		return err
 	}
-	return DBA.MGO("test").C("testSessions").FindId(bsonId).One(s)
+	return dba.MGO("test").C("testSessions").FindId(bsonId).One(s)
 }
 
 func (s *Session) Save() error {
 	s.User = nil
-	_, err := DBA.MGO("test").C("testSessions").UpsertId(s.ID, s)
+	_, err := dba.MGO("test").C("testSessions").UpsertId(s.ID, s)
 	return err
 }
 
 func (s *Session) Delete() error {
-	return DBA.MGO("test").C("testSessions").RemoveId(s.ID)
+	return dba.MGO("test").C("testSessions").RemoveId(s.ID)
 }
 
 func (s *Session) Validate() error {

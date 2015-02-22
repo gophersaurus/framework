@@ -9,7 +9,7 @@ import (
 )
 
 // Databases takes a config object and returns a gf.DBA
-func Databases(c *config.Config) gf.DBA {
+func Databases(c config.Config) *gf.DBA {
 
 	// Create a new DBA to work with.
 	dba := gf.NewDBA()

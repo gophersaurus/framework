@@ -34,16 +34,16 @@ func (u *User) FindByID(id string) error {
 	if err != nil {
 		return err
 	}
-	return DBA.MGO("test").C("testUsers").FindId(bsonId).One(u)
+	return dba.MGO("test").C("testUsers").FindId(bsonId).One(u)
 }
 
 func (u *User) Save() error {
-	_, err := DBA.MGO("test").C("testUsers").UpsertId(u.Id, u)
+	_, err := dba.MGO("test").C("testUsers").UpsertId(u.Id, u)
 	return err
 }
 
 func (u *User) Delete() error {
-	return DBA.MGO("test").C("testUsers").RemoveId(u.Id)
+	return dba.MGO("test").C("testUsers").RemoveId(u.Id)
 }
 
 func (u *User) Validate() error {

@@ -19,21 +19,37 @@ import (
 // You might disagree with us, but this is for your own good.
 // Your security friends will thank us.
 type Config struct {
-	*gf.Config
+	gf.Config
+	SessionDays int `yaml:"session_days,omitempty" json:"session_days,omitempty"`
+	Services    `yaml:"services,omitempty" json:"services,omitempty"`
+}
+
+type Services struct {
+	Rackspace `yaml:"rackspace,omitempty" json:"rackspace,omitempty"`
+}
+
+type Rackspace struct {
+	Key                 string `yaml:"key,omitempty" json:"key,omitempty"`
+	User                string `yaml:"user,omitempty" json:"user,omitempty"`
+	Pass                string `yaml:"pass,omitempty" json:"pass,omitempty"`
+	Region              string `yaml:"region,omitempty" json:"region,omitempty"`
+	TenantID            string `yaml:"tenantid,omitempty" json:"tenantid,omitempty"`
+	ImageContainer      string `yaml:"imagecontainer,omitempty" json:"imagecontainer,omitempty"`
+	PixelcryptContainer string `yaml:"pixelcryptcontainer,omitempty" json:"pixelcryptcontainer,omitempty"`
 }
 
 // NewConfig comments
-func NewConfig() *Config {
-	return &Config{gf.NewConfig()}
+func NewConfig() Config {
+	return Config{Config: gf.NewConfig()}
 }
 
 // ReadFile takes a filename and returns a Config object.
-func ReadFile(filename string) *Config {
+func ReadFile(filename string) Config {
 
 	c := NewConfig()
 
 	// Read the file values into the Config object.
-	if err := gf.ReadConfig(filename, c); err != nil {
+	if err := gf.ReadConfig(filename, &c); err != nil {
 
 		// If we have an error, we should log the error and exit.
 		// Invalid configuration is a show stopper.

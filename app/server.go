@@ -7,6 +7,7 @@ import (
 
 	"git.target.com/gophersaurus/gf.v1"
 	"git.target.com/gophersaurus/gophersaurus/app/controllers"
+	"git.target.com/gophersaurus/gophersaurus/app/middleware"
 	"git.target.com/gophersaurus/gophersaurus/app/models"
 	"git.target.com/gophersaurus/gophersaurus/bootstrap"
 	"git.target.com/gophersaurus/gophersaurus/config"
@@ -16,48 +17,50 @@ import (
 type Server struct {
 	port   string
 	static string
+	dba    *gf.DBA
 	keys   map[string][]string
 }
 
 // NewServer takes a config, databases, port, and keys and returns a new server.
 func NewServer(
-	dba gf.DBA,
+	dba *gf.DBA,
 	port string,
 	static string,
-	config *config.Config,
+	config config.Config,
 	keys map[string][]string,
 ) Server {
-
-	// Return a new Server.
-	return Server{port: port, static: static, keys: keys}
+	return Server{port: port, static: static, dba: dba, keys: keys}
 }
 
 // Bootstrap takes settings an returns a Server.
 func Bootstrap(settings map[string]string) Server {
 
 	// INITALIZE CONFIGURATION
-	c := bootstrap.Config(settings)
+	conf := bootstrap.Config(settings)
 
 	// INITALIZE DATABASES
-	dba := bootstrap.Databases(c)
+	dba := bootstrap.Databases(conf)
 
 	// SERVER PORT
-	p := c.Port
+	port := conf.Port
 
 	// STATIC FILE PATH
-	s := settings["static"]
+	static := settings["static"]
 
 	// QUICK KEYS
-	k := c.Keys
+	keys := conf.Keys
 
 	// Initalize the database admin in models.
-	models.Init(dba)
+	models.Init(conf, dba)
 
 	// Initalize the config object in controllers.
-	controllers.Init(c)
+	controllers.Init(conf)
+
+	// Initalize the config object in middleware.
+	middleware.Init(conf)
 
 	// SERVER
-	return NewServer(dba, p, s, c, k)
+	return NewServer(dba, port, static, conf, keys)
 }
 
 // Serve starts the application server.
@@ -67,12 +70,12 @@ func (s Server) Serve() {
 	fmt.Println("	Defering closing databases connections...")
 
 	// Defer the command to close Mongo db connections.
-	for _, db := range models.DBA.NoSQL {
+	for _, db := range s.dba.NoSQL {
 		defer db.Close()
 	}
 
 	// Defer the command to close SQL db connections.
-	for _, db := range models.DBA.SQL {
+	for _, db := range s.dba.SQL {
 		defer db.Close()
 	}
 
@@ -81,7 +84,7 @@ func (s Server) Serve() {
 	r := gf.NewRouter()
 
 	// If valid keys are provided, register them as gf.NewKeyMiddleware.
-	if len(s.keys) > 0 && s.keys != nil {
+	if len(s.keys) > 0 {
 		fmt.Println("	Attaching API keys middleware to router...")
 		r.Middleware(gf.NewKeyMiddleware(s.keys))
 	}

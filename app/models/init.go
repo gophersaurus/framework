@@ -1,10 +1,14 @@
 package models
 
-import "git.target.com/gophersaurus/gf.v1"
+import (
+	"git.target.com/gophersaurus/gf.v1"
+	"git.target.com/gophersaurus/gophersaurus/config"
+)
 
-// The Database Administrator object.
-var DBA gf.DBA
+var dba *gf.DBA
+var conf config.Config
 
-func Init(dba gf.DBA) {
-	DBA = dba
+func Init(c config.Config, d *gf.DBA) {
+	dba = d
+	conf = c
 }
