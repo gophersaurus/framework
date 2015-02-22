@@ -149,7 +149,7 @@ Our solution/plan has been to steal all of the good directory structure other fr
 
 ###Under The Hood
 
-Gophersarus runs many different open source packages under the hood.  Again, we did not reinvent the wheel, we simply cut and pasted it together ;)
+Gophersarus runs many different open source packages under the hood.  Again, we did not reinvent the wheel, we built the glue, and then cut and pasted the wheel together. ;)
 
 Please note that the `github.com/mattn/go-sqlite3` package is missing from the list below.  That is because we `go install github.com/mattn/go-sqlite3` was run ahead of time.  The `github.com/mattn/go-sqlite3` package is primarily written in C and therefore takes much longer to compile than pure go.
 
