@@ -114,7 +114,7 @@ Gophersaurus will search `Header` for a `X-FORWARDED-FOR` value by default.
 
 ###The Database Administrator
 
-Gophersaurus was never overly keen on ORMs.  We understand ORMs are a necessary convenience, but in the new world of SQL and NoSQL databases, no one golang ORM has emerged.  (If you do know of a golang ORM to rule them all, please let us know.)
+Gophersaurus was never overly keen on ORMs.  We understand ORMs are a necessary convenience, but in the new world of SQL and NoSQL databases, no singular Golang ORM has emerged.  (If you do know of a golang ORM to rule them all, please let us know.)
 
 Thus the `DBA` or Database Administrator object was born to help with SQL vs NoSQL.  Here is what it looks like:
 
