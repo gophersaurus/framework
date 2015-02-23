@@ -16,8 +16,16 @@ type Address struct {
 	Zip    string `json:"zip" bson:"zip"`
 }
 
-func NewAddress() gf.Model {
+func NewAddress() *Address {
 	return &Address{Id: bson.NewObjectId().Hex()}
+}
+
+func (a *Address) NewModel() gf.Model {
+	return &Address{Id: bson.NewObjectId().Hex()}
+}
+
+func (a *Address) PathID() string {
+	return "address_id"
 }
 
 func (a *Address) SetID(id string) error {
@@ -26,12 +34,11 @@ func (a *Address) SetID(id string) error {
 }
 
 func (a *Address) BelongsTo(owner gf.Model) error {
-	user, ok := owner.(*User)
-	if !ok {
-		return errors.New("invalid parent type")
+	if user, ok := owner.(*User); ok {
+		a.user = user
+		return nil
 	}
-	a.user = user
-	return nil
+	return errors.New("invalid parent type")
 }
 
 func (a *Address) FindByID(id string) error {
@@ -46,6 +53,25 @@ func (a *Address) FindByID(id string) error {
 	*a = a.user.Addresses[index]
 	a.user = user
 	return nil
+}
+
+func (a *Address) FindAll() ([]gf.Model, error) {
+
+	// Get all the addresses.
+	var addresses []Address
+	if err := dba.MGO("test").C("testAddresses").Find(bson.M{}).All(&addresses); err != nil {
+		return nil, err
+	}
+
+	// Create a new array of models.
+	models := []gf.Model{}
+
+	// Range through addresses.
+	for _, address := range addresses {
+		temp := address // needed for pointer
+		models = append(models, &temp)
+	}
+	return models, nil
 }
 
 func (a *Address) Save() error {
@@ -80,6 +106,24 @@ func (a *Address) Delete() error {
 	a.user.Addresses = addresses
 	a.user.Save()
 	return nil
+}
+
+func (a *Address) FindAllByOwner(owner gf.Model) ([]gf.Model, error) {
+
+	// Create a new array of models.
+	models := []gf.Model{}
+
+	if user, ok := owner.(*User); ok {
+
+		// Range through addresses.
+		for _, address := range user.Addresses {
+			temp := address // needed for pointer
+			models = append(models, &temp)
+		}
+
+		return models, nil
+	}
+	return nil, errors.New("invalid parent type")
 }
 
 func (a *Address) Validate() error {

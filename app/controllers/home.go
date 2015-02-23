@@ -5,7 +5,7 @@ import (
 
 	"git.target.com/gophersaurus/gf.v1"
 
-	weather "git.target.com/gophersaurus/gophersaurus/app/services/openweathermap/data/v25"
+	weather "git.target.com/gophersaurus/gophersaurus/app/services/api.openweathermap.org/data/2.5"
 )
 
 // HomeController contains controller logic for home.
@@ -16,7 +16,7 @@ var Home = &HomeController{}
 // Index handles a "/home" GET request for the HomeController.
 func (h *HomeController) Index(resp gf.Responder, req gf.Requester) {
 
-	w, err := weather.Find("Minneapolis", "us")
+	w, err := weather.Find("minneapolis", "us")
 
 	if err != nil {
 

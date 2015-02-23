@@ -26,7 +26,7 @@ func (s *SessionAdminMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Reques
 	}
 
 	// check to ensure the presence of a session
-	sessionID, err := gf.StringToBsonID(r.Header.Get(s.SessionIDlabel))
+	sessionID, err := gf.BSONID(r.Header.Get(s.SessionIDlabel))
 	if err != nil {
 		w.Header().Set("Error", gf.MissingSession)
 		next(w, r)

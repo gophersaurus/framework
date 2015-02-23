@@ -26,7 +26,7 @@ func (s *SessionController) Store(resp gf.Responder, req gf.Requester) {
 		return
 	}
 
-	userID, err := gf.StringToBsonID(userIDstr)
+	userID, err := gf.BSONID(userIDstr)
 	if err != nil {
 		resp.RespondWithErr(err.Error())
 		return
@@ -52,7 +52,7 @@ func (s *SessionController) Store(resp gf.Responder, req gf.Requester) {
 }
 
 func (s *SessionController) Show(resp gf.Responder, req gf.Requester) {
-	sessionID, err := gf.StringToBsonID(req.Request().Header.Get("Session-Id"))
+	sessionID, err := gf.BSONID(req.Header().Get("Session-Id"))
 	if err != nil {
 		resp.RespondWithErr(gf.MissingSession)
 		return
