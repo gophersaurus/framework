@@ -111,6 +111,15 @@ config:
   user: mongoUserName
   pass: mongoUserPassword
   address: localhost:27017/mongoDatabaseName
+session_days: 30
+services:
+  rackspace:
+    user: rackuser
+    key: rackkey
+    pass: rackpass
+    region: ORD
+    tenantid: accountnumber
+    container: containername
 ```
 
 > Note: Referer `localhost` values currently translate as `::1`.  Most `/etc/hosts` files have `::1` listed last after `127.0.0.1`.  Also do not attempt to compensate for proxies or loadbalancers unless you know what your doing. 
