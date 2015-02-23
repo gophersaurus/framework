@@ -17,10 +17,20 @@ type User struct { // embedded object for marshalling and unmarshalling
 }
 
 // NewUser creates an anonymous user.
-func NewUser() gf.Model {
+func NewUser() *User {
 	return &User{
 		Id: bson.NewObjectId(),
 	}
+}
+
+func (u *User) NewModel() gf.Model {
+	return &User{
+		Id: bson.NewObjectId(),
+	}
+}
+
+func (u *User) PathID() string {
+	return "user_id"
 }
 
 func (u *User) SetID(id string) error {
@@ -35,6 +45,29 @@ func (u *User) FindByID(id string) error {
 		return err
 	}
 	return dba.MGO("test").C("testUsers").FindId(bsonId).One(u)
+}
+
+func (u *User) FindAllByOwner(gf.Model) ([]gf.Model, error) {
+	return nil, errors.New("user do not have an owner")
+}
+
+func (u *User) FindAll() ([]gf.Model, error) {
+
+	// Get all the users.
+	var users []User
+	if err := dba.MGO("test").C("testUsers").Find(bson.M{}).All(&users); err != nil {
+		return nil, err
+	}
+
+	// Create a new array of models.
+	models := []gf.Model{}
+
+	// Range through addresses.
+	for _, user := range users {
+		temp := user // needed for pointer
+		models = append(models, &temp)
+	}
+	return models, nil
 }
 
 func (u *User) Save() error {
