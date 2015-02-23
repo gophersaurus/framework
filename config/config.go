@@ -29,13 +29,12 @@ type Services struct {
 }
 
 type Rackspace struct {
-	Key                 string `yaml:"key,omitempty" json:"key,omitempty"`
-	User                string `yaml:"user,omitempty" json:"user,omitempty"`
-	Pass                string `yaml:"pass,omitempty" json:"pass,omitempty"`
-	Region              string `yaml:"region,omitempty" json:"region,omitempty"`
-	TenantID            string `yaml:"tenantid,omitempty" json:"tenantid,omitempty"`
-	ImageContainer      string `yaml:"imagecontainer,omitempty" json:"imagecontainer,omitempty"`
-	PixelcryptContainer string `yaml:"pixelcryptcontainer,omitempty" json:"pixelcryptcontainer,omitempty"`
+	Key       string `yaml:"key,omitempty" json:"key,omitempty"`
+	User      string `yaml:"user,omitempty" json:"user,omitempty"`
+	Pass      string `yaml:"pass,omitempty" json:"pass,omitempty"`
+	Region    string `yaml:"region,omitempty" json:"region,omitempty"`
+	TenantID  string `yaml:"tenantid,omitempty" json:"tenantid,omitempty"`
+	Container string `yaml:"container,omitempty" json:"container,omitempty"`
 }
 
 // NewConfig comments
