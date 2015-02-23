@@ -57,20 +57,22 @@ func (a *Address) FindByID(id string) error {
 
 func (a *Address) FindAll() ([]gf.Model, error) {
 
-	// Get all the addresses.
+	// Create a slice of addresses to work with.
 	var addresses []Address
+
+	// Search the databases for addresses.
 	if err := dba.MGO("test").C("testAddresses").Find(bson.M{}).All(&addresses); err != nil {
 		return nil, err
 	}
 
-	// Create a new array of models.
-	models := []gf.Model{}
-
-	// Range through addresses.
-	for _, address := range addresses {
-		temp := address // needed for pointer
-		models = append(models, &temp)
+	// Unfortunately a []struct that implements []gf.Model is not compatible.
+	// This is because of how interface memory is mapped in golang. It sucks.
+	// More here: https://groups.google.com/forum/#!topic/golang-nuts/Il-tO1xtAyE
+	models := make([]gf.Model, len(addresses))
+	for i, v := range addresses {
+		models[i] = gf.Model(&v)
 	}
+
 	return models, nil
 }
 

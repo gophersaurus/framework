@@ -59,14 +59,14 @@ func (u *User) FindAll() ([]gf.Model, error) {
 		return nil, err
 	}
 
-	// Create a new array of models.
-	models := []gf.Model{}
-
-	// Range through addresses.
-	for _, user := range users {
-		temp := user // needed for pointer
-		models = append(models, &temp)
+	// Unfortunately a []struct that implements []gf.Model is not compatible.
+	// This is because of how interface memory is mapped in golang. It sucks.
+	// More here: https://groups.google.com/forum/#!topic/golang-nuts/Il-tO1xtAyE
+	models := make([]gf.Model, len(users))
+	for i, v := range users {
+		models[i] = gf.Model(&v)
 	}
+
 	return models, nil
 }
 
