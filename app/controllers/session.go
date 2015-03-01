@@ -16,26 +16,26 @@ func (s *SessionController) Store(resp gf.Responder, req gf.Requester) {
 	body := map[string]string{}
 	err := req.Read(&body)
 	if err != nil {
-		resp.RespondWithErr(err.Error())
+		resp.WriteErrs(err.Error())
 		return
 	}
 
 	userIDstr, ok := body["user"]
 	if !ok {
-		resp.RespondWithErr("missing user id")
+		resp.WriteErrs("missing user id")
 		return
 	}
 
 	userID, err := gf.BSONID(userIDstr)
 	if err != nil {
-		resp.RespondWithErr(err.Error())
+		resp.WriteErrs(err.Error())
 		return
 	}
 
 	user := models.NewUser()
 	err = user.FindByID(userID.Hex())
 	if err != nil {
-		resp.RespondWithErr("Invalid User")
+		resp.WriteErrs("Invalid User")
 		return
 	}
 
@@ -43,37 +43,37 @@ func (s *SessionController) Store(resp gf.Responder, req gf.Requester) {
 	session.UserID = userID
 	err = session.Save()
 	if err != nil {
-		resp.RespondWithErr(err.Error())
+		resp.WriteErrs(err.Error())
 		return
 	}
 	resp.Header("Session-Id", session.ID.Hex())
 	resp.Header("Session-Expires", fmt.Sprintf("%v", session.Expires))
-	resp.Respond()
+	resp.Do(req)
 }
 
 func (s *SessionController) Show(resp gf.Responder, req gf.Requester) {
 	sessionID, err := gf.BSONID(req.Header().Get("Session-Id"))
 	if err != nil {
-		resp.RespondWithErr(gf.MissingSession)
+		resp.WriteErrs(gf.MissingSession)
 		return
 	}
 
 	session := models.NewSession()
 	err = session.FindByID(sessionID.Hex())
 	if err != nil {
-		resp.RespondWithErr(gf.MissingSession)
+		resp.WriteErrs(gf.MissingSession)
 		return
 	}
 
 	user := &models.User{}
 	err = user.FindByID(session.UserID.Hex())
 	if err != nil {
-		resp.RespondWithErr("Invalid User")
+		resp.WriteErrs("Invalid User")
 		return
 	}
 
 	session.User = user
 
 	resp.Read(session)
-	resp.RespondJSON()
+	resp.JSON()
 }

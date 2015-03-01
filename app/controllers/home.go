@@ -21,7 +21,7 @@ func (h *HomeController) Index(resp gf.Responder, req gf.Requester) {
 	if err != nil {
 
 		// Add json body data.
-		resp.RespondWithJSON(map[string]string{
+		resp.WriteJSON(map[string]string{
 			"hello Minneapolis": "Sorry, no weather report today. :( ",
 			"error":             err.Error(),
 		})
@@ -30,7 +30,7 @@ func (h *HomeController) Index(resp gf.Responder, req gf.Requester) {
 	}
 
 	// Add json body data.
-	resp.RespondWithJSON(map[string]string{
+	resp.WriteJSON(map[string]string{
 		"Hello":       "Hi there, here is what's happening outside!",
 		"location":    w.Name,
 		"averageTemp": strconv.FormatFloat(w.Main.Temp, 'f', 1, 64),

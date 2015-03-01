@@ -21,12 +21,12 @@ func (w *workController) Index(resp gf.Responder, req gf.Requester) {
 
 	err := gf.NewWorkerPool(5, jobs...).RunJobs()
 	if err != nil {
-		resp.RespondWithErr(err.Error())
+		resp.WriteErrs(err.Error())
 		return
 	}
 
 	resp.Read(sum)
-	resp.RespondJSON()
+	resp.JSON()
 }
 
 func double(i int) int {
