@@ -1,8 +1,6 @@
 package controllers
 
 import (
-	"strconv"
-
 	"git.target.com/gophersaurus/gf.v1"
 
 	weather "git.target.com/gophersaurus/gophersaurus/app/services/api.openweathermap.org/data/2.5"
@@ -30,14 +28,6 @@ func (h *HomeController) Index(resp gf.Responder, req gf.Requester) {
 	}
 
 	// Add json body data.
-	resp.WriteJSON(map[string]string{
-		"Hello":       "Hi there, here is what's happening outside!",
-		"location":    w.Name,
-		"averageTemp": strconv.FormatFloat(w.Main.Temp, 'f', 1, 64),
-		"highTemp":    strconv.FormatFloat(w.Main.TempMax, 'f', 1, 64),
-		"lowTemp":     strconv.FormatFloat(w.Main.TempMin, 'f', 1, 64),
-		"sunrise":     strconv.Itoa(w.Sys.Sunrise),
-		"sunset":      strconv.Itoa(w.Sys.Sunset),
-	})
+	resp.Write(req, w)
 
 }

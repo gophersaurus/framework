@@ -1,8 +1,6 @@
 package middleware
 
 import (
-	"net/http"
-
 	"git.target.com/gophersaurus/gf.v1"
 	"git.target.com/gophersaurus/gophersaurus/app/models"
 )
@@ -18,21 +16,12 @@ func NewSessionUserMiddleware(sessionIDlabel, userIDlabel string) *SessionUserMi
 	return &SessionUserMiddleware{sessionIDlabel, userIDlabel}
 }
 
-func (s *SessionUserMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
-	errStr := w.Header().Get("Error")
-	if len(errStr) > 0 {
-		next(w, r)
-		return
-	}
-
-	// Create a new Request.
-	req := gf.NewRequest(r)
+func (s *SessionUserMiddleware) ServeHTTP(resp gf.Responder, req gf.Requester, next gf.HandlerFunc) {
 
 	// check to ensure the presence of a session
-	sessionID, err := gf.BSONID(r.Header.Get(s.SessionIDlabel))
+	sessionID, err := gf.BSONID(req.Header().Get(s.SessionIDlabel))
 	if err != nil {
-		w.Header().Set("Error", gf.MissingSession)
-		next(w, r)
+		resp.WriteErrs(gf.MissingSession)
 		return
 	}
 
@@ -40,19 +29,17 @@ func (s *SessionUserMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request
 
 	// Search for session by sessionId.
 	if session_db_err := session.FindByID(sessionID.Hex()); session_db_err != nil {
-		w.Header().Set("Error", gf.MissingSession)
-		next(w, r)
+		resp.WriteErrs(gf.MissingSession)
 		return
 	}
 
 	/*
 		if the user of the session is not the user in the path, pass error
 	*/
-	userVar, _ := req.Var(s.UserIDlabel)
+	userVar := req.Param(s.UserIDlabel)
 	if session.UserID.Hex() != userVar {
-		w.Header().Set("Error", gf.InvalidPermission)
-		next(w, r)
+		resp.WriteErrs(gf.InvalidPermission)
 		return
 	}
-	next(w, r)
+	next(resp, req)
 }

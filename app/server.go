@@ -81,7 +81,7 @@ func (s Server) Serve() {
 
 	fmt.Println("	Creating a new router...")
 	// Create a new router.
-	r := gf.NewRouter()
+	r := gf.NewRouter(true)
 
 	// If valid keys are provided, register them as gf.NewKeyMiddleware.
 	if len(s.keys) > 0 {
@@ -96,11 +96,10 @@ func (s Server) Serve() {
 	// If a static directory path is provided, register it.
 	fmt.Println("	Setting static assets directory...")
 	if len(s.static) > 0 {
-		r.Static("/", s.static)
+		r.Static("/static", s.static)
 	} else {
-		r.Static("/", "/public")
+		r.Static("/static", "/public")
 	}
-
 	fmt.Print("\n")
 
 	// let the humans know we are listening...
