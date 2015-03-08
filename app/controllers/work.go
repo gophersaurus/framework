@@ -11,7 +11,7 @@ var Work = &workController{}
 type workController struct {
 }
 
-func (w *workController) Index(resp gf.Responder, req gf.Requester) {
+func (w *workController) Index(resp gf.Responder, req *gf.Request) {
 	sum := 0
 
 	jobs := []gf.Job{}

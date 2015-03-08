@@ -8,7 +8,7 @@ import (
 )
 
 // Users is a ResourceController.
-var Users = gf.NewResourceController(models.NewUser(), func(req gf.Requester) (string, error) {
+var Users = gf.NewResourceController(models.NewUser(), func(req *gf.Request) (string, error) {
 
 	// Get the session id from the header.
 	if sid := req.Header().Get("Session-Id"); len(sid) > 0 {

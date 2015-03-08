@@ -16,7 +16,7 @@ func NewSessionUserMiddleware(sessionIDlabel, userIDlabel string) *SessionUserMi
 	return &SessionUserMiddleware{sessionIDlabel, userIDlabel}
 }
 
-func (s *SessionUserMiddleware) ServeHTTP(resp gf.Responder, req gf.Requester, next gf.HandlerFunc) {
+func (s *SessionUserMiddleware) ServeHTTP(resp gf.Responder, req *gf.Request, next gf.HandlerFunc) {
 
 	// check to ensure the presence of a session
 	sessionID, err := gf.BSONID(req.Header().Get(s.SessionIDlabel))

@@ -12,7 +12,7 @@ var Sessions = &SessionController{}
 type SessionController struct {
 }
 
-func (s *SessionController) Store(resp gf.Responder, req gf.Requester) {
+func (s *SessionController) Store(resp gf.Responder, req *gf.Request) {
 	body := map[string]string{}
 	err := req.Read(&body)
 	if err != nil {
@@ -51,7 +51,7 @@ func (s *SessionController) Store(resp gf.Responder, req gf.Requester) {
 	resp.Do(req)
 }
 
-func (s *SessionController) Show(resp gf.Responder, req gf.Requester) {
+func (s *SessionController) Show(resp gf.Responder, req *gf.Request) {
 	sessionID, err := gf.BSONID(req.Header().Get("Session-Id"))
 	if err != nil {
 		resp.WriteErrs(gf.MissingSession)

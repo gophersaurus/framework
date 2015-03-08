@@ -17,7 +17,7 @@ func NewSessionUserAdminMiddleware(sessionIDlabel, userIDlabel, adminRole string
 	return &SessionUserAdminMiddleware{sessionIDlabel, userIDlabel, adminRole}
 }
 
-func (s *SessionUserAdminMiddleware) ServeHTTP(resp gf.Responder, req gf.Requester, next gf.HandlerFunc) {
+func (s *SessionUserAdminMiddleware) ServeHTTP(resp gf.Responder, req *gf.Request, next gf.HandlerFunc) {
 
 	// check to ensure the presence of a session
 	sessionID, err := gf.BSONID(req.Header().Get(s.SessionIDlabel))
