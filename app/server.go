@@ -86,7 +86,8 @@ func (s Server) Serve() {
 	// If valid keys are provided, register them as gf.NewKeyMiddleware.
 	if len(s.keys) > 0 {
 		fmt.Println("	Attaching API keys middleware to router...")
-		r.Middleware(gf.NewKeyMiddleware(s.keys))
+		km := gf.NewKeyMiddleware(s.keys)
+		r.Middleware(km.Do)
 	}
 
 	// register dynamic routes.
