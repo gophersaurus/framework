@@ -19,7 +19,7 @@ func NewSessionUserMiddleware(sessionIDlabel, userIDlabel string) *SessionUserMi
 func (s *SessionUserMiddleware) ServeHTTP(resp gf.Responder, req *gf.Request, next gf.HandlerFunc) {
 
 	// check to ensure the presence of a session
-	sessionID, err := gf.BSONID(req.Header().Get(s.SessionIDlabel))
+	sessionID, err := gf.BSONID(req.Header.Get(s.SessionIDlabel))
 	if err != nil {
 		resp.WriteErrs(gf.MissingSession)
 		return

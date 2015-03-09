@@ -11,7 +11,7 @@ import (
 var Users = gf.NewResourceController(models.NewUser(), func(req *gf.Request) (string, error) {
 
 	// Get the session id from the header.
-	if sid := req.Header().Get("Session-Id"); len(sid) > 0 {
+	if sid := req.Header.Get("Session-Id"); len(sid) > 0 {
 
 		// Create a new session to work with.
 		session := models.NewSession()

@@ -52,7 +52,7 @@ func (s *SessionController) Store(resp gf.Responder, req *gf.Request) {
 }
 
 func (s *SessionController) Show(resp gf.Responder, req *gf.Request) {
-	sessionID, err := gf.BSONID(req.Header().Get("Session-Id"))
+	sessionID, err := gf.BSONID(req.Header.Get("Session-Id"))
 	if err != nil {
 		resp.WriteErrs(gf.MissingSession)
 		return
