@@ -9,9 +9,9 @@ import (
 func register(r *gf.Router) {
 
 	// Register the HTTP GET pattern "/home" to the HomeController Index() method.
-	r.Get("/home", c.Home.Index)
+	r.GET("/home", c.Home.Index)
 
 	// Register the HTTP GET pattern "/work" to the WorkController Index() method.
-	r.Get("/work", c.Work.Index)
+	r.GET("/work", c.Work.Index)
 
 }
