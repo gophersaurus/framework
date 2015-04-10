@@ -3,7 +3,7 @@ Gophersaurus
 
 Gophersaurus is a framework for building monolithic web services quickly. It provides a more structured approach to building go services and abstracts much of the common logic away for building an API.  These traits make Gophersaurus a great choice for projects that need to be rapidly developed, yet maintain consistency.  
 
-<img src="https://git.target.com/gophersaurus/art/raw/master/gophersaurus.png" width="300px" />
+<img src="https://github.com/gophersaurus/art/raw/master/gophersaurus.png" width="300px" />
 
 Gophersaurus provides structure for large teams of gophers, and wraps many open source golang packages to abstract away common logic.  It is for these reasons Gophersaurus got its name.  Its a big package.
 
@@ -29,7 +29,7 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
    Then change the project directory name. `mv gophersaurus project-name`
 8. Do a search and replace in your project root.                                                      
    Move into your project root directory. `cd project-name`                                                 
-   Search `git.target.com/gophersaurus/gophersaurus` replace with `your.git.com/your-org/project-name`
+   Search `github.com/gophersaurus/gophersaurus` replace with `your.git.com/your-org/project-name`
 
 
 ####Git Setup
@@ -44,7 +44,7 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 Now you should be able to run `go build` from your project root and run all manner of `git` commands.
 
 If everything worked as it should, then at the root path you should see the following page:
-![gophersaurus-working-public-directory](https://git.target.com/gophersaurus/art/raw/master/gophersaurus_public_directory.png)
+![gophersaurus-working-public-directory](https://github.com/gophersaurus/art/raw/master/gophersaurus_public_directory.png)
 
 ###Directory Structure
 
@@ -185,15 +185,15 @@ gopkg.in/mgo.v2
 gopkg.in/validator.v2
 gopkg.in/yaml.v2
 github.com/codegangsta/cli
-git.target.com/gophersaurus/gf.v1/imgo
-git.target.com/gophersaurus/gf.v1
+github.com/gophersaurus/gf.v1/imgo
+github.com/gophersaurus/gf.v1
 github.com/gophersaurus/framework/app/models
 github.com/gophersaurus/framework/app/services/api.openweathermap.org/data/2.5
 github.com/gophersaurus/framework/config
 github.com/gophersaurus/framework/bootstrap
 github.com/gophersaurus/framework/app/controllers
 github.com/gophersaurus/framework/app
-git.target.com/gophersaurus/gophersaurus
+github.com/gophersaurus/gophersaurus
 ```
 
 ###Contribution guidelines

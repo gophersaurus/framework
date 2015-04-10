@@ -3,7 +3,7 @@ package cityweather
 import (
 	"encoding/json"
 
-	"git.target.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1"
 )
 
 func Find(city, country string) (*Result, error) {

@@ -3,7 +3,7 @@ package config
 import (
 	"log"
 
-	"git.target.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1"
 )
 
 // Config describes configuration settings.

@@ -1,7 +1,7 @@
 package server
 
 import (
-	"git.target.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1"
 	c "github.com/gophersaurus/framework/app/controllers"
 )
 

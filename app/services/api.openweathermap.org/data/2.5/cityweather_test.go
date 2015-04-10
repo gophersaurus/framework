@@ -4,9 +4,9 @@ import (
 	"errors"
 	"testing"
 
-	"git.target.com/gophersaurus/gf.v1"
-	"git.target.com/gophersaurus/gf.v1/mock/gophermocks"
-	"git.target.com/gophersaurus/gf.v1/mock/mockstar"
+	"github.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1/mock/gophermocks"
+	"github.com/gophersaurus/gf.v1/mock/mockstar"
 )
 
 func Test_Find(t *testing.T) {

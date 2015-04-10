@@ -1,6 +1,6 @@
 package models
 
-import "git.target.com/gophersaurus/gf.v1"
+import "github.com/gophersaurus/gf.v1"
 
 func init() {
 	passValidator := gf.NewPatternValidator("[a-zA-Z][a-zA-Z0-9]{7,19}$")

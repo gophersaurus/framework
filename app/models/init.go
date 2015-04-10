@@ -1,7 +1,7 @@
 package models
 
 import (
-	"git.target.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1"
 	"github.com/gophersaurus/framework/config"
 )
 

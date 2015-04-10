@@ -3,7 +3,7 @@ package controllers
 import (
 	"fmt"
 
-	"git.target.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1"
 )
 
 var Work = &workController{}

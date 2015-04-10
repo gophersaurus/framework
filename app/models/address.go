@@ -3,7 +3,7 @@ package models
 import (
 	"errors"
 
-	"git.target.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1"
 	"gopkg.in/mgo.v2/bson"
 )
 

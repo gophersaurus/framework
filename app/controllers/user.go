@@ -3,7 +3,7 @@ package controllers
 import (
 	"errors"
 
-	"git.target.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1"
 	"github.com/gophersaurus/framework/app/models"
 )
 

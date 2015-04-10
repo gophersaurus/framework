@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"git.target.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1"
 
 	weather "github.com/gophersaurus/framework/app/services/api.openweathermap.org/data/2.5"
 )
