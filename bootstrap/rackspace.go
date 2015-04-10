@@ -3,7 +3,7 @@ package bootstrap
 import (
 	"log"
 
-	"git.target.com/gophersaurus/gophersaurus/config"
+	"github.com/gophersaurus/framework/config"
 	"github.com/rackspace/gophercloud"
 	"github.com/rackspace/gophercloud/rackspace"
 )

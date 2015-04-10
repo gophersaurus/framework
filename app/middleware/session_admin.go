@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"git.target.com/gophersaurus/gf.v1"
-	"git.target.com/gophersaurus/gophersaurus/app/models"
+	"github.com/gophersaurus/framework/app/models"
 )
 
 var SessionAdmin = NewSessionAdminMiddleware("Session-Id", "admin")

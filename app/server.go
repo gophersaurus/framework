@@ -6,11 +6,11 @@ import (
 	"net/http"
 
 	"git.target.com/gophersaurus/gf.v1"
-	"git.target.com/gophersaurus/gophersaurus/app/controllers"
-	"git.target.com/gophersaurus/gophersaurus/app/middleware"
-	"git.target.com/gophersaurus/gophersaurus/app/models"
-	"git.target.com/gophersaurus/gophersaurus/bootstrap"
-	"git.target.com/gophersaurus/gophersaurus/config"
+	"github.com/gophersaurus/framework/app/controllers"
+	"github.com/gophersaurus/framework/app/middleware"
+	"github.com/gophersaurus/framework/app/models"
+	"github.com/gophersaurus/framework/bootstrap"
+	"github.com/gophersaurus/framework/config"
 )
 
 // Server describes a server application.

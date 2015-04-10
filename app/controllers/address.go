@@ -1,5 +1,5 @@
 package controllers
 
-import "git.target.com/gophersaurus/gophersaurus/app/models"
+import "github.com/gophersaurus/framework/app/models"
 
 var Addresses = Users.Extend(models.NewAddress())

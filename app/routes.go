@@ -2,7 +2,7 @@ package server
 
 import (
 	"git.target.com/gophersaurus/gf.v1"
-	c "git.target.com/gophersaurus/gophersaurus/app/controllers"
+	c "github.com/gophersaurus/framework/app/controllers"
 )
 
 // register takes a Router and registers route paths to controller methods.

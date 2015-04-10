@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"git.target.com/gophersaurus/gf.v1"
-	"git.target.com/gophersaurus/gophersaurus/app/models"
+	"github.com/gophersaurus/framework/app/models"
 )
 
 var Sessions = &SessionController{}

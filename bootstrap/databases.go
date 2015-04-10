@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"git.target.com/gophersaurus/gf.v1"
-	"git.target.com/gophersaurus/gophersaurus/config"
+	"github.com/gophersaurus/framework/config"
 )
 
 // Databases takes a config object and returns a gf.DBA

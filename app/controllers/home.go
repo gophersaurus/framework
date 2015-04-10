@@ -3,7 +3,7 @@ package controllers
 import (
 	"git.target.com/gophersaurus/gf.v1"
 
-	weather "git.target.com/gophersaurus/gophersaurus/app/services/api.openweathermap.org/data/2.5"
+	weather "github.com/gophersaurus/framework/app/services/api.openweathermap.org/data/2.5"
 )
 
 // HomeController contains controller logic for home.

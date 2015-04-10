@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"git.target.com/gophersaurus/gf.v1"
-	"git.target.com/gophersaurus/gophersaurus/app/models"
+	"github.com/gophersaurus/framework/app/models"
 )
 
 var SessionUserAdmin = NewSessionUserAdminMiddleware("Session-Id", "user_id", "admin")

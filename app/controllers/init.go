@@ -1,6 +1,6 @@
 package controllers
 
-import "git.target.com/gophersaurus/gophersaurus/config"
+import "github.com/gophersaurus/framework/config"
 
 var conf config.Config
 

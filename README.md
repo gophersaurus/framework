@@ -187,12 +187,12 @@ gopkg.in/yaml.v2
 github.com/codegangsta/cli
 git.target.com/gophersaurus/gf.v1/imgo
 git.target.com/gophersaurus/gf.v1
-git.target.com/gophersaurus/gophersaurus/app/models
-git.target.com/gophersaurus/gophersaurus/app/services/api.openweathermap.org/data/2.5
-git.target.com/gophersaurus/gophersaurus/config
-git.target.com/gophersaurus/gophersaurus/bootstrap
-git.target.com/gophersaurus/gophersaurus/app/controllers
-git.target.com/gophersaurus/gophersaurus/app
+github.com/gophersaurus/framework/app/models
+github.com/gophersaurus/framework/app/services/api.openweathermap.org/data/2.5
+github.com/gophersaurus/framework/config
+github.com/gophersaurus/framework/bootstrap
+github.com/gophersaurus/framework/app/controllers
+github.com/gophersaurus/framework/app
 git.target.com/gophersaurus/gophersaurus
 ```
 

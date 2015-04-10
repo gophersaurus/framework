@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"git.target.com/gophersaurus/gophersaurus/app"
+	"github.com/gophersaurus/framework/app"
 	"github.com/codegangsta/cli"
 )
 

@@ -1,6 +1,6 @@
 package bootstrap
 
-import "git.target.com/gophersaurus/gophersaurus/config"
+import "github.com/gophersaurus/framework/config"
 
 // Config takes settings and returns a Config object.
 func Config(settings map[string]string) config.Config {
