@@ -19,16 +19,16 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
 
 ####Code Setup
 
-1. Clone this repositiory. `git clone git@git.target.com:gophersaurus/gophersaurus.git`
+1. Clone this repositiory. `git clone git@github.com:gophersaurus/gophersaurus.git`
 2. Enter the root project directory. `cd gophersaurus`
 4. Run the command `go get ./...` to ensure you have all nessesary dependencies locally.  
    If you want the latest dependencies and verbose mode on run `go get -u -v ./...`.
 5. Create your `.config.yml` settings file.  See "Configuration Settings" below.
 6. Move outside of the project root.`cd ..`  
-7. Rename `gophersaurus` to your project name.                          
+7. Rename `gophersaurus` to your project name.
    Then change the project directory name. `mv gophersaurus project-name`
-8. Do a search and replace in your project root.                                                      
-   Move into your project root directory. `cd project-name`                                                 
+8. Do a search and replace in your project root.
+   Move into your project root directory. `cd project-name`
    Search `github.com/gophersaurus/gophersaurus` replace with `your.git.com/your-org/project-name`
 
 
@@ -86,7 +86,7 @@ The "meat" of your application lives in the `app` directory. The `app` directory
   It also implements the `models` `package` in your application.
 * The `services` directory, contains all the service code of your application.  
   Multiple service `packages` are implemented in the `services` directory.  Service `package` names usually depend on the kind of service, as well as the URI endpoint for that particular service.  
-  
+
 > Note on `service` `package` names: In the example directory structure above, we can determine that the endpoint for the `weather` `service` is located at `http://api.openweathermap.org/data/2.5/weather`.  This convention is useful for quickly identifying a URI `service` endpoint in your application.
 
 ###Configuration Settings
@@ -122,7 +122,7 @@ services:
     container: containername
 ```
 
-> Note: Referer `localhost` values currently translate as `::1`.  Most `/etc/hosts` files have `::1` listed last after `127.0.0.1`.  Also do not attempt to compensate for proxies or loadbalancers unless you know what your doing. 
+> Note: Referer `localhost` values currently translate as `::1`.  Most `/etc/hosts` files have `::1` listed last after `127.0.0.1`.  Also do not attempt to compensate for proxies or loadbalancers unless you know what your doing.
 Gophersaurus will search `Header` for a `X-FORWARDED-FOR` value by default.
 
 ###The Database Administrator
@@ -169,7 +169,7 @@ Please note that the `github.com/mattn/go-sqlite3` package is missing from the l
 Run `go build -v` to see all packages as they build:
 
 ```
-→ go build -v                                                                                                       
+→ go build -v
 
 gopkg.in/mgo.v2/bson
 gopkg.in/mgo.v2/internal/scram
@@ -199,7 +199,7 @@ github.com/gophersaurus/gophersaurus
 ###Contribution guidelines
 
 * Submit an issue.  
-* Send us a pull request. 
+* Send us a pull request.
 
 Thanks! :)
 
