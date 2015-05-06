@@ -19,6 +19,7 @@ type Server struct {
 	static string
 	dba    *gf.DBA
 	keys   map[string][]string
+	TLS    gf.TLS
 }
 
 // NewServer takes a config, databases, port, and keys and returns a new server.
@@ -29,7 +30,7 @@ func NewServer(
 	config config.Config,
 	keys map[string][]string,
 ) Server {
-	return Server{port: port, static: static, dba: dba, keys: keys}
+	return Server{port: port, static: static, dba: dba, keys: keys, TLS: config.TLS}
 }
 
 // Bootstrap takes settings an returns a Server.
@@ -107,5 +108,10 @@ func (s Server) Serve() {
 	fmt.Println("# SERVING")
 	fmt.Println("	Server is listening on port " + s.port)
 	fmt.Print("\n")
-	log.Fatal(http.ListenAndServe(":"+s.port, r))
+
+	if len(s.TLS.Key) > 0 && len(s.TLS.Cert) > 0 {
+ 		log.Fatal(http.ListenAndServeTLS(":"+s.port, s.TLS.Cert, s.TLS.Key, r))
+ 	} else {
+ 		log.Fatal(http.ListenAndServe(":"+s.port, r))
+ 	}
 }
