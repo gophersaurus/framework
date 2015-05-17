@@ -5,37 +5,25 @@ Gophersaurus is a framework for building API based web services quickly. It prov
 
 <img src="https://raw.githubusercontent.com/gophersaurus/framework/master/public/images/homepage.png" />
 
-Gophersaurus provides structure for large teams of gophers and wraps many popular open source packages to abstract away common features and logic.  This is how Gophersaurus got its name.  Its a big package.
-
 Gophersaurus has been forged in the fires of production.  It can scale and gets the job done, but it does not try to
-eek out every bit of performance possible.  Honestly... if you want the best golang performance possible, don't use a framework, the go standard library will do.  
+eek out every bit of performance possible.  Honestly... if you want the best golang performance possible, don't use a framework, the go standard library will do. This is how Gophersaurus got its name.  Its a big package.
 
-Gophersaurus is heavily inspired by other backend frameworks, but especially the Laravel PHP Framework.  Just like Laravel, Gophersaurus encourages the use of Models, Controllers, Resources.
-
-> IMPORTANT NOTE: Gophersaurus is still in development and currently the API is not stable.  We will lockdown the API soon, and then gf.v1 will cease to have breaking changes.  All breaking changes will be diverted gf.v2.
+Gophersaurus is heavily inspired by other backend frameworks, but especially the Laravel PHP Framework.  Just like Laravel, Gophersaurus encourages the use of Models, Controllers, and Resources.
 
 ###Installation:
 
 > Note: These instructions assume you already have your $GOPATH configured and you are using git with github or github-enterprise.
 
-####Code Setup
+####Option 1.
 
-1. Clone this repositiory. `git clone git@github.com:gophersaurus/gophersaurus.git`
-2. Enter the root project directory. `cd gophersaurus`
-4. Run the command `go get ./...` to ensure you have all nessesary dependencies locally.  
-   If you want the latest dependencies and verbose mode on run `go get -u -v ./...`.
-5. Create your `.config.yml` settings file.  See "Configuration Settings" below.
-6. Move outside of the project root.`cd ..`  
-7. Rename `gophersaurus` to your project name.
-   Then change the project directory name. `mv gophersaurus project-name`
-8. Do a search and replace in your project root.
-   Move into your project root directory. `cd project-name`
-   Search `github.com/gophersaurus/gophersaurus` replace with `your.git.com/your-org/project-name`
+Clone or fork this repository locally and start hacking.
 
+####Option 2.
 
-####Git Setup
+Use the `gf` command line tool to create a new project.
 
-1. In the project directory run `git remote set-url origin git@your.git.com:your-org/your-project-name.git`
+  - `go get github.com/gophersaurus/gf`
+  - `gf new project-name`
 
 ####Extra Points
 
@@ -43,9 +31,6 @@ Gophersaurus is heavily inspired by other backend frameworks, but especially the
    Save yourself now from slow C compile times.
 
 Now you should be able to run `go build` from your project root and run all manner of `git` commands.
-
-If everything worked as it should, then at the root path you should see the following page:
-![gophersaurus-working-public-directory](https://github.com/gophersaurus/art/raw/master/gophersaurus_public_directory.png)
 
 ###Directory Structure
 
@@ -65,30 +50,30 @@ If everything worked as it should, then at the root path you should see the foll
 
 ####The Root Directory
 
-The root directory of a fresh Laravel installation contains a variety of folders:
+The root directory of a fresh Gophersaurus installation contains a variety of folders:
 
 * The `app` directory, as you might expect, contains the core code of your application.  
-  It also implements the `server` `package` in your application.
+  It also implements the `server` package in your application.
 * The `bootstrap` folder contains a few files that bootstrap the framework and configure autoloading.  
-  It also implements the `bootstrap` `package` in your application.
+  It also implements the `bootstrap` package in your application.
 * The `config` directory, as the name implies, contains all of your application's configuration settings and logic.
-  It also implements the `config` `package` in your application.
-* The `public` directory contains the front controller and your assets (images, JavaScript, CSS, etc.).
+  It also implements the `config` package in your application.
+* The `public` directory contains your assets (images, JavaScript, CSS, etc.).
 
 ####The App Directory
 
 The "meat" of your application lives in the `app` directory. The `app` directory ships with a variety of additional directories such as `controllers`, `middleware`, `models`, and `services`.
 
 * The `controllers` directory, contains all the core controller code of your application.  
-  It also implements the `controllers` `package` in your application.
+  It also implements the `controllers` package in your application.
 * The `middleware` directory, contains all the core middleware code of your application.  
-  It also implements the `middleware` `package` in your application.
+  It also implements the `middleware` package in your application.
 * The `models` directory, contains all the core middleware code of your application.  
-  It also implements the `models` `package` in your application.
+  It also implements the `models` package in your application.
 * The `services` directory, contains all the service code of your application.  
-  Multiple service `packages` are implemented in the `services` directory.  Service `package` names usually depend on the kind of service, as well as the URI endpoint for that particular service.  
+  Multiple service `packages` are implemented in the `services` directory.  Service package names usually depend on the kind of service, as well as the URI endpoint for that particular service.  
 
-> Note on `service` `package` names: In the example directory structure above, we can determine that the endpoint for the `weather` `service` is located at `http://api.openweathermap.org/data/2.5/weather`.  This convention is useful for quickly identifying a URI `service` endpoint in your application.
+> Note on `service` package names: In the example directory structure above, we can determine that the endpoint for the `weather` `service` is located at `http://api.openweathermap.org/data/2.5/weather`.  This convention is useful for quickly identifying a URI `service` endpoint in your application.
 
 ###Configuration Settings
 
@@ -139,7 +124,7 @@ type DBA struct {
 }
 ```
 
-The `DBA` object in Gophersaurus is still something like an ORM.  Sorta/Kinda/Maybe.  Right now it impliments the `mgo` `package` for NoSQL and the `gorp` `package` for SQL.  The `DBA` keeps both seperate, but they impliment the same `DB` interface for easy access.  
+The `DBA` object in Gophersaurus is still something like an ORM.  Sorta/Kinda/Maybe.  Right now it impliments the `mgo` package for NoSQL and the `gorp` package for SQL.  The `DBA` keeps both seperate, but they impliment the same `DB` interface for easy access.  
 
 Currently Gophersaurus supports following databases:
 * MongoDB
