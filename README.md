@@ -3,7 +3,7 @@ Gophersaurus
 
 Gophersaurus is a framework for building monolithic web services quickly. It provides a more structured approach to building go services and abstracts much of the common logic away for building an API.  These traits make Gophersaurus a great choice for projects that need to be rapidly developed, yet maintain consistency.  
 
-<img src="https://github.com/gophersaurus/art/raw/master/gophersaurus.png" width="300px" />
+<img src="https://raw.githubusercontent.com/gophersaurus/framework/master/public/images/homepage.png" />
 
 Gophersaurus provides structure for large teams of gophers, and wraps many open source golang packages to abstract away common logic.  It is for these reasons Gophersaurus got its name.  Its a big package.
 
