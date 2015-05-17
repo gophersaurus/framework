@@ -98,10 +98,10 @@ func (s Server) Serve() {
 
 	// serve and let the humans know we are serving...
 	if len(s.TLS.Key) > 0 && len(s.TLS.Cert) > 0 {
-		fmt.Println("\x1b[32;1m" + "Gophersaurus server started on https://localhost:" + s.port + "\x1b[0m")
+		fmt.Println("\x1b[32;1m" + "Gophersaurus server listening with TLS on port :" + s.port + "\x1b[0m")
 		log.Fatal(http.ListenAndServeTLS(":"+s.port, s.TLS.Cert, s.TLS.Key, r))
 	} else {
-		fmt.Println("\x1b[32;1m" + "Gophersaurus server started on http://localhost:" + s.port + "\x1b[0m")
+		fmt.Println("\x1b[32;1m" + "Gophersaurus server listening on port :" + s.port + "\x1b[0m")
 		log.Fatal(http.ListenAndServe(":"+s.port, r))
 	}
 }
