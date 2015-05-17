@@ -5,9 +5,10 @@ import "github.com/gophersaurus/gf.v1"
 // HomeController contains controller logic for home.
 type HomeController struct{}
 
+// Home is a HomeController.
 var Home = &HomeController{}
 
-// Index handles a "/home" GET request for the HomeController.
+// Index handles a "/" GET request for a HomeController.
 func (h *HomeController) Index(resp gf.Responder, req *gf.Request) {
 
 	// set the default HTTP scheme without SSL/TLS

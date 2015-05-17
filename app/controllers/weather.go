@@ -9,10 +9,10 @@ import (
 // WeatherController contains controller logic for the weather endpoint.
 type WeatherController struct{}
 
-// Create a weather controller.
+// Weather is a WeatherController.
 var Weather = &WeatherController{}
 
-// Show handles a "/weather/:city" GET request for the WeatherController.
+// Show handles a "/weather/:city" GET request for a WeatherController.
 func (wc *WeatherController) Show(resp gf.Responder, req *gf.Request) {
 
 	// get the city as a parameter
