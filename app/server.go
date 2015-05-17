@@ -5,12 +5,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gophersaurus/gf.v1"
 	"github.com/gophersaurus/framework/app/controllers"
 	"github.com/gophersaurus/framework/app/middleware"
 	"github.com/gophersaurus/framework/app/models"
 	"github.com/gophersaurus/framework/bootstrap"
 	"github.com/gophersaurus/framework/config"
+	"github.com/gophersaurus/gf.v1"
 )
 
 // Server describes a server application.
@@ -67,9 +67,6 @@ func Bootstrap(settings map[string]string) Server {
 // Serve starts the application server.
 func (s Server) Serve() {
 
-	fmt.Println("# STARTING SERVER")
-	fmt.Println("	Defering closing databases connections...")
-
 	// Defer the command to close Mongo db connections.
 	for _, db := range s.dba.NoSQL {
 		defer db.Close()
@@ -80,38 +77,31 @@ func (s Server) Serve() {
 		defer db.Close()
 	}
 
-	fmt.Println("	Creating a new router...")
 	// Create a new router.
 	r := gf.NewRouter(true)
 
 	// If valid keys are provided, register them as gf.NewKeyMiddleware.
 	if len(s.keys) > 0 {
-		fmt.Println("	Attaching API keys middleware to router...")
 		km := gf.NewKeyMiddleware(s.keys)
 		r.Middleware(km.Do)
 	}
 
 	// register dynamic routes.
-	fmt.Println("	Registering routes...")
 	register(r)
 
 	// If a static directory path is provided, register it.
-	fmt.Println("	Setting static assets directory...")
 	if len(s.static) > 0 {
-		r.Static("/static", s.static)
+		r.Static("/public", s.static)
 	} else {
-		r.Static("/static", "/public")
+		r.Static("/public", "/public")
 	}
-	fmt.Print("\n")
 
-	// let the humans know we are listening...
-	fmt.Println("# SERVING")
-	fmt.Println("	Server is listening on port " + s.port)
-	fmt.Print("\n")
-
+	// serve and let the humans know we are serving...
 	if len(s.TLS.Key) > 0 && len(s.TLS.Cert) > 0 {
- 		log.Fatal(http.ListenAndServeTLS(":"+s.port, s.TLS.Cert, s.TLS.Key, r))
- 	} else {
- 		log.Fatal(http.ListenAndServe(":"+s.port, r))
- 	}
+		fmt.Println("\x1b[32;1m" + "Gophersaurus server started on https://localhost:" + s.port + "\x1b[0m")
+		log.Fatal(http.ListenAndServeTLS(":"+s.port, s.TLS.Cert, s.TLS.Key, r))
+	} else {
+		fmt.Println("\x1b[32;1m" + "Gophersaurus server started on http://localhost:" + s.port + "\x1b[0m")
+		log.Fatal(http.ListenAndServe(":"+s.port, r))
+	}
 }

@@ -1,10 +1,6 @@
 package controllers
 
-import (
-	"github.com/gophersaurus/gf.v1"
-
-	weather "github.com/gophersaurus/framework/app/services/api.openweathermap.org/data/2.5"
-)
+import "github.com/gophersaurus/gf.v1"
 
 // HomeController contains controller logic for home.
 type HomeController struct{}
@@ -14,20 +10,25 @@ var Home = &HomeController{}
 // Index handles a "/home" GET request for the HomeController.
 func (h *HomeController) Index(resp gf.Responder, req *gf.Request) {
 
-	w, err := weather.Find("minneapolis", "us")
+	// set the default HTTP scheme without SSL/TLS
+	scheme := "http://"
 
-	if err != nil {
-
-		// Add json body data.
-		resp.WriteJSON(map[string]string{
-			"hello Minneapolis": "Sorry, no weather report today. :( ",
-			"error":             err.Error(),
-		})
-
-		return
+	// check if we are serving SSL/TLS HTTP traffic
+	if req.TLS != nil {
+		scheme = "https://"
 	}
 
-	// Add json body data.
-	resp.Write(req, w)
+	// define an anonymous result struct
+	result := struct {
+		Status     int
+		Message    string
+		StaticPage string
+	}{
+		200,
+		"You have arrived.",
+		scheme + req.Host + "/public/index.html",
+	}
 
+	// write the result
+	resp.Write(req, result)
 }

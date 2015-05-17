@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/gophersaurus/gf.v1"
 	"github.com/gophersaurus/framework/config"
+	"github.com/gophersaurus/gf.v1"
 )
 
 // Databases takes a config object and returns a gf.DBA
@@ -13,8 +13,6 @@ func Databases(c config.Config) *gf.DBA {
 
 	// Create a new DBA to work with.
 	dba := gf.NewDBA()
-
-	fmt.Println("# CONNECTING TO DATABSES")
 
 	// Iterate through the databases provided.
 	for _, db := range c.Databases {
@@ -54,13 +52,9 @@ func Databases(c config.Config) *gf.DBA {
 			}
 
 			// Connect
-			fmt.Print("	Attempting to connect to MongoDB " + db.Name + "... ")
 			if err := m.Connect(db.Name); err != nil {
 				log.Fatalln("Failed: " + err.Error())
 			}
-
-			// Let the user know we have connected.
-			fmt.Println("Success!")
 
 			// Assign the mongodb to its name in the DBA.
 			dba.NoSQL[db.Name] = m
@@ -76,13 +70,9 @@ func Databases(c config.Config) *gf.DBA {
 			}
 
 			// Connect
-			fmt.Print("	Attempting to connect to PostgreSQL " + db.Name + "... ")
 			if err := g.Connect("postgres", db.Name); err != nil {
 				log.Fatalln("Failed: " + err.Error())
 			}
-
-			// Let the user know we have connected.
-			fmt.Println("Success!")
 
 			// Assign the gorp to its name in the DBA.
 			dba.SQL[db.Name] = g
@@ -91,8 +81,6 @@ func Databases(c config.Config) *gf.DBA {
 			log.Fatalln("Unsupported database: " + db.Type)
 		}
 	}
-
-	fmt.Print("\n")
 
 	return dba
 }

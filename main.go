@@ -1,10 +1,8 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/gophersaurus/framework/app"
 	"github.com/codegangsta/cli"
+	"github.com/gophersaurus/framework/app"
 )
 
 // main starts the program.
@@ -40,9 +38,6 @@ func main() {
 
 	// Define the default CLI action.
 	app.Action = func(c *cli.Context) {
-
-		// Start with nice spacing :)
-		fmt.Print("\n")
 
 		// Define the application settings.
 		settings := map[string]string{
