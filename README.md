@@ -1,15 +1,16 @@
 Gophersaurus
 =============================
 
-Gophersaurus is a framework for building monolithic web services quickly. It provides a more structured approach to building go services and abstracts much of the common logic away for building an API.  These traits make Gophersaurus a great choice for projects that need to be rapidly developed, yet maintain consistency.  
+Gophersaurus is a framework for building API based web services quickly. It provides a more structured approach to building golang services and abstracts out much of the common logic away for building an API.  These traits make Gophersaurus a great choice for projects that need to be rapidly developed with multiple people.  
 
 <img src="https://raw.githubusercontent.com/gophersaurus/framework/master/public/images/homepage.png" />
 
-Gophersaurus provides structure for large teams of gophers, and wraps many open source golang packages to abstract away common logic.  It is for these reasons Gophersaurus got its name.  Its a big package.
+Gophersaurus provides structure for large teams of gophers and wraps many popular open source packages to abstract away common features and logic.  This is how Gophersaurus got its name.  Its a big package.
 
-Gophersaurus has been tested in production, it can scale, and basically gets the job done, but it is not the framework for trying to eek out every bit of performance possible.  As the framework matures, it will become more performant, but honestly... if you want the best golang performance possible, don't use a framework.  The go standard library will do.  
+Gophersaurus has been forged in the fires of production.  It can scale and gets the job done, but it does not try to
+eek out every bit of performance possible.  Honestly... if you want the best golang performance possible, don't use a framework, the go standard library will do.  
 
-Gophersaurus is heavily inspired by other backend frameworks, but especially the Laravel PHP Framework.  Just like Laravel, Gophersaurus encourages the use of Models, Controllers, Resources, and JSON views/responses.
+Gophersaurus is heavily inspired by other backend frameworks, but especially the Laravel PHP Framework.  Just like Laravel, Gophersaurus encourages the use of Models, Controllers, Resources.
 
 > IMPORTANT NOTE: Gophersaurus is still in development and currently the API is not stable.  We will lockdown the API soon, and then gf.v1 will cease to have breaking changes.  All breaking changes will be diverted gf.v2.
 
