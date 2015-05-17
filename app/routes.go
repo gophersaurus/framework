@@ -12,6 +12,6 @@ func register(r *gf.Router) {
 	r.GET("/", c.Home.Index)
 
 	// Register the HTTP GET pattern "/work" to the WorkController Index() method.
-	r.GET("/weather/*city", c.Weather.Show)
+	r.GET("/weather/:city", c.Weather.Show)
 
 }
