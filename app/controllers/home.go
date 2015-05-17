@@ -25,7 +25,7 @@ func (h *HomeController) Index(resp gf.Responder, req *gf.Request) {
 		PublicPage string `json:"public_page" xml:"public_page"`
 	}{
 		200,
-		"You have arrived.",
+		"Welcome fellow gopher.",
 		scheme + req.Host + "/public/index.html",
 	}
 
