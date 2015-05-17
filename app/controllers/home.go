@@ -20,9 +20,9 @@ func (h *HomeController) Index(resp gf.Responder, req *gf.Request) {
 
 	// define an anonymous result struct
 	result := struct {
-		Status     int
-		Message    string
-		StaticPage string
+		Status     int    `json:"status" xml:"status"`
+		Message    string `json:"message" xml:"message"`
+		PublicPage string `json:"public_page" xml:"public_page"`
 	}{
 		200,
 		"You have arrived.",
