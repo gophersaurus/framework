@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gophersaurus/framework/app/controllers"
 	"github.com/gophersaurus/framework/app/middleware"
@@ -89,11 +90,11 @@ func (s Server) Serve() {
 	// register dynamic routes.
 	register(r)
 
-	// If a static directory path is provided, register it.
+	// If a public static directory path is provided, register it.
 	if len(s.static) > 0 {
 		r.Static("/public", s.static)
 	} else {
-		r.Static("/public", "/public")
+		r.Static("/public", string(os.PathSeparator)+"public")
 	}
 
 	// serve and let the humans know we are serving...
