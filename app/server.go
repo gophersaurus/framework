@@ -97,6 +97,9 @@ func (s Server) Serve() {
 		r.Static("/public", string(os.PathSeparator)+"public")
 	}
 
+	// auto generate API documentation
+	r.GenAPIDoc("bootstrap/apidoc.tmpl", "public/docs/api/index.html")
+
 	// serve and let the humans know we are serving...
 	if len(s.TLS.Key) > 0 && len(s.TLS.Cert) > 0 {
 		fmt.Println("\x1b[32;1m" + "Gophersaurus server listening with TLS on port :" + s.port + "\x1b[0m")
