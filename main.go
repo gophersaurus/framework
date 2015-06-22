@@ -31,7 +31,7 @@ func main() {
 		// Static file path.
 		cli.StringFlag{
 			Name:  "static, s",
-			Value: "/public",
+			Value: "public",
 			Usage: "The environment for the application to run in.",
 		},
 	}
