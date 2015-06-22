@@ -99,7 +99,7 @@ func (s Server) Serve() {
 	}
 
 	// auto generate API documentation
-	r.GenAPIDoc(filepath.Join(filepath.Dir(s.static), "bootstrap", "apidoc.tmpl"), "public/docs/api/index.html")
+	r.GenAPIDoc(filepath.Join(filepath.Dir(s.static), "bootstrap", "apidoc.tmpl"), filepath.Join(s.static, "docs", "api", "index.html"))
 
 	// serve and let the humans know we are serving...
 	if len(s.TLS.Key) > 0 && len(s.TLS.Cert) > 0 {
