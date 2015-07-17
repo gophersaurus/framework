@@ -17,8 +17,8 @@ func main() {
 		// Configuration options.
 		cli.StringFlag{
 			Name:  "config, conf, c",
-			Value: ".config.yml",
-			Usage: "The path to the config file. Defaults to '.config.yml'.",
+			Value: "config/config.yml",
+			Usage: "The path to the config file. Defaults to 'config/config.yml'.",
 		},
 
 		// Environment options.

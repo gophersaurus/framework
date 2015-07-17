@@ -5,14 +5,14 @@ import (
 	"log"
 
 	"github.com/gophersaurus/framework/config"
-	"github.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1/database"
 )
 
 // Databases takes a config object and returns a gf.DBA
-func Databases(c config.Config) *gf.DBA {
+func Databases(c config.Config) *database.DBA {
 
 	// Create a new DBA to work with.
-	dba := gf.NewDBA()
+	dba := database.NewDBA()
 
 	// Iterate through the databases provided.
 	for _, db := range c.Databases {
@@ -22,7 +22,7 @@ func Databases(c config.Config) *gf.DBA {
 		case "mysql":
 
 			// Create a new gorp
-			g, err := gf.NewGorp(db.User, db.Pass, db.Address)
+			g, err := database.NewGorp(db.User, db.Pass, db.Address)
 
 			// Check for error.
 			if err != nil {
@@ -44,7 +44,7 @@ func Databases(c config.Config) *gf.DBA {
 		case "mongo", "mongodb":
 
 			// Create a new MongoDB
-			m, err := gf.NewMongoDB(db.User, db.Pass, db.Address)
+			m, err := database.NewMongoDB(db.User, db.Pass, db.Address)
 
 			// Check for error.
 			if err != nil {
@@ -62,7 +62,7 @@ func Databases(c config.Config) *gf.DBA {
 		case "postgres", "postgresql":
 
 			// Create a new gorp
-			g, err := gf.NewGorp(db.User, db.Pass, db.Address)
+			g, err := database.NewGorp(db.User, db.Pass, db.Address)
 
 			// Check for error.
 			if err != nil {

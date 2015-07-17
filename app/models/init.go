@@ -1,14 +1,14 @@
 package models
 
 import (
-	"github.com/gophersaurus/gf.v1"
 	"github.com/gophersaurus/framework/config"
+	"github.com/gophersaurus/gf.v1/database"
 )
 
-var dba *gf.DBA
+var dba *database.DBA
 var conf config.Config
 
-func Init(c config.Config, d *gf.DBA) {
+func Init(c config.Config, d *database.DBA) {
 	dba = d
 	conf = c
 }

@@ -12,21 +12,22 @@ import (
 	"github.com/gophersaurus/framework/app/models"
 	"github.com/gophersaurus/framework/bootstrap"
 	"github.com/gophersaurus/framework/config"
-	"github.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1/database"
+	"github.com/gophersaurus/gf.v1/router"
 )
 
 // Server describes a server application.
 type Server struct {
 	port   string
 	static string
-	dba    *gf.DBA
+	dba    *database.DBA
 	keys   map[string][]string
-	TLS    gf.TLS
+	TLS    config.TLS
 }
 
 // NewServer takes a config, databases, port, and keys and returns a new server.
 func NewServer(
-	dba *gf.DBA,
+	dba *database.DBA,
 	port string,
 	static string,
 	config config.Config,
@@ -80,33 +81,33 @@ func (s Server) Serve() {
 	}
 
 	// Create a new router.
-	r := gf.NewRouter(true)
+	m := router.NewMux()
 
 	// If valid keys are provided, register them as gf.NewKeyMiddleware.
 	if len(s.keys) > 0 {
-		km := gf.NewKeyMiddleware(s.keys)
-		r.Middleware(km.Do)
+		km := router.NewKeyMiddleware(s.keys)
+		m.Middleware(km.Do)
 	}
 
 	// register dynamic routes.
-	register(r)
+	register(m)
 
 	// If a public static directory path is provided, register it.
 	if len(s.static) > 0 {
-		r.Static("/public", s.static)
+		m.Static("/public", s.static)
 	} else {
-		r.Static("/public", string(os.PathSeparator)+"public")
+		m.Static("/public", string(os.PathSeparator)+"public")
 	}
 
 	// auto generate API documentation
-	r.GenAPIDoc(filepath.Join(filepath.Dir(s.static), "bootstrap", "apidoc.tmpl"), filepath.Join(s.static, "docs", "api", "index.html"))
+	m.GenAPIDoc(filepath.Join(filepath.Dir(s.static), "bootstrap", "apidoc.tmpl"), filepath.Join(s.static, "docs", "api", "index.html"))
 
-	// serve and let the humans know we are serving...
+	// serve and let the humans know...
 	if len(s.TLS.Key) > 0 && len(s.TLS.Cert) > 0 {
 		fmt.Println("\x1b[32;1m" + "Gophersaurus server listening with TLS on port :" + s.port + "\x1b[0m")
-		log.Fatal(http.ListenAndServeTLS(":"+s.port, s.TLS.Cert, s.TLS.Key, r))
+		log.Fatal(http.ListenAndServeTLS(":"+s.port, s.TLS.Cert, s.TLS.Key, m))
 	} else {
 		fmt.Println("\x1b[32;1m" + "Gophersaurus server listening on port :" + s.port + "\x1b[0m")
-		log.Fatal(http.ListenAndServe(":"+s.port, r))
+		log.Fatal(http.ListenAndServe(":"+s.port, m))
 	}
 }

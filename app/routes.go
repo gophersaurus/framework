@@ -2,11 +2,11 @@ package server
 
 import (
 	c "github.com/gophersaurus/framework/app/controllers"
-	"github.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1/router"
 )
 
 // register takes a Router and registers route paths to controller methods.
-func register(r *gf.Router) {
+func register(r router.Router) {
 
 	// Register the HTTP GET pattern "/home" to the HomeController Index() method.
 	r.GET("/", c.Home.Index)

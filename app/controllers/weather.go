@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1/http"
 
 	weather "github.com/gophersaurus/framework/app/services/api.openweathermap.org/data/2.5"
 )
@@ -13,14 +13,14 @@ type WeatherController struct{}
 var Weather = &WeatherController{}
 
 // Show handles a "/weather/:city" GET request for a WeatherController.
-func (wc *WeatherController) Show(resp gf.Responder, req *gf.Request) {
+func (wc *WeatherController) Show(resp http.Responder, req *http.Request) {
 
 	// get the city as a parameter
 	city := req.Param("city")
 
 	// try some basic input checking
 	if len(city) < 3 {
-		resp.WriteErrs(gf.InvalidInput, "not a valid city name")
+		resp.WriteErrs(req, http.InvalidInput, "not a valid city name")
 		return
 	}
 
@@ -31,10 +31,7 @@ func (wc *WeatherController) Show(resp gf.Responder, req *gf.Request) {
 	if err != nil {
 
 		// write a response
-		resp.WriteJSON(map[string]string{
-			"hello " + city: "Sorry, no weather report today. :( ",
-			"error":         err.Error(),
-		})
+		resp.WriteErrs(req, "Sorry, no weather report today...", err.Error())
 		return
 	}
 
