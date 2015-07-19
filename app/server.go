@@ -12,7 +12,6 @@ import (
 	"github.com/gophersaurus/framework/app/models"
 	"github.com/gophersaurus/framework/bootstrap"
 	"github.com/gophersaurus/framework/config"
-	"github.com/gophersaurus/gf.v1/database"
 	"github.com/gophersaurus/gf.v1/router"
 )
 
@@ -43,7 +42,7 @@ func Bootstrap(settings map[string]string) Server {
 	conf := bootstrap.Config(settings)
 
 	// INITALIZE DATABASES
-	dba := bootstrap.Databases(conf)
+	dba := bootstrap.DBs(conf)
 
 	// SERVER PORT
 	port := conf.Port
