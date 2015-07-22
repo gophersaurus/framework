@@ -7,11 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/gophersaurus/framework/app/controllers"
-	"github.com/gophersaurus/framework/app/middleware"
-	"github.com/gophersaurus/framework/app/models"
-	"github.com/gophersaurus/framework/bootstrap"
-	"github.com/gophersaurus/framework/config"
+	"github.com/gophersaurus/framework/app/bootstrap"
 	"github.com/gophersaurus/gf.v1/router"
 )
 
@@ -19,51 +15,24 @@ import (
 type Server struct {
 	port   string
 	static string
-	dba    *database.DBA
 	keys   map[string][]string
 	TLS    config.TLS
 }
 
 // NewServer takes a config, databases, port, and keys and returns a new server.
 func NewServer(
-	dba *database.DBA,
 	port string,
 	static string,
-	config config.Config,
 	keys map[string][]string,
 ) Server {
-	return Server{port: port, static: static, dba: dba, keys: keys, TLS: config.TLS}
+	return Server{port: port, static: static, keys: keys, TLS: config.TLS}
 }
 
 // Bootstrap takes settings an returns a Server.
 func Bootstrap(settings map[string]string) Server {
-
-	// INITALIZE CONFIGURATION
-	conf := bootstrap.Config(settings)
-
-	// INITALIZE DATABASES
-	dba := bootstrap.DBs(conf)
-
-	// SERVER PORT
-	port := conf.Port
-
-	// STATIC FILE PATH
-	static := settings["static"]
-
-	// QUICK KEYS
-	keys := conf.Keys
-
-	// Initalize the database admin in models.
-	models.Init(conf, dba)
-
-	// Initalize the config object in controllers.
-	controllers.Init(conf)
-
-	// Initalize the config object in middleware.
-	middleware.Init(conf)
-
-	// SERVER
-	return NewServer(dba, port, static, conf, keys)
+	bootstrap.Config()
+	bootstrap.DB()
+	return NewServer(port, static, keys)
 }
 
 // Serve starts the application server.

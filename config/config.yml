@@ -1,4 +1,0 @@
-config:
-  port: 8080
-  keys:
-    gophersaurus-key:
