@@ -1,48 +1,40 @@
 package bootstrap
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/gophersaurus/gf.v1/config"
-	"github.com/gophersaurus/gf.v1/db"
+	"github.com/gophersaurus/gf.v1/dba"
 )
 
 // DB bootstraps databases listed in configuration settings.
 func DB() error {
 
-	dbs := config.GetStringMapString("databases")
+	// find db config settings
+	dbs := config.GetStringMap("databases")
 
-	for _, d := range dbs {
+	// each key value is the db name
+	for name := range dbs {
 
-		switch d.Type {
+		// find that particular db config map
+		dmap := config.GetStringMapString("databases." + name)
+
+		// create a new db instance based on db type
+		switch dmap["type"] {
 		case "mysql", "postgres", "sqlite":
-
-			s, err := db.NewSQL(d.User, d.Pass, d.Address)
+			sql, err := dba.NewSQL(dmap["type"], dmap["user"], dmap["pass"], dmap["addr"])
 			if err != nil {
 				return err
 			}
-
-			if err := s.Dial(d.Name, d.Type); err != nil {
-				return err
-			}
-
-			db.AddSQL(s)
-
+			dba.AddSQL(sql)
 		case "mongo":
-
-			m, err := db.NewMongoDB(d.User, d.Pass, d.Address)
+			mongo, err := dba.NewMongoDB(dmap["user"], dmap["pass"], dmap["addr"])
 			if err != nil {
 				return err
 			}
-
-			if err := m.Dial(d.Name); err != nil {
-				return err
-			}
-
-			db.AddMongoDB(m)
-
+			dba.AddMongoDB(mongo)
 		default:
-			log.Fatalf("unsupported %s database: %s", d.Type, d.Name)
+			return fmt.Errorf("unsupported %s database: %s", dmap["type"], name)
 		}
 	}
 

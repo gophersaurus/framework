@@ -1,4 +1,9 @@
-config:
-  port: 8080
-  keys:
-    gophersaurus-key:
+port: 8080
+keys:
+  gophersaurus:
+databases:
+  weeklyad:
+    type: mongo
+    user: bee
+    pass: Feelthesting!
+    address: 10.63.218.249:27017

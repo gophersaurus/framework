@@ -47,10 +47,10 @@ func main() {
 		}
 
 		// Bootstrap the server.
-		s := server.Bootstrap(settings)
+		/*s := */ server.Bootstrap(settings)
 
 		// Start serving content.
-		s.Serve()
+		// s.Serve()
 	}
 
 	// Run the CLI application.
