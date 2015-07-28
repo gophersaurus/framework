@@ -24,17 +24,16 @@ type Server struct {
 func NewServer(
 	port string,
 	static string,
-	keys map[string][]string,
+	// keys map[string][]string,
 ) Server {
-	return Server{port: port, static: static, keys: keys /*, TLS: config.TLS*/}
+	return Server{port: port, static: static /* , keys: keys , TLS: config.TLS*/}
 }
 
 // Bootstrap takes settings an returns a Server.
-func Bootstrap(settings map[string]string) Server {
-	fmt.Println(settings)
+func Bootstrap() Server {
 	bootstrap.Config()
 	bootstrap.DB()
-	return NewServer(config.GetString("port"), config.GetString("static"), config.GetStringMapString("keys"))
+	return NewServer(config.GetString("port"), config.GetString("static"))
 }
 
 // Serve starts the application server.

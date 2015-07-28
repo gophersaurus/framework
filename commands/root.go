@@ -8,7 +8,4 @@ var RootCmd = &cobra.Command{
 	Long: `Gophersaurus is a RESTFul API framework
           that provides a solid directory structure
           to organize a MVC application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		// Do Stuff Here
-	},
 }
