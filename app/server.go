@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -10,6 +9,7 @@ import (
 	"github.com/gophersaurus/gf.v1/config"
 	"github.com/gophersaurus/gf.v1/dba"
 	"github.com/gophersaurus/gf.v1/router"
+	"github.com/fatih/color"
 )
 
 // Server describes a server application.
@@ -72,7 +72,8 @@ func (s Server) Serve() {
 			log.Fatal(http.ListenAndServeTLS(":"+s.port, s.TLS.Cert, s.TLS.Key, m))
 		} else {
 	*/
-	fmt.Println("\x1b[32;1m" + "Gophersaurus server listening on port :" + s.port + "\x1b[0m")
+	green := color.New(color.FgGreen).PrintfFunc()
+	green("Gophersaurus server listening on port :%s\n", s.port)
 	log.Fatal(http.ListenAndServe(":"+s.port, m))
 	//}
 }
