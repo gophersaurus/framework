@@ -6,14 +6,9 @@ import (
 	weather "github.com/gophersaurus/framework/app/services/api.openweathermap.org/data/2.5"
 )
 
-// WeatherController contains controller logic for the weather endpoint.
-type WeatherController struct{}
-
-// Weather is a WeatherController.
-var Weather = &WeatherController{}
-
-// Show handles a "/weather/:city" GET request for a WeatherController.
-func (wc *WeatherController) Show(resp http.Responder, req *http.Request) {
+var Weather = struct {
+	Show func(resp http.Responder, req *http.Request)
+}{func(resp http.Responder, req *http.Request) {
 
 	// get the city as a parameter
 	city := req.Param("city")
@@ -37,4 +32,4 @@ func (wc *WeatherController) Show(resp http.Responder, req *http.Request) {
 
 	// write the weather data
 	resp.Write(req, w)
-}
+}}
