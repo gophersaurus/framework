@@ -1,9 +1,3 @@
 port: 5225
 keys:
   gophersaurus:
-databases:
-  weeklyad:
-    type: mongo
-    user: bee
-    pass: Feelthesting!
-    address: 10.63.218.249:27017
