@@ -6,6 +6,7 @@ import (
 	weather "github.com/gophersaurus/framework/app/services/api.openweathermap.org/data/2.5"
 )
 
+// Weather is a weather controller for cities.
 var Weather = struct {
 	Show func(resp http.Responder, req *http.Request)
 }{
