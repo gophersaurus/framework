@@ -1,4 +1,4 @@
-package server
+package app
 
 import (
 	"log"
@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/gophersaurus/framework/app/bootstrap"
+	"github.com/gophersaurus/framework/app/middleware"
 	"github.com/gophersaurus/gf.v1/config"
 	"github.com/gophersaurus/gf.v1/dba"
 	"github.com/gophersaurus/gf.v1/router"
@@ -49,7 +50,7 @@ func (s Server) Serve() {
 
 	// keys
 	if len(s.keys) > 0 {
-		km := router.NewKeyMiddleware(s.keys)
+		km := middleware.NewKeys(s.keys)
 		m.Middleware(km.Do)
 	}
 
@@ -68,12 +69,12 @@ func (s Server) Serve() {
 	// serve and let the humans know...
 	/*
 		if len(s.TLS.Key) > 0 && len(s.TLS.Cert) > 0 {
-			fmt.Println("\x1b[32;1m" + "Gophersaurus server listening with TLS on port :" + s.port + "\x1b[0m")
+			fmt.Println("\x1b[32;1m" + "gophersaurus server listening with TLS on port :" + s.port + "\x1b[0m")
 			log.Fatal(http.ListenAndServeTLS(":"+s.port, s.TLS.Cert, s.TLS.Key, m))
 		} else {
 	*/
 	green := color.New(color.FgGreen).PrintfFunc()
-	green("Gophersaurus server listening on port :%s\n", s.port)
+	green("gophersaurus server listening on port :%s\n", s.port)
 	log.Fatal(http.ListenAndServe(":"+s.port, m))
 	//}
 }

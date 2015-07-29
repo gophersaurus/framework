@@ -1,4 +1,4 @@
-package server
+package app
 
 import (
 	c "github.com/gophersaurus/framework/app/controllers"

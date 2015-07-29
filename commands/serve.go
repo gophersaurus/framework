@@ -15,11 +15,11 @@ func init() {
 }
 
 var ServeCmd = &cobra.Command{
-	Use:   "Serve",
+	Use:   "serve",
 	Short: "Listen and Serve HTTP",
 	Long:  "Listen and Serve HTTP",
 	Run: func(cmd *cobra.Command, args []string) {
-		s := server.Bootstrap()
+		s := app.Bootstrap()
 		s.Serve()
 	},
 }

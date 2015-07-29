@@ -27,7 +27,7 @@ func (h *HomeController) Index(resp http.Responder, req *http.Request) {
 	}{
 		200,
 		"Welcome fellow gopher.",
-		scheme + req.Host + "/public/index.html",
+		scheme + req.Host + "/public",
 	}
 
 	// write the result
