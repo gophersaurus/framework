@@ -8,10 +8,10 @@ import (
 // register takes a Router and registers route paths to controller methods.
 func register(r router.Router) {
 
-	// Register the HTTP GET pattern "/home" to the HomeController Index() method.
+	// Register the HTTP GET URI "/home" to the Home controller Index method.
 	r.GET("/", c.Home.Index)
 
-	// Register the HTTP GET pattern "/work" to the WorkController Index() method.
+	// Register the HTTP GET URI "/weather" to the Weather controller Show method.
 	r.GET("/weather/:city", c.Weather.Show)
 
 }
