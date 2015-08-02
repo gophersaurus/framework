@@ -1,3 +1,4 @@
 port: 5225
 keys:
-  gf:
+  gophersaurus:
+    - all

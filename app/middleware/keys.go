@@ -46,7 +46,7 @@ func (k Keys) Check(key, remoteAddr string) error {
 
 		// range over each whitelisted URI
 		for _, uri := range whitelist {
-			if uri == remoteAddr {
+			if uri == "all" || uri == "*" || uri == remoteAddr {
 				return nil
 			}
 		}
