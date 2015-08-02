@@ -1,5 +1,4 @@
-Gophersaurus
-[![GoDoc](http://godoc.org/github.com/gophersaurus/gf.v1?status.png)](http://godoc.org/github.com/gophersaurus/gf.v1) [![Build Status](https://travis-ci.org/gophersaurus/gf.v1.svg?branch=master)](https://travis-ci.org/gophersaurus/gf.v1) [![Coverage](http://gocover.io/_badge/github.com/gophersaurus/gf.v1?2)](http://gocover.io/github.com/gophersaurus/gf.v1)
+Gophersaurus [![GoDoc](http://godoc.org/github.com/gophersaurus/gf.v1?status.png)](http://godoc.org/github.com/gophersaurus/gf.v1) [![Build Status](https://travis-ci.org/gophersaurus/gf.v1.svg?branch=master)](https://travis-ci.org/gophersaurus/gf.v1) [![Coverage](http://gocover.io/_badge/github.com/gophersaurus/gf.v1?2)](http://gocover.io/github.com/gophersaurus/gf.v1)
 ============
 
 Gophersaurus is a framework for building API based services quickly. It provides
