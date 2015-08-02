@@ -1,9 +1,7 @@
 <html>
 	<head>
 		<title>API Docs</title>
-
 		<link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
-
 		<style>
 			body {
 				margin: 0;
@@ -14,12 +12,10 @@
 				font-weight: 100;
 				font-family: 'Lato';
 			}
-
 			.container {
 				text-align: center;
         padding: 10px;
 			}
-
 		</style>
 	</head>
 	<body>
@@ -30,12 +26,17 @@
             <th>Request Type</th>
             <th>Endpoint Path</th>
           </tr>
-          {{ range $endpoint := .Endpoints }}
+          
           <tr>
-            <td>{{ $endpoint.Type }}</td>
-            <td>{{ $endpoint.Path }}</td>
+            <td>GET</td>
+            <td>/</td>
           </tr>
-        {{end}}
+        
+          <tr>
+            <td>GET</td>
+            <td>/weather/:city</td>
+          </tr>
+        
       </table>
 		</div>
 	</body>

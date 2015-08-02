@@ -1,43 +1,38 @@
 package controllers
 
 import (
-	"github.com/gophersaurus/gf.v1"
+	"github.com/gophersaurus/gf.v1/http"
 
 	weather "github.com/gophersaurus/framework/app/services/api.openweathermap.org/data/2.5"
 )
 
-// WeatherController contains controller logic for the weather endpoint.
-type WeatherController struct{}
+// Weather is a weather controller for cities.
+var Weather = struct {
+	Show func(resp http.Responder, req *http.Request)
+}{
+	Show: func(resp http.Responder, req *http.Request) {
 
-// Weather is a WeatherController.
-var Weather = &WeatherController{}
+		// get the city as a parameter
+		city := req.Param("city")
 
-// Show handles a "/weather/:city" GET request for a WeatherController.
-func (wc *WeatherController) Show(resp gf.Responder, req *gf.Request) {
+		// try some basic input checking
+		if len(city) < 3 {
+			resp.WriteErrs(req, http.InvalidInput, "not a valid city name")
+			return
+		}
 
-	// get the city as a parameter
-	city := req.Param("city")
+		// use the weather service to get the weather
+		w, err := weather.Find(city, "us")
 
-	// try some basic input checking
-	if len(city) < 3 {
-		resp.WriteErrs(gf.InvalidInput, "not a valid city name")
-		return
-	}
+		// check for errors
+		if err != nil {
 
-	// use the weather service to get the weather
-	w, err := weather.Find(city, "us")
+			// write a response
+			resp.WriteErrs(req, "Sorry, no weather report today...", err.Error())
+			return
+		}
 
-	// check for errors
-	if err != nil {
-
-		// write a response
-		resp.WriteJSON(map[string]string{
-			"hello " + city: "Sorry, no weather report today. :( ",
-			"error":         err.Error(),
-		})
-		return
-	}
-
-	// write the weather data
-	resp.Write(req, w)
+		// write the weather data
+		resp.Write(req, w)
+	},
 }

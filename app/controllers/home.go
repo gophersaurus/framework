@@ -1,15 +1,12 @@
 package controllers
 
-import "github.com/gophersaurus/gf.v1"
+import "github.com/gophersaurus/gf.v1/http"
 
-// HomeController contains controller logic for home.
-type HomeController struct{}
-
-// Home is a HomeController.
-var Home = &HomeController{}
-
-// Index handles a "/" GET request for a HomeController.
-func (h *HomeController) Index(resp gf.Responder, req *gf.Request) {
+// Home is a home controller for new users.
+var Home = struct {
+	Index func(resp http.Responder, req *http.Request)
+}{
+	Index: func(resp http.Responder, req *http.Request) {
 
 	// set the default HTTP scheme without SSL/TLS
 	scheme := "http://"
@@ -27,9 +24,10 @@ func (h *HomeController) Index(resp gf.Responder, req *gf.Request) {
 	}{
 		200,
 		"Welcome fellow gopher.",
-		scheme + req.Host + "/public/index.html",
+		scheme + req.Host + "/public",
 	}
 
 	// write the result
 	resp.Write(req, result)
+	},
 }

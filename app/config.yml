@@ -1,0 +1,4 @@
+port: 5225
+keys:
+  gophersaurus:
+    - all

@@ -2,25 +2,33 @@ package cityweather
 
 import (
 	"encoding/json"
-
-	"github.com/gophersaurus/gf.v1"
+	"io/ioutil"
+	"net/http"
 )
 
+// Find finds weather by city and country.
 func Find(city, country string) (*Result, error) {
 
 	url := "http://api.openweathermap.org/data/2.5/weather?q=" + city + "," + country
 
-	resp, err := gf.HTTP.Get(url)
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
 
 	result := &Result{}
-	err = json.Unmarshal(resp.Body, result)
+	err = json.Unmarshal(b, result)
 	return result, err
 
 }
 
+// Result describes a weather result.
 type Result struct {
 	Coord struct {
 		Lon float64 `json:"lon"`

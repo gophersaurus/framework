@@ -1,5 +1,6 @@
-package bootstrap
+package services
 
+/*
 import (
 	"log"
 
@@ -37,3 +38,4 @@ func RackspaceObjectStorage(c config.Config) *gophercloud.ServiceClient {
 
 	return client
 }
+*/
