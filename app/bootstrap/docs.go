@@ -11,5 +11,5 @@ import (
 func Docs(static string, endpoints []router.Endpoint) {
 	tmpl := filepath.Join(filepath.Dir(static), "app", "templates", "endpoints.tmpl")
 	html := filepath.Join(static, "docs", "api", "index.html")
-	docs.APIendpoints(tmpl, html, endpoints)
+	docs.Endpoints(tmpl, html, endpoints)
 }
