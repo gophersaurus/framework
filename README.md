@@ -122,6 +122,7 @@ type DatabaseAdmin struct {
     SQL   []Database
 }
 ```
+
 ```Go
 type Database interface {
     Dial(name string) error
