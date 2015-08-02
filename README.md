@@ -120,9 +120,9 @@ Here is what the `DatabaseAdmin` struct and `Database` interface looks like:
 type DatabaseAdmin struct {
     Mongo []Database
     SQL   []Database
-}L   map[string]DB
 }
-
+```
+```Go
 type Database interface {
     Dial(name string) error
     Name() string
