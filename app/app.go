@@ -17,7 +17,6 @@ import (
 // Serve starts serving the application.
 func Serve() {
 
-	// bootstrap config and db
 	bootstrap.Config()
 	bootstrap.DB()
 
@@ -26,14 +25,12 @@ func Serve() {
 		defer db.Close()
 	}
 
-	// mux
-	m := router.NewMux()
-
-	// find config vars
 	port := config.GetString("port")
 	static := config.GetString("static")
 	tls := config.GetStringMapString("tls")
 	keys := config.GetStringMapStringSlice("keys")
+
+	m := router.NewMux()
 
 	// key middleware
 	if len(keys) > 0 {
@@ -41,7 +38,7 @@ func Serve() {
 		m.Middleware(km.Do)
 	}
 
-	// register dynamic routes
+	// register routes
 	register(m)
 
 	// if a static directory path is provided, register it
@@ -54,10 +51,11 @@ func Serve() {
 	// bootstrap docs
 	bootstrap.Docs(static, m.Endpoints())
 
+	// prep port and green output
 	portStr := fmt.Sprintf(":%s", port)
 	green := color.New(color.FgGreen).PrintfFunc()
 
-	// serve and let the humans know...
+	// let the humans know we are serving...
 	if tls["cert"] != "" && tls["key"] != "" {
 		green("https listening and serving with TLS on port %s\n", port)
 		log.Fatal(http.ListenAndServeTLS(portStr, tls["cert"], tls["key"], m))
