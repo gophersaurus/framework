@@ -7,13 +7,13 @@ import (
 	"github.com/gophersaurus/gf.v1/http"
 )
 
-// KeyMiddleware checks if keys are valid.
+// Keys describes API keys.
 type Keys struct {
 	success http.Handler
-	Keys    map[string][]string
+	keymap  map[string][]string
 }
 
-// NewKeyMiddleware returns a KeyHandler.
+// NewKeys returns takes a map of string to string and returns a Keys object.
 func NewKeys(keys map[string][]string) Keys {
 
 	for _, whitelist := range keys {
@@ -24,7 +24,7 @@ func NewKeys(keys map[string][]string) Keys {
 		}
 	}
 
-	return Keys{Keys: keys}
+	return Keys{keymap: keys}
 }
 
 // Do takes a handler and executes key middleware.
@@ -36,16 +36,15 @@ func (k Keys) Do(h http.Handler) http.Handler {
 // Check takes a key and checks it.
 func (k Keys) Check(key, remoteAddr string) error {
 
-	// key exists in the map
-	if whitelist, ok := k.Keys[key]; ok {
+	if whitelist, ok := k.keymap[key]; ok {
 
 		// no whitelist is provided, so any request is ok
 		if len(whitelist) == 0 {
 			return nil
 		}
 
-		// range over each whitelisted URI
 		for _, uri := range whitelist {
+			// if 'all' or '*' is found, allow any remote ip address
 			if uri == "all" || uri == "*" || uri == remoteAddr {
 				return nil
 			}
@@ -66,7 +65,7 @@ func (k Keys) ServeHTTP(resp http.Responder, req *http.Request) {
 		ip = proxy
 	}
 
-	// API key parameter in URL
+	// parameter
 	if key := req.URL.Query().Get("key"); len(key) > 0 {
 		if err := k.Check(key, ip); err != nil {
 			resp.WriteErrs(req, err.Error())
@@ -76,7 +75,7 @@ func (k Keys) ServeHTTP(resp http.Responder, req *http.Request) {
 		return
 	}
 
-	// API key in header
+	// header
 	if key := req.Header.Get("API-Key"); len(key) > 0 {
 		if err := k.Check(key, ip); err != nil {
 			resp.WriteErrs(req, err.Error())
@@ -86,6 +85,5 @@ func (k Keys) ServeHTTP(resp http.Responder, req *http.Request) {
 		return
 	}
 
-	// no API key provided
 	resp.WriteErrs(req, http.InvalidPermission)
 }

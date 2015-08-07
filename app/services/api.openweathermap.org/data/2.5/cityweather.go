@@ -2,16 +2,17 @@ package cityweather
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 )
 
+const url = "http://api.openweathermap.org/data/2.5/weather?q=%s,%s"
+
 // Find finds weather by city and country.
 func Find(city, country string) (*Result, error) {
 
-	url := "http://api.openweathermap.org/data/2.5/weather?q=" + city + "," + country
-
-	resp, err := http.Get(url)
+	resp, err := http.Get(fmt.Sprintf(url, city, country))
 	if err != nil {
 		return nil, err
 	}
@@ -25,7 +26,6 @@ func Find(city, country string) (*Result, error) {
 	result := &Result{}
 	err = json.Unmarshal(b, result)
 	return result, err
-
 }
 
 // Result describes a weather result.

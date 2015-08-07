@@ -8,26 +8,20 @@ var Home = struct {
 }{
 	Index: func(resp http.Responder, req *http.Request) {
 
-	// set the default HTTP scheme without SSL/TLS
-	scheme := "http://"
+		// define a result
+		result := struct {
+			Status        int    `json:"status" xml:"status"`
+			Message       string `json:"message" xml:"message"`
+			PublicPage    string `json:"public_page" xml:"public_page"`
+			PublicAPIDocs string `json:"public_api_docs" xml:"public_api_docs"`
+		}{
+			200,
+			"Welcome fellow gopher.",
+			"http://" + req.Host + "/public",
+			"http://" + req.Host + "/public/docs/api",
+		}
 
-	// check if we are serving SSL/TLS HTTP traffic
-	if req.TLS != nil {
-		scheme = "https://"
-	}
-
-	// define an anonymous result struct
-	result := struct {
-		Status     int    `json:"status" xml:"status"`
-		Message    string `json:"message" xml:"message"`
-		PublicPage string `json:"public_page" xml:"public_page"`
-	}{
-		200,
-		"Welcome fellow gopher.",
-		scheme + req.Host + "/public",
-	}
-
-	// write the result
-	resp.Write(req, result)
+		// write the result
+		resp.Write(req, result)
 	},
 }
