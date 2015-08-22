@@ -14,11 +14,11 @@ import (
 	"github.com/gophersaurus/gf.v1/router"
 )
 
-// Serve starts serving the application.
+// Serve starts serving the web service application.
 func Serve() {
 
-	bootstrap.Config()
-	bootstrap.DB()
+	bootstrap.Config() // load configuration settings
+	bootstrap.DB()     // load database settings
 
 	// defer closing db connections
 	for _, db := range dba.All() {
@@ -38,7 +38,6 @@ func Serve() {
 		m.Middleware(km.Do)
 	}
 
-	// register routes
 	register(m)
 
 	// if a static directory path is provided, register it
