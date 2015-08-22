@@ -48,7 +48,9 @@ func Serve() {
 	}
 
 	// bootstrap docs
-	bootstrap.Docs(static, m.Endpoints())
+	if err := bootstrap.Docs(static, m.Endpoints()); err != nil {
+		log.Fatal(err)
+	}
 
 	// prep port and green output
 	portStr := fmt.Sprintf(":%s", port)
