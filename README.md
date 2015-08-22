@@ -1,4 +1,4 @@
-Gophersaurus [![GoDoc](http://godoc.org/github.com/gophersaurus/gf.v1?status.png)](http://godoc.org/github.com/gophersaurus/gf.v1) [![Build Status](https://travis-ci.org/gophersaurus/gf.v1.svg?branch=master)](https://travis-ci.org/gophersaurus/gf.v1) [![Coverage](http://gocover.io/_badge/github.com/gophersaurus/gf.v1?2)](http://gocover.io/github.com/gophersaurus/gf.v1)
+Gophersaurus [![GoDoc](http://godoc.org/github.com/gophersaurus/gf.v1?status.png)](http://godoc.org/github.com/gophersaurus/gf.v1) [![Build Status](https://travis-ci.org/gophersaurus/gf.v1.svg?branch=master)](https://travis-ci.org/gophersaurus/gf.v1)
 ============
 
 Gophersaurus is a framework for building API based services quickly. It provides
@@ -7,6 +7,20 @@ logic away when building API services.
 
  Gophersaurus was forged in the fires of production, since no API framework
  had yet given us a simple MVC scaffold.
+ 
+ Packages
+ --------
+
+ | Package  | Description                   | Coverage |
+ |:---------|:------------------------------|---------:|
+ | [config](http://godoc.org/github.com/gophersaurus/gf.v1/config) | manage configuration settings | [![Coverage](http://gocover.io/_badge/github.com/spf13/viper)](http://gocover.io/github.com/spf13/viper) |
+ | [dba](http://godoc.org/github.com/gophersaurus/gf.v1/dba)      | manage database connections   |     none |
+ | [docs](http://godoc.org/github.com/gophersaurus/gf.v1/docs)     | auto generate documentation   | [![Coverage](http://gocover.io/_badge/github.com/gophersaurus/gf.v1/docs)](http://gocover.io/github.com/gophersaurus/gf.v1/docs) |
+ | [http](http://godoc.org/github.com/gophersaurus/gf.v1/http)     | manage http requests          | [![Coverage](http://gocover.io/_badge/github.com/gophersaurus/gf.v1/http)](http://gocover.io/github.com/gophersaurus/gf.v1/http) |
+ |	[mock](http://godoc.org/github.com/gophersaurus/gf.v1/mock)     | mock http requests            | [![Coverage](http://gocover.io/_badge/github.com/gophersaurus/gf.v1/mock)](http://gocover.io/github.com/gophersaurus/gf.v1/mock) |
+ | [render](http://godoc.org/github.com/gophersaurus/gf.v1/render)   | http response formats         | [![Coverage](http://gocover.io/_badge/github.com/gophersaurus/gf.v1/render)](http://gocover.io/github.com/gophersaurus/gf.v1/render) |
+ | [resource](http://godoc.org/github.com/gophersaurus/gf.v1/resource) | automate CRUD                 | [![Coverage](http://gocover.io/_badge/github.com/gophersaurus/gf.v1/resource)](http://gocover.io/github.com/gophersaurus/gf.v1/resource) |
+ |	[router](http://godoc.org/github.com/gophersaurus/gf.v1/router)   | multiplex router              |     none |
 
 Installation:
 -------------
