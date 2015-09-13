@@ -1,4 +1,5 @@
-Gophersaurus [![GoDoc](http://godoc.org/github.com/gophersaurus/gf.v1?status.png)](http://godoc.org/github.com/gophersaurus/gf.v1) [![Build Status](https://travis-ci.org/gophersaurus/gf.v1.svg?branch=master)](https://travis-ci.org/gophersaurus/gf.v1)
+Gophersaurus [![GoDoc](http://godoc.org/github.com/gophersaurus/gf.v1?status.png)](http://godoc.org/github.com/gophersaurus/gf.v1) [![Build Status](https://travis-ci.org/gophersaurus/gf.v1.svg?branch=master)](https://travis-ci.org/gophersaurus/gf.v1) [![Go Report Card](http://goreportcard.com/badge/gophersaurus/framework)](http://goreportcard.com/report/gophersaurus/framework)
+============================================================================================================================
 ============
 
 Gophersaurus is a framework for building API based services quickly. It provides
@@ -7,7 +8,7 @@ logic away when building API services.
 
  Gophersaurus was forged in the fires of production, since no API framework
  had yet given us a simple MVC scaffold.
- 
+
 Packages
 --------
 
