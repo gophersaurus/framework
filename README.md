@@ -1,12 +1,10 @@
 Gophersaurus [![GoDoc](http://godoc.org/github.com/gophersaurus/gf.v1?status.png)](http://godoc.org/github.com/gophersaurus/gf.v1) [![Build Status](https://travis-ci.org/gophersaurus/gf.v1.svg?branch=master)](https://travis-ci.org/gophersaurus/gf.v1) [![Go Report Card](http://goreportcard.com/badge/gophersaurus/framework)](http://goreportcard.com/report/gophersaurus/framework)
 =========================
 
-Gophersaurus is a framework for building API based services quickly. It provides
-a structured scaffold for building golang services and abstracts away common
-logic away when building API services.
+Gophersaurus is a MVC framework for building RESTful API based services quickly. It provides a structured scaffolding for abstracting away common service logic.
 
- Gophersaurus was forged in the fires of production, since no API framework
- had yet given us a simple MVC scaffold.
+ Gophersaurus was forged in the fires of production, since no Golang MVC framework
+ had yet existed. Now there are many.
 
 Installation:
 -------------
@@ -92,7 +90,6 @@ keys:
   gophersaurus:
     - all
 databases:
-  dbUsers:
   type: mongo
   user: gf
   pass: g0phersaurus!
