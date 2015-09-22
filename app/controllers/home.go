@@ -4,9 +4,9 @@ import "github.com/gophersaurus/gf.v1/http"
 
 // Home is a home controller for new users.
 var Home = struct {
-	Index func(resp http.Responder, req *http.Request)
+	Index func(resp http.ResponseWriter, req *http.Request)
 }{
-	Index: func(resp http.Responder, req *http.Request) {
+	Index: func(resp http.ResponseWriter, req *http.Request) {
 
 		// define a result
 		result := struct {

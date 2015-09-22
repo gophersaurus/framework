@@ -8,9 +8,9 @@ import (
 
 // Weather is a weather controller for cities.
 var Weather = struct {
-	Show func(resp http.Responder, req *http.Request)
+	Show func(resp http.ResponseWriter, req *http.Request)
 }{
-	Show: func(resp http.Responder, req *http.Request) {
+	Show: func(resp http.ResponseWriter, req *http.Request) {
 
 		city := req.Param("city")
 

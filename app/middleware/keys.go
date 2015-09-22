@@ -55,7 +55,7 @@ func (k Keys) Check(key, remoteAddr string) error {
 }
 
 // ServeHTTP fulfills the http package interface for middlewares.
-func (k Keys) ServeHTTP(resp http.Responder, req *http.Request) {
+func (k Keys) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 
 	// get client IP address
 	ip, _, _ := net.SplitHostPort(req.RemoteAddr)
