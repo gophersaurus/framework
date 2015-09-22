@@ -22,6 +22,6 @@ var Home = struct {
 		}
 
 		// write the result
-		resp.Write(req, result)
+		resp.AutoFormat(req, result)
 	},
 }

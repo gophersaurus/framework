@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"errors"
+
 	"github.com/gophersaurus/gf.v1/http"
 
 	weather "github.com/gophersaurus/framework/app/services/api.openweathermap.org/data/2.5"
@@ -16,17 +18,17 @@ var Weather = struct {
 
 		// input checking
 		if len(city) < 3 {
-			resp.WriteErrs(req, http.InvalidInput, "not a valid city name")
+			resp.WriteErrs(req, errors.New(http.InvalidInput), errors.New("not a valid city name"))
 			return
 		}
 
 		w, err := weather.Find(city, "us")
 		if err != nil {
-			resp.WriteErrs(req, "Sorry, no weather report today...", err.Error())
+			resp.WriteErrs(req, errors.New("Sorry, no weather report today..."), err)
 			return
 		}
 
 		// write response
-		resp.Write(req, w)
+		resp.AutoFormat(req, w)
 	},
 }
