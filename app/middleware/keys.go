@@ -55,7 +55,7 @@ func (k Keys) Check(key, remoteAddr string) error {
 }
 
 // ServeHTTP fulfills the http package interface for middlewares.
-func (k Keys) ServeHTTP(resp http.Responder, req *http.Request) {
+func (k Keys) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 
 	// get client IP address
 	ip, _, _ := net.SplitHostPort(req.RemoteAddr)
@@ -68,7 +68,7 @@ func (k Keys) ServeHTTP(resp http.Responder, req *http.Request) {
 	// parameter
 	if key := req.URL.Query().Get("key"); len(key) > 0 {
 		if err := k.Check(key, ip); err != nil {
-			resp.WriteErrs(req, err.Error())
+			resp.WriteErrs(req, err)
 			return
 		}
 		k.success.ServeHTTP(resp, req)
@@ -78,12 +78,12 @@ func (k Keys) ServeHTTP(resp http.Responder, req *http.Request) {
 	// header
 	if key := req.Header.Get("API-Key"); len(key) > 0 {
 		if err := k.Check(key, ip); err != nil {
-			resp.WriteErrs(req, err.Error())
+			resp.WriteErrs(req, err)
 			return
 		}
 		k.success.ServeHTTP(resp, req)
 		return
 	}
 
-	resp.WriteErrs(req, http.InvalidPermission)
+	resp.WriteErrs(req, errors.New(http.InvalidPermission))
 }
