@@ -29,6 +29,6 @@ var Weather = struct {
 		}
 
 		// write response
-		resp.AutoFormat(req, w)
+		resp.WriteFormat(req, w)
 	},
 }
