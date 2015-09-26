@@ -16,7 +16,7 @@ var Weather = struct {
 
 		city := req.Param("city")
 
-		// input checking
+		// check input
 		if len(city) < 3 {
 			resp.WriteErrs(req, errors.New(http.InvalidInput), errors.New("not a valid city name"))
 			return
@@ -28,7 +28,6 @@ var Weather = struct {
 			return
 		}
 
-		// write response
 		resp.WriteFormat(req, w)
 	},
 }
