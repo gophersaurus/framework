@@ -8,7 +8,6 @@ var Home = struct {
 }{
 	Index: func(resp http.ResponseWriter, req *http.Request) {
 
-		// define a result
 		result := struct {
 			Status        int    `json:"status" xml:"status"`
 			Message       string `json:"message" xml:"message"`
@@ -21,7 +20,6 @@ var Home = struct {
 			"http://" + req.Host + "/public/docs/api",
 		}
 
-		// write the result
 		resp.WriteFormat(req, result)
 	},
 }
