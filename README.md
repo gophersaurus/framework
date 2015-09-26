@@ -1,32 +1,34 @@
 framework [![GoDoc](http://godoc.org/github.com/gophersaurus/gf.v1?status.png)](http://godoc.org/github.com/gophersaurus/gf.v1) [![Build Status](https://travis-ci.org/gophersaurus/gf.v1.svg?branch=master)](https://travis-ci.org/gophersaurus/gf.v1) [![Go Report Card](http://goreportcard.com/badge/gophersaurus/framework)](http://goreportcard.com/report/gophersaurus/framework)
 =========================
 
-Gophersaurus is a MVC framework for building RESTful API based services quickly. It provides a structured scaffolding for abstracting away common service logic.
+Gophersaurus is a MVC framework for building RESTful API based services quickly.
+It provides a structured scaffolding for abstracting away common service logic.
 
- Gophersaurus was forged in the fires of production, since no Golang MVC framework
- had yet existed. Now there are many.
+ Gophersaurus was forged in the fires of production, since no Golang MVC framework existed yet.
+ Now there are many.
 
 Installation:
 -------------
-> Note: These instructions assume you already have your $GOPATH configured and
-> you are using git with github or github-enterprise.
+> Note: These instructions assume you already have your $GOPATH configured.
 
-###Option 1.
-Clone or fork this repository locally and start hacking.
+The easiest way to create a gophersaurus project is with the `gf` command.
 
-###Option 2.
-Use the `gf` command line tool to create a new project.
-
-  - `go get github.com/gophersaurus/gf`
+  - `go get -u github.com/gophersaurus/gf`
   - `gf new project-name`
 
 ####Extra Points
-Run `go install github.com/mattn/go-sqlite3`. You don't want to build this C
-package every time. You have now saved yourself from slow C compile times.
+  - `go install github.com/mattn/go-sqlite3`.
+
+If your using an SQL database you might not want to build this C package every time.
+You have now saved yourself from slow C compile times.
 
 Directory Structure
 -------------------
-```
+
+> Running the `$ tree -d` command will show the following result.
+
+```bash
+→ tree -d
 .
 ├── app
 │   ├── bootstrap
@@ -34,9 +36,17 @@ Directory Structure
 │   ├── middleware
 │   ├── models
 │   ├── services
+│   │   └── api.openweathermap.org
+│   │       └── data
+│   │           └── 2.5
 │   └── templates
 ├── commands
 └── public
+    ├── docs
+    │   └── api
+    └── images
+
+15 directories
 ```
 
 ###The Root Directory
