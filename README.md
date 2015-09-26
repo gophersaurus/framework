@@ -19,7 +19,7 @@ The easiest way to create a gophersaurus project is with the `gf` command.
 ####Extra Points
   - `go install github.com/mattn/go-sqlite3`.
 
-If your using an SQL database you might not want to build this C package every time.
+If your using a SQL database you might not want to build this C package every time.
 You have now saved yourself from slow C compile times.
 
 Directory Structure
