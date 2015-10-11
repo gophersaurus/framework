@@ -48,7 +48,7 @@ func Serve() {
 	}
 
 	// bootstrap docs
-	if err := bootstrap.Docs(static, m.Endpoints()); err != nil {
+	if err := bootstrap.Docs(static, router.Endpoints()); err != nil {
 		log.Fatal(err)
 	}
 
