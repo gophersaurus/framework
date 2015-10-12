@@ -7,5 +7,4 @@ import (
 
 func register(r router.Router) {
 	r.GET("/", c.Home.Index)
-	r.GET("/weather/:city", c.Weather.Show)
 }
