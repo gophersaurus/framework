@@ -41,8 +41,7 @@ import (
 // }()
 //
 func Config() error {
-	err := config.ReadInConfig()
-	if err != nil {
+	if err := config.ReadInENVConfig(); err != nil {
 		return fmt.Errorf("app config settings error: %s \n", err)
 	}
 	return nil

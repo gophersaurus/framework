@@ -17,8 +17,15 @@ import (
 // Serve starts serving the web service application.
 func Serve() {
 
-	bootstrap.Config() // load configuration settings
-	bootstrap.DB()     // load database settings
+	// load configuration settings
+	if err := bootstrap.Config(); err != nil {
+		log.Fatal(err)
+	}
+
+	// load database settings
+	if err := bootstrap.DB(); err != nil {
+		log.Fatal(err)
+	}
 
 	// defer closing db connections
 	for _, db := range dba.All() {
@@ -47,7 +54,7 @@ func Serve() {
 		m.Static("/public", string(os.PathSeparator)+"public")
 	}
 
-	// bootstrap docs
+	// generate docs
 	if err := bootstrap.Docs(static, router.Endpoints()); err != nil {
 		log.Fatal(err)
 	}
