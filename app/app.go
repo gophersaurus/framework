@@ -2,7 +2,6 @@ package app
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 
@@ -15,16 +14,16 @@ import (
 )
 
 // Serve starts serving the web service application.
-func Serve() {
+func Serve() error {
 
 	// load configuration settings
 	if err := bootstrap.Config(); err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	// load database settings
 	if err := bootstrap.DB(); err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	// defer closing db connections
@@ -56,7 +55,7 @@ func Serve() {
 
 	// generate docs
 	if err := bootstrap.Docs(static, router.Endpoints()); err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	// prep port and green output
@@ -66,9 +65,9 @@ func Serve() {
 	// let the humans know we are serving...
 	if tls["cert"] != "" && tls["key"] != "" {
 		green("https listening and serving with TLS on port %s\n", port)
-		log.Fatal(http.ListenAndServeTLS(portStr, tls["cert"], tls["key"], m))
+		return http.ListenAndServeTLS(portStr, tls["cert"], tls["key"], m)
 	} else {
 		green("http listening and serving on port %s\n", port)
-		log.Fatal(http.ListenAndServe(portStr, m))
+		return http.ListenAndServe(portStr, m)
 	}
 }
