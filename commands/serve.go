@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"log"
+
 	"github.com/gophersaurus/framework/app"
 	"github.com/gophersaurus/gf.v1/config"
 	"github.com/spf13/cobra"
@@ -28,6 +30,6 @@ var ServeCmd = &cobra.Command{
 	Short:   "Listen and Serve HTTP",
 	Long:    "Listen and Serve HTTP",
 	Run: func(cmd *cobra.Command, args []string) {
-		app.Serve()
+		log.Fatal(app.Serve())
 	},
 }
