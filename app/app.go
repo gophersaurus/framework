@@ -12,9 +12,8 @@ func Serve() error {
 
 	m := router.NewMux()
 
+	// set api keys as middleware
 	keys := config.GetStringMapStringSlice("keys")
-
-	// key middleware
 	if len(keys) > 0 {
 		km := middleware.NewKeys(keys)
 		m.Middleware(km.Do)
