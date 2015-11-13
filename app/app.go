@@ -10,6 +10,11 @@ import (
 // Serve starts serving the web service application.
 func Serve() error {
 
+	// bootstrap environment and configuration settings
+	if err := bootstrap.Config(); err != nil {
+		return err
+	}
+
 	m := router.NewMux()
 
 	// set api keys as middleware
