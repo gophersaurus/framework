@@ -34,7 +34,6 @@ Directory Structure
 │   ├── controllers
 │   ├── middleware
 │   ├── models
-│   ├── services
 │   └── templates
 ├── cmd
 ├── public
@@ -42,8 +41,6 @@ Directory Structure
 │   │   └── api
 │   └── images
 └── vendor
-
-15 directories
 ```
 
 ###The Root Directory
@@ -73,6 +70,7 @@ ships with a variety of additional directories such as `bootstrap`,
   and unmarshaling data.
 * The `services` directory contains packages that interface with other external
   services. This keeps business logic separate from other service integrations.
+  This directory is optional and not created for you by default.
 * The `templates` directory contains golang templates usually used for rendering
   HTML pages.
 
