@@ -1,8 +1,8 @@
 package main
 
-import "github.com/gophersaurus/framework/commands"
+import "github.com/gophersaurus/framework/cmd"
 
 func main() {
-	commands.RootCmd.AddCommand(commands.ServeCmd)
-	commands.RootCmd.Execute()
+	cmd.RootCmd.AddCommand(cmd.ServeCmd)
+	cmd.RootCmd.Execute()
 }
