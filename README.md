@@ -31,20 +31,17 @@ Directory Structure
 → tree -d
 .
 ├── app
-│   ├── bootstrap
 │   ├── controllers
 │   ├── middleware
 │   ├── models
 │   ├── services
-│   │   └── api.openweathermap.org
-│   │       └── data
-│   │           └── 2.5
 │   └── templates
-├── commands
-└── public
-    ├── docs
-    │   └── api
-    └── images
+├── cmd
+├── public
+│   ├── docs
+│   │   └── api
+│   └── images
+└── vendor
 
 15 directories
 ```
@@ -54,7 +51,7 @@ The root directory of a fresh Gophersaurus installation contains a variety of
 directories.
 
 * The `app` directory contains the core code of your application.
-* The `commands` directory contains all the code for CLI commands and flags.
+* The `cmd` directory contains all the code for CLI commands and flags.
   Gophersaurus makes good use of [`cobra`](https://github.com/spf13/cobra) for
   CLI management.
 * The `public` directory contains your static assets such as images, JavaScript
