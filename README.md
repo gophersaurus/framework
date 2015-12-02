@@ -93,13 +93,23 @@ databases:
   type: mongo
   user: gf
   pass: g0phersaurus!
-  address: 10.44.222.233:27017
+  address: 10.10.10.10:27017
+
+environments:
+  prod:
+    api_service: "http://api.example.com:11090"
+  stage:
+    api_service: "http://api.example.com:11090"
+  test:
+    api_service: "http://api.example.com:11090"
+  dev:
+    api_service: "http://api.example.com:11090"
 ```
 
-> Note: The port for Gophersaurus applications defaults to `5225`.  
+> Note: The port for gophersaurus applications defaults to `5225`.  
 >
-> After specifying a key you must specify a whitelist of allowed referer
-> addresses. Referer `localhost` values translate as `::1`.
+> After specifying a key you must specify a whitelist of allowed referrer
+> addresses. Referrer `localhost` values translate as `::1`.
 >
 > Gophersaurus attempts to compensate for proxies or load balancers by searching
 the `Header` for a `X-FORWARDED-FOR` value.
@@ -109,7 +119,7 @@ The Database Administrator
 We never were overly keen on ORMs. We understand ORMs provide convenience, but
 in the new world of SQL and NoSQL databases, no singular ORM solves everything.
 
-Thus the `dba` package (Database Administrator) was born to provide
+Thus the `dba` package (Database Administrator) is used to provide
 functionality for both SQL and NoSQL databases.
 
 Here is what the `DatabaseAdmin` struct and `Database` interface looks like:
@@ -133,7 +143,7 @@ Right now it implements the `mgo` package for MongoDB and the `gorp` package for
 SQL databases. `DatabaseAdmin` keeps both separate, but both implement the same
 `Database` interface for convenience.  
 
-Currently the Gophersaurus Framework has support the databases below.
+Currently gophersaurus supports the databases below.
 * MongoDB
 * PostgreSQL
 * MySQL
@@ -141,7 +151,7 @@ Currently the Gophersaurus Framework has support the databases below.
 
 Style Guide
 -----------
-The Gophersaurus project attempts to produce idiomatic go code by utilizing the following standards and style guides.
+This project attempts to produce idiomatic go code by utilizing the following standards and style guides.
 
 ###Style Guides
 - [Golang Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
@@ -164,4 +174,4 @@ Thanks! :)
 
 License
 -------
-The Gophersaurus project is open-sourced software licensed under the [MIT License](http://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT License](http://opensource.org/licenses/MIT).
