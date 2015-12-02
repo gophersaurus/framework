@@ -1,26 +1,23 @@
 framework [![GoDoc](http://godoc.org/github.com/gophersaurus/gf.v1?status.png)](http://godoc.org/github.com/gophersaurus/gf.v1) [![Build Status](https://travis-ci.org/gophersaurus/gf.v1.svg?branch=master)](https://travis-ci.org/gophersaurus/gf.v1) [![Go Report Card](http://goreportcard.com/badge/gophersaurus/framework)](http://goreportcard.com/report/gophersaurus/framework)
 =========================
 
-Gophersaurus is a MVC framework for building RESTful API based services quickly.
-It provides a structured scaffolding for abstracting away common service logic.
+Gophersaurus is a MVC framework for building RESTful API services quickly.
+It provides a structured scaffolding for abstracting away some common logic.
 
- Gophersaurus was forged in the fires of production, since no Golang MVC framework existed yet.
- Now there are many.
+Gophersaurus was forged for production use.
 
 Installation:
 -------------
 > Note: These instructions assume you already have your $GOPATH configured.
 
-The easiest way to create a gophersaurus project is with the `gf` command.
+The easiest way to create a new project is with the `gf` command.
 
   - `go get -u github.com/gophersaurus/gf`
   - `gf new project-name`
 
-####Extra Points
+#### Extra Points
   - `go install github.com/mattn/go-sqlite3`.
-
-If your using a SQL database you might not want to build this C package every time.
-You have now saved yourself from slow C compile times.
+If your using a SQL database you might not want to build this C package every time.  You have now saved yourself from slow C compile times.
 
 Directory Structure
 -------------------
@@ -43,9 +40,8 @@ Directory Structure
 └── vendor
 ```
 
-###The Root Directory
-The root directory of a fresh Gophersaurus installation contains a variety of
-directories.
+### The Root Directory
+The root directory of a fresh installation contains a variety of directories.
 
 * The `app` directory contains the core code of your application.
 * The `cmd` directory contains all the code for CLI commands and flags.
@@ -54,7 +50,7 @@ directories.
 * The `public` directory contains your static assets such as images, JavaScript
   files, CSS, etc.
 
-####The App Directory
+#### The App Directory
 
 The "meat" of your application lives in the `app` directory. The `app` directory
 ships with a variety of additional directories such as `bootstrap`,
@@ -79,15 +75,14 @@ Configuration Settings
 Gophersaurus utilizes the awesome [`viper`](https://github.com/spf13/viper)
 package for configuration management.
 
-By default Gophersaurus will search in your projects `app` directory for a file
-named `config` to read application settings. [`Viper`](https://github.com/spf13/viper)
-supports `JSON`, `YAML`, and `TOML`. You can specify a different file by passing
-in the `-c=path/to/file.yml`.
+By default Gophersaurus will search in your projects root directory for a file
+named `.env.yml` to read application settings. [`Viper`](https://github.com/spf13/viper)
+supports `JSON`, `YAML`, and `TOML`.
 
 [`Viper`](https://github.com/spf13/viper) also provides support for `etcd` and
 `consul`.
 
-An example `app/config.yml` configuration file is provided below.
+An example `.env.yml` configuration file is provided below.
 
 ```YAML
 port: 5225
@@ -163,7 +158,7 @@ The Gophersaurus project attempts to produce idiomatic go code by utilizing the 
 Contribution guidelines
 -----------------------
 * Submit an issue.  
-* Send us a pull request against the `develop` branch.
+* Send us a pull request.
 
 Thanks! :)
 
