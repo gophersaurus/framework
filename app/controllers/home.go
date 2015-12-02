@@ -2,7 +2,7 @@ package controllers
 
 import "github.com/gophersaurus/gf.v1/http"
 
-// Home is a home controller for new users.
+// Home is a controller to say hi to new users.
 var Home = struct {
 	Index func(resp http.ResponseWriter, req *http.Request)
 }{
